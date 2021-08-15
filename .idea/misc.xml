@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/drawable/bg_round_corner.xml" value="0.2515625" />
+        <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/drawable/ic_rank.xml" value="0.42102564102564105" />
+        <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/layout/activity_main.xml" value="0.23541666666666666" />
+        <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/layout/fragment_book_shelf.xml" value="0.4026268115942029" />
+        <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/layout/fragment_novel_home.xml" value="0.23541666666666666" />
+        <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/layout/fragment_rank.xml" value="0.4026268115942029" />
+        <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/layout/item_book_shelf.xml" value="0.4026268115942029" />
+        <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/layout/layout_bottom_tab.xml" value="0.23541666666666666" />
+        <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/menu/bottom_item_menu.xml" value="0.23541666666666666" />
+      </map>
+    </option>
+  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">novel</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="book_shelf">BookShelf</string>
+    <string name="discovery">Discovery</string>
+    <string name="rank">Rank</string>
+    <string name="me">Me</string>
 </resources>

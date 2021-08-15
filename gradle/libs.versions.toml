@@ -2,6 +2,8 @@
 kotlin = "1.5.20"
 android-gradlePlugin = "7.0.0"
 koin = "3.1.2"
+navigation = "2.3.5"
+coil = "1.3.2"
 
 [libraries]
 kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin"}
@@ -11,7 +13,13 @@ android-gradlePlugin = { module = "com.android.tools.build:gradle", version.ref 
 android-material = "com.google.android.material:material:1.3.0"
 androidx-core = "androidx.core:core-ktx:1.3.2"
 androidx-appcompat = "androidx.appcompat:appcompat:1.2.0"
+androidx-fragment = "androidx.fragment:fragment-ktx:1.3.6"
 androidx-constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
+
+androidx-navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
+androidx-navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
+
+androidx-swiperefresh = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
 androidx-test-junit = "androidx.test.ext:junit:1.1.2"
 androidx-test-espresso-core = "androidx.test.espresso:espresso-core:3.3.0"
@@ -22,3 +30,5 @@ koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-androidCompat = { module = "io.insert-koin:koin-android-compat", version.ref = "koin" }
+
+coil = { module = "io.coil-kt:coil", version.ref = "coil" }
