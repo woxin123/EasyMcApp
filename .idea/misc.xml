@@ -3,10 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/drawable/bg_radius_20.xml" value="0.23541666666666666" />
         <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/drawable/bg_round_corner.xml" value="0.2515625" />
+        <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/drawable/bg_search_content.xml" value="0.2515625" />
+        <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.2515625" />
         <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/drawable/ic_rank.xml" value="0.42102564102564105" />
+        <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/drawable/select_bottom_navigation.xml" value="0.2515625" />
         <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/layout/activity_main.xml" value="0.23541666666666666" />
         <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/layout/fragment_book_shelf.xml" value="0.4026268115942029" />
+        <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/layout/fragment_discovery.xml" value="0.21927083333333333" />
         <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/layout/fragment_novel_home.xml" value="0.23541666666666666" />
         <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/layout/fragment_rank.xml" value="0.4026268115942029" />
         <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/layout/item_book_shelf.xml" value="0.4026268115942029" />

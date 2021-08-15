@@ -5,5 +5,7 @@
     <string name="book_shelf">BookShelf</string>
     <string name="discovery">Discovery</string>
     <string name="rank">Rank</string>
-    <string name="me">Me</string>
+    <string name="me">Me</string>]
+    <string name="search_hint">Search name or author</string>
+    <string name="search">Search</string>
 </resources>
