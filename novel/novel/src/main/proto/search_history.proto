@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option java_package = "top.mcwebsite.novel.data.local.datastore";
+option java_multiple_files = true;
+
+message SearchHistories {
+  repeated SearchHistory histories = 1;
+}
+
+message SearchHistory {
+  string text = 1;
+  int64 time = 2;
+}

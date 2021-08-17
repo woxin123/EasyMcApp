@@ -6,7 +6,15 @@ plugins {
 android {
     compileSdk 30
 
+    defaultConfig {
+        applicationId "top.mcwebsite.novel_api"
+        minSdkVersion 23
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
 
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

@@ -8,4 +8,6 @@
     <string name="me">Me</string>]
     <string name="search_hint">Search name or author</string>
     <string name="search">Search</string>
+    <string name="recent_searches">Recent Searches</string>
+    <string name="clear_all">Clear all</string>
 </resources>
