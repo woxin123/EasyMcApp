@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import top.mcwebsite.common.ui.loading.LoadingDialog
 import top.mcwebsite.novel.R
 import top.mcwebsite.novel.databinding.FragmentNovelHomeBinding
 import top.mcwebsite.novel.ui.bookshelf.BookShelfFragment
@@ -66,6 +67,7 @@ class NovelHomeFragment : Fragment() {
             }
             true
         }
+        LoadingDialog(requireContext()).showLoading("loading", true, 3000L)
     }
 
 }

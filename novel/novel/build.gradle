@@ -97,6 +97,7 @@ dependencies {
     implementation libs.androidx.navigation.ui
     implementation libs.coil
     implementation libs.protobuf.javalite
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation libs.junit
     androidTestImplementation libs.androidx.test.junit
     androidTestImplementation libs.androidx.test.espresso.core
