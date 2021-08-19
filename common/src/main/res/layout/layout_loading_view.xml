@@ -8,9 +8,9 @@
 
     <ImageView
         android:id="@+id/close"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:layout_margin="10dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:padding="10dp"
         android:src="@drawable/ic_baseline_clear_24"
         android:visibility="gone"
         android:contentDescription="@null"

@@ -21,22 +21,32 @@ class LoadingDialog constructor(
 
     private val close by lazy { findViewById<ImageView>(R.id.close) }
 
+    private var cancel: () -> Unit = {}
+
 
     init {
         setContentView(R.layout.layout_loading_view)
         setCanceledOnTouchOutside(false)
+
+        close.setOnClickListener {
+            dismiss()
+            cancel.invoke()
+        }
     }
 
-    fun showLoading(title: String, showClose: Boolean = false, delayShowClose: Long = 0) {
-        if (showClose) {
-            close.postDelayed({
-                close.visibility = View.VISIBLE
-            }, delayShowClose)
-        }
+    fun showLoading(title: String, delayShowClose: Long = 0, cancel: (() -> Unit)? = null) {
+        close.postDelayed({
+            close.visibility = View.VISIBLE
+        }, delayShowClose)
         this.title.text = title
+        if (cancel != null) {
+            this.cancel = cancel
+        }
         show()
     }
 
-
+    fun setCancel(cancel: () -> Unit) {
+        this.cancel = cancel
+    }
 
 }

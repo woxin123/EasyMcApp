@@ -67,7 +67,9 @@ class NovelHomeFragment : Fragment() {
             }
             true
         }
-        LoadingDialog(requireContext()).showLoading("loading", true, 3000L)
+        LoadingDialog(requireContext()).showLoading("loading", 3000L) {
+
+        }
     }
 
 }
