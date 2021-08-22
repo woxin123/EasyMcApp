@@ -8,6 +8,10 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import top.mcwebsite.novel.data.local.datastore.SearchHistories
 import top.mcwebsite.novel.data.local.datastore.SearchHistoriesSerializer
+import top.mcwebsite.novel.data.remote.repository.impl.BookRepositoryManager
+import top.mcwebsite.novel.data.remote.repository.impl.TaduBookRepository
+import top.mcwebsite.novel.data.remote.repository.impl.Yb3BookRepository
+import top.mcwebsite.novel.ui.bookdetail.BookDetailViewModel
 import top.mcwebsite.novel.ui.search.SearchViewModel
 import top.mcwebsite.novel.ui.discovery.DiscoveryViewModel
 
@@ -26,7 +30,17 @@ val appModule = module {
         DiscoveryViewModel()
     }
 
+    viewModel {
+        BookDetailViewModel()
+    }
+
     single {
         androidApplication().searchHistoryDataStore
     }
+
+    single { TaduBookRepository() }
+
+    single { Yb3BookRepository() }
+
+    single { BookRepositoryManager() }
 }

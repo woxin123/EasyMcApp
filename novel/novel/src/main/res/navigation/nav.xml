@@ -19,7 +19,25 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="top.mcwebsite.novel.ui.search.SearchFragment"
-        android:label="SearchFragment" />
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_bookDetailFragment"
+            app:destination="@id/bookDetailFragment" >
+
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/bookDetailFragment"
+        android:name="top.mcwebsite.novel.ui.bookdetail.BookDetailFragment"
+        android:label="fragment_book_detail"
+        tools:layout="@layout/fragment_book_detail">
+
+        <argument
+            android:name="book_model"
+            app:argType="top.mcwebsite.novel.model.BookModel"
+            app:nullable="false" />
+
+    </fragment>
 
 
 </navigation>

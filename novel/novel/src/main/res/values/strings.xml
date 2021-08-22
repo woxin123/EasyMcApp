@@ -10,4 +10,6 @@
     <string name="search">Search</string>
     <string name="recent_searches">Recent Searches</string>
     <string name="clear_all">Clear all</string>
+    <string name="add">+Add</string>
+    <string name="from_source">From: %s</string>
 </resources>
