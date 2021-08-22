@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/book_shelf"
+        android:id="@+id/bookShelfFragment"
         android:title="@string/book_shelf"
         android:icon="@drawable/ic_baseline_book_24"/>
 
     <item
-        android:id="@+id/discovery"
+        android:id="@+id/discoveryFragment"
         android:title="@string/discovery"
         android:icon="@drawable/ic_baseline_search_24"/>
 
     <item
-        android:id="@+id/rank"
+        android:id="@+id/rankFragment"
         android:title="@string/rank"
         android:icon="@drawable/ic_rank" />
 
     <item
-        android:id="@+id/me"
+        android:id="@+id/meFragment"
         android:title="@string/me"
         android:icon="@drawable/ic_me" />
 </menu>

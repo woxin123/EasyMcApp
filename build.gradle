@@ -8,9 +8,9 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath(libs.android.gradlePlugin)
+        classpath libs.android.gradlePlugin
         classpath libs.kotlin.gradlePlugin
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20'
+        classpath libs.androidx.navigation.gradlePlugin
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle.kts files

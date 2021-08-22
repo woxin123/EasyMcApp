@@ -77,11 +77,12 @@
         tools:text="第99章：tmd，退钱" />
 
     <TextView
+        android:id="@+id/add_to_bookshelf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"
         android:textColor="@android:color/white"
-        android:padding="5dp"
+        android:padding="8dp"
         android:text="@string/add"
         android:background="@drawable/bg_book_type"
         app:layout_constraintEnd_toEndOf="parent"

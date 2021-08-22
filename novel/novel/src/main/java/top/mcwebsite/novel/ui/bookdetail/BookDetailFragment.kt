@@ -6,8 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import coil.load
+import coil.transform.RoundedCornersTransformation
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import top.mcwebsite.common.ui.utils.dip2px
 import top.mcwebsite.novel.R
 import top.mcwebsite.novel.common.Constant
 import top.mcwebsite.novel.databinding.FragmentBookDetailBinding
@@ -24,8 +32,7 @@ class BookDetailFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             val bookModel = it.getParcelable<BookModel>(Constant.BOOK_MODEL)!!
-            viewModel.book = bookModel
-            Toast.makeText(this.requireContext(), bookModel.toString(), Toast.LENGTH_SHORT).show()
+            viewModel.setBookModel(bookModel)
         }
     }
 
@@ -41,13 +48,46 @@ class BookDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        initObservable()
     }
 
     private fun initView() {
-        binding.appBar.title = viewModel.book.name
-        binding.appBar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
-        binding.appBar.setNavigationOnClickListener {
+        updateBookView()
+        binding.title.text = viewModel.book.name
+        binding.backBtn.setOnClickListener {
             findNavController().popBackStack()
+        }
+    }
+
+    private fun updateBookView() {
+        binding.apply {
+            val book = viewModel.book
+            bookName.text = book.name
+            if (book.coverUrl != null) {
+                bookCover.load(book.coverUrl) {
+                    transformations(RoundedCornersTransformation(dip2px(requireContext(), 2F).toFloat()))
+                }
+            }
+            bookAuthor.text = book.author
+            bookSource.text = resources.getString(R.string.from_source, book.source)
+            bookType.text = book.bookType
+            bookLast.text = book.lastChapter
+            if (book.introduce.isBlank()) {
+                bookIntroduceContent.text = resources.getString(R.string.loading)
+            } else {
+                bookIntroduceContent.text = book.introduce
+            }
+            if (!book.update.isNullOrBlank()) {
+                updateTime.text = resources.getString(R.string.update_time, book.update)
+            }
+        }
+    }
+
+    private fun initObservable() {
+        lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.updateBookModel.collect { updateBookView() }
+            }
         }
     }
 

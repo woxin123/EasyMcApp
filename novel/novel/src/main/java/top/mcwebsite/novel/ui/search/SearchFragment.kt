@@ -31,6 +31,8 @@ class SearchFragment : Fragment() {
 
     private val viewModel: SearchViewModel by viewModel()
 
+    private lateinit var searchResultRecyclerAdapter: SearchResultRecyclerAdapter
+
     private val imm by lazy {
         ContextCompat.getSystemService(this.requireContext(), InputMethodManager::class.java)
     }
@@ -64,20 +66,22 @@ class SearchFragment : Fragment() {
         binding.recentSearchRecycle.let { recentSearchRecycle ->
             val adapter = RecentSearchRecyclerAdapter(viewModel)
             recentSearchRecycle.adapter = adapter
-            recentSearchRecycle.layoutManager = LinearLayoutManager(this@SearchFragment.requireContext())
+            recentSearchRecycle.layoutManager =
+                LinearLayoutManager(this@SearchFragment.requireContext())
             viewModel.searchHistoryData.observe(this@SearchFragment.viewLifecycleOwner) {
                 adapter.setData(it)
             }
         }
         binding.searchResultRecycle.let { searchResultRecycler ->
-            val adapter = SearchResultRecyclerAdapter(viewModel)
-            searchResultRecycler.adapter = adapter
-            searchResultRecycler.layoutManager = LinearLayoutManager(this@SearchFragment.requireContext())
+            searchResultRecyclerAdapter = SearchResultRecyclerAdapter(viewModel)
+            searchResultRecycler.adapter = searchResultRecyclerAdapter
+            searchResultRecycler.layoutManager =
+                LinearLayoutManager(this@SearchFragment.requireContext())
             viewModel.searchResult.observe(this.viewLifecycleOwner) {
                 loadingDialog.dismiss()
                 showOrHideRecent(false)
                 binding.searchResultRecycle.visibility = View.VISIBLE
-                adapter.setData(it)
+                searchResultRecyclerAdapter.setData(it)
             }
         }
     }
@@ -98,7 +102,7 @@ class SearchFragment : Fragment() {
             }
         }
         viewLifecycleOwner.lifecycleScope.launch {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     viewModel.searchEvent.collect {
                         loadingDialog.showLoading("Searching...", delayShowClose = 2000) {
@@ -109,15 +113,44 @@ class SearchFragment : Fragment() {
                 launch {
                     viewModel.clickSearchResultEvent.collect {
                         findNavController().navigate(
-                            R.id.action_searchFragment_to_bookDetailFragment,
-                            Bundle().apply {
-                                putParcelable(Constant.BOOK_MODEL, it)
-                            })
+                            SearchFragmentDirections.actionSearchFragmentToBookDetailFragment(it)
+                        )
+                    }
+                }
+                launch {
+                    viewModel.searchItemUpdateEvent.collect {
+                        searchResultRecyclerAdapter.updateBookItem(it.first, it.second)
                     }
                 }
             }
-
         }
+        // 这种方式有问题
+//        lifecycleScope.launch {
+//            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                launch {
+//                    viewModel.searchEvent.collect {
+//                        loadingDialog.showLoading("Searching...", delayShowClose = 2000) {
+//                            viewModel.cancelSearch()
+//                        }
+//                    }
+//                }
+//                launch {
+//                    viewModel.clickSearchResultEvent.collect {
+//                        findNavController().navigate(
+//                            R.id.action_searchFragment_to_bookDetailFragment,
+//                            Bundle().apply {
+//                                putParcelable(Constant.BOOK_MODEL, it)
+//                            })
+//                    }
+//                }
+//                launch {
+//                    viewModel.searchItemUpdateEvent.collect {
+//                        searchResultRecyclerAdapter.updateBookItem(it.first, it.second)
+//                    }
+//                }
+//            }
+//
+//        }
 
     }
 }

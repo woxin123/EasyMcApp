@@ -5,23 +5,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import top.mcwebsite.novel.data.local.datastore.SearchHistories
-import top.mcwebsite.novel.data.local.datastore.SearchHistory
+import top.mcwebsite.novel.data.local.datasource.IBookDatasource
+import top.mcwebsite.novel.data.local.db.entity.BookEntity
+import top.mcwebsite.novel.data.local.serizlizer.SearchHistories
+import top.mcwebsite.novel.data.local.serizlizer.SearchHistory
 import top.mcwebsite.novel.data.remote.repository.impl.BookRepositoryManager
 import top.mcwebsite.novel.model.BookModel
-import top.mcwebsite.novel.net.RetrofitFactory
-import java.util.*
 import kotlin.collections.ArrayList
 
-class SearchViewModel : ViewModel(), KoinComponent {
+class SearchViewModel(private val bookDataSource: IBookDatasource) : ViewModel(), KoinComponent {
 
     val searchContent = MutableLiveData<String>()
 
@@ -49,12 +45,22 @@ class SearchViewModel : ViewModel(), KoinComponent {
 
     private val bookRepositoryManager by inject<BookRepositoryManager>()
 
+    private val _searchItemUpdateEvent = MutableSharedFlow<Pair<BookModel, Int>>()
+    val searchItemUpdateEvent = _searchItemUpdateEvent.asSharedFlow()
+
+    private var bookshelf = listOf<BookEntity>()
+
     init {
         viewModelScope.launch {
             searchHistories = ArrayList(searchHistoryDataStore.data.first().historiesList)
             _searchHistoryEvent.value = searchHistories
                 .sortedByDescending { it.time }
                 .map { it.text }
+        }
+        viewModelScope.launch {
+            bookDataSource.getBookAll().collect {
+                bookshelf = it
+            }
         }
     }
 
@@ -87,8 +93,15 @@ class SearchViewModel : ViewModel(), KoinComponent {
     private fun realSearch(key: String) {
         viewModelScope.launch {
             bookRepositoryManager.searchBook(key, 0, 10).collect {
+                updateSearchResult(it)
                 _searchResult.value = it
             }
+        }
+    }
+
+    private fun updateSearchResult(books: List<BookModel>) {
+        books.forEach { book ->
+            book.atBookShelf = bookshelf.find { it.url == book.url }  != null
         }
     }
 
@@ -113,7 +126,6 @@ class SearchViewModel : ViewModel(), KoinComponent {
     }
 
 
-
     private fun addHistory(text: String) {
         searchHistories.add(
             SearchHistory.newBuilder().setText(text).setTime(System.currentTimeMillis()).build()
@@ -126,6 +138,18 @@ class SearchViewModel : ViewModel(), KoinComponent {
 
     fun back() {
         _backEvent.value = Unit
+    }
+
+    fun addToBookShelf(bookModel: BookModel, position: Int) {
+        viewModelScope.launch {
+            bookRepositoryManager.getBookInfo(bookModel).collect {
+                if (!bookDataSource.isExistByUrl(bookModel.url)) {
+                    bookDataSource.insert(bookModel)
+                    bookModel.atBookShelf = true
+                    _searchItemUpdateEvent.emit(bookModel to position)
+                }
+            }
+        }
     }
 
 }

@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id "com.google.protobuf" version "0.8.12"
     id "kotlin-parcelize"
+    id "androidx.navigation.safeargs.kotlin"
 }
 
 android {
@@ -91,6 +92,10 @@ dependencies {
     implementation libs.androidx.lifecycle.runtime.ktx
     implementation libs.androidx.datasource
     implementation libs.androidx.swiperefresh
+    implementation libs.androidx.room.runtime
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    kapt libs.androidx.room.compiler
+    implementation libs.androidx.room.ktx
     implementation libs.koin.core
     implementation libs.koin.android
     implementation libs.koin.androidCompat

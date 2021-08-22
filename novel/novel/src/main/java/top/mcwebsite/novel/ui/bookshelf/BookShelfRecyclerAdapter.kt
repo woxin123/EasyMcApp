@@ -6,38 +6,38 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import top.mcwebsite.common.ui.utils.dip2px
+import top.mcwebsite.novel.data.local.db.entity.BookEntity
 import top.mcwebsite.novel.databinding.ItemBookShelfBinding
 import top.mcwebsite.novel.model.BookModel
 import top.mcwebsite.novel.ui.bookshelf.BookShelfRecyclerAdapter.BookShelfRecyclerViewHolder
 
-class BookShelfRecyclerAdapter : RecyclerView.Adapter<BookShelfRecyclerViewHolder>() {
+class BookShelfRecyclerAdapter(private val viewModel: BookshelfViewModel) : RecyclerView.Adapter<BookShelfRecyclerViewHolder>() {
 
+    private val data = mutableListOf<BookEntity>()
+
+    fun setBooks(books: List<BookEntity>) {
+        data.clear()
+        data.addAll(books)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookShelfRecyclerViewHolder {
         return BookShelfRecyclerViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: BookShelfRecyclerViewHolder, position: Int) {
-        holder.bind(
-            BookModel(
-                "龙族",
-                author = "江南",
-                coverUrl = "https://www.75xs.cc/d/file/book/aefbfeac075ff32bc9523bab1a878ad2.jpg",
-                source = "mock",
-                url = "xxx"
-            )
-        )
+        holder.bind(viewModel, data[position])
     }
 
     override fun getItemCount(): Int {
-        return 19
+        return data.size
     }
 
 
     class BookShelfRecyclerViewHolder(private val binding: ItemBookShelfBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(book: BookModel) {
+        fun bind(viewModel: BookshelfViewModel, book: BookEntity) {
             binding.bookName.text = book.name
             binding.bookCover.load(book.coverUrl) {
                 transformations(
@@ -49,7 +49,14 @@ class BookShelfRecyclerAdapter : RecyclerView.Adapter<BookShelfRecyclerViewHolde
                     )
                 )
             }
-            binding.bookProgress.text = "未读"
+            if (book.lastReadChapterTitle.isNullOrBlank()) {
+                binding.bookProgress.text = "未读"
+            } else {
+                binding.bookProgress.text = book.lastReadChapterTitle
+            }
+            binding.root.setOnClickListener {
+                viewModel.clickItem(book)
+            }
         }
 
         companion object {

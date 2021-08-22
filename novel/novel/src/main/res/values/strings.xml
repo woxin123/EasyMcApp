@@ -11,5 +11,11 @@
     <string name="recent_searches">Recent Searches</string>
     <string name="clear_all">Clear all</string>
     <string name="add">+Add</string>
+    <string name="added">Added</string>
     <string name="from_source">From: %s</string>
+    <string name="brief_introduction">Brief Introduction</string>
+    <string name="add_to_bookshelf">Add BookShelf</string>
+    <string name="start_read">Start Read</string>
+    <string name="loading">Loading</string>
+    <string name="update_time">Update Time: %s</string>
 </resources>

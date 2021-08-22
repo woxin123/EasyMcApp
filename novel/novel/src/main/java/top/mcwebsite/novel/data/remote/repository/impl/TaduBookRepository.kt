@@ -8,7 +8,7 @@ import top.mcwebsite.novel.api.ITaduApi
 import top.mcwebsite.novel.data.remote.repository.IBookRepository
 import top.mcwebsite.novel.model.BookModel
 import top.mcwebsite.novel.model.Chapter
-import top.mcwebsite.novel.net.RetrofitFactory
+import top.mcwebsite.novel.data.remote.net.RetrofitFactory
 
 class TaduBookRepository() : IBookRepository {
 

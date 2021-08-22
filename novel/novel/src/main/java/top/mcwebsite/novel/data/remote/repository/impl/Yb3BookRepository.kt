@@ -7,7 +7,7 @@ import top.mcwebsite.novel.api.IYb3Api
 import top.mcwebsite.novel.data.remote.repository.IBookRepository
 import top.mcwebsite.novel.model.BookModel
 import top.mcwebsite.novel.model.Chapter
-import top.mcwebsite.novel.net.RetrofitFactory
+import top.mcwebsite.novel.data.remote.net.RetrofitFactory
 
 class Yb3BookRepository  : IBookRepository {
 

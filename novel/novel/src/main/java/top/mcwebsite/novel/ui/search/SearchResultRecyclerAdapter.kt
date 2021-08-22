@@ -21,6 +21,11 @@ class SearchResultRecyclerAdapter(private val viewModel: SearchViewModel) : Recy
         notifyDataSetChanged()
     }
 
+    fun updateBookItem(book: BookModel, position: Int) {
+        books[position] = book
+        notifyItemChanged(position)
+    }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -51,27 +56,43 @@ class SearchResultRecyclerAdapter(private val viewModel: SearchViewModel) : Recy
         }
 
         fun bind(viewModel: SearchViewModel, book: BookModel) {
-            if (book.coverUrl != null) {
-                binding.bookCover.load(book.coverUrl) {
-                    transformations(
-                        RoundedCornersTransformation(
-                            dip2px(
-                                binding.root.context,
-                                2F
-                            ).toFloat()
+            binding.apply {
+                if (book.coverUrl != null) {
+                    bookCover.load(book.coverUrl) {
+                        transformations(
+                            RoundedCornersTransformation(
+                                dip2px(
+                                    binding.root.context,
+                                    2F
+                                ).toFloat()
+                            )
                         )
-                    )
-                    placeholder(R.drawable.default_img_cover)
+                        placeholder(R.drawable.default_img_cover)
+                    }
+                }
+                root.setOnClickListener {
+                    viewModel.clickSearchItem(book)
+                }
+                bookName.text = book.name
+                bookAuthor.text = book.author
+                bookSource.text =
+                    binding.root.context.getString(R.string.from_source, book.source)
+                bookType.text = book.bookType
+                bookLast.text = book.lastChapter
+                if (book.atBookShelf) {
+                    addToBookshelf.text = root.resources.getString(R.string.added)
+                    addToBookshelf.setBackgroundColor(root.resources.getColor(R.color.gray))
+                } else {
+                    addToBookshelf.text = root.resources.getString(R.string.add)
+                    addToBookshelf.setBackgroundColor(root.resources.getColor(R.color.colorPrimary))
+                }
+                addToBookshelf.setOnClickListener {
+                    if (book.atBookShelf) {
+                        return@setOnClickListener
+                    }
+                    viewModel.addToBookShelf(book, adapterPosition)
                 }
             }
-            binding.root.setOnClickListener {
-                viewModel.clickSearchItem(book)
-            }
-            binding.bookName.text = book.name
-            binding.bookAuthor.text = book.author
-            binding.bookSource.text = binding.root.context.getString(R.string.from_source, book.source)
-            binding.bookType.text = book.bookType
-            binding.bookLast.text = book.lastChapter
         }
     }
 

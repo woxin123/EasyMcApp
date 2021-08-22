@@ -1,4 +1,4 @@
-package top.mcwebsite.novel.data.local.datastore
+package top.mcwebsite.novel.data.local.serizlizer
 
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer

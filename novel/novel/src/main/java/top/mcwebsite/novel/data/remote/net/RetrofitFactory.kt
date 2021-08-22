@@ -1,4 +1,4 @@
-package top.mcwebsite.novel.net
+package top.mcwebsite.novel.data.remote.net
 
 import android.content.Context
 import okhttp3.Cache

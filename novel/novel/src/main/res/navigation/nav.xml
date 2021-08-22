@@ -3,19 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/bookShelfFragment">
 
-    <fragment
-        android:id="@+id/mainFragment"
-        android:name="top.mcwebsite.novel.ui.home.NovelHomeFragment"
-        android:label="Main"
-        app:defaultNavHost="true"
-        tools:layout="@layout/fragment_novel_home">
-
-        <action
-            android:id="@+id/action_mainFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
-    </fragment>
+<!--    <fragment-->
+<!--        android:id="@+id/mainFragment"-->
+<!--        android:name="top.mcwebsite.novel.ui.home.NovelHomeFragment"-->
+<!--        android:label="Main"-->
+<!--        app:defaultNavHost="true"-->
+<!--        tools:layout="@layout/fragment_novel_home">-->
+<!--        <action-->
+<!--            android:id="@+id/action_mainFragment_to_bookShelfFragment"-->
+<!--            app:destination="@id/bookShelfFragment" />-->
+<!--        <action-->
+<!--            android:id="@+id/action_mainFragment_to_meFragment"-->
+<!--            app:destination="@id/meFragment" />-->
+<!--        <action-->
+<!--            android:id="@+id/action_mainFragment_to_discoveryFragment"-->
+<!--            app:destination="@id/discoveryFragment" />-->
+<!--        <action-->
+<!--            android:id="@+id/action_mainFragment_to_rankFragment"-->
+<!--            app:destination="@id/rankFragment" />-->
+<!--    </fragment>-->
     <fragment
         android:id="@+id/searchFragment"
         android:name="top.mcwebsite.novel.ui.search.SearchFragment"
@@ -36,8 +44,53 @@
             android:name="book_model"
             app:argType="top.mcwebsite.novel.model.BookModel"
             app:nullable="false" />
+        <action
+            android:id="@+id/action_bookDetailFragment_to_readBookFragment"
+            app:destination="@id/readBookFragment" />
 
     </fragment>
+    <fragment
+        android:id="@+id/readBookFragment"
+        android:name="top.mcwebsite.novel.ui.read.ReadBookFragment"
+        android:label="fragment_read_book"
+        tools:layout="@layout/fragment_read_book">
+
+        <argument
+            android:name="book_entity"
+            app:argType="top.mcwebsite.novel.data.local.db.entity.BookEntity"
+            app:nullable="false" />
+        <action
+            android:id="@+id/action_readBookFragment_to_bookShelfFragment"
+            app:destination="@id/bookShelfFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/bookShelfFragment"
+        android:name="top.mcwebsite.novel.ui.bookshelf.BookShelfFragment"
+        android:label="fragment_book_shelf"
+        tools:layout="@layout/fragment_book_shelf" >
+        <action
+            android:id="@+id/action_bookShelfFragment_to_readBookFragment"
+            app:destination="@id/readBookFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/discoveryFragment"
+        android:name="top.mcwebsite.novel.ui.discovery.DiscoveryFragment"
+        android:label="DiscoveryFragment" >
+        <action
+            android:id="@+id/action_discoveryFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/rankFragment"
+        android:name="top.mcwebsite.novel.ui.rank.RankFragment"
+        android:label="fragment_rank"
+        tools:layout="@layout/fragment_rank" />
+    <fragment
+        android:id="@+id/meFragment"
+        android:name="top.mcwebsite.novel.ui.me.MeFragment"
+        android:label="fragment_me"
+        tools:layout="@layout/fragment_me" />
 
 
 </navigation>

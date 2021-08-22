@@ -2,12 +2,14 @@ package top.mcwebsite.novel.ui.discovery
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import top.mcwebsite.novel.R
 import top.mcwebsite.novel.databinding.FragmentDiscoveryBinding
@@ -38,7 +40,7 @@ class DiscoveryFragment : Fragment() {
         binding.searchContent.setOnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 NavHostFragment.findNavController(this)
-                    .navigate(R.id.action_mainFragment_to_searchFragment)
+                    .navigate(R.id.action_discoveryFragment_to_searchFragment)
             }
             // 注意如果这里返回 true，那么 onClick 就不会被调用
             false
