@@ -20,8 +20,11 @@ class BookDetailViewModel(private val bookRepository: IBookRepository) : ViewMod
     fun setBookModel(book: BookModel) {
         this.book = book
         viewModelScope.launch {
-            bookRepository.getBookInfo(book).collect {
-                _updateBookModel.emit(Unit)
+            // TODO 添加缓存层
+            if (book.introduce.isBlank()) {
+                bookRepository.getBookInfo(book).collect {
+                    _updateBookModel.emit(Unit)
+                }
             }
         }
     }

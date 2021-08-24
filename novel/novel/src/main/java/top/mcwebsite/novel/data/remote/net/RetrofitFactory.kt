@@ -2,6 +2,7 @@ package top.mcwebsite.novel.data.remote.net
 
 import android.content.Context
 import okhttp3.Cache
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -17,6 +18,7 @@ object RetrofitFactory : KoinComponent {
 
     private val okHttpClientBuild: OkHttpClient.Builder =
         OkHttpClient.Builder()
+            .addInterceptor(addUserAgentInterceptor())
             .readTimeout(60, TimeUnit.SECONDS)
             .callTimeout(60, TimeUnit.SECONDS)
             .connectTimeout(60, TimeUnit.SECONDS)
@@ -33,6 +35,14 @@ object RetrofitFactory : KoinComponent {
             .build()
     }
 
+    private fun addUserAgentInterceptor(): Interceptor {
+        return Interceptor {  chain ->
+            val request = chain.request()
+            val requestBuilder = request.newBuilder()
+            requestBuilder.addHeader("User-Agent", "User-Agent:Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3")
+            chain.proceed(requestBuilder.build())
+        }
+    }
 
     private fun getCache(): Cache {
         return Cache(File(context.cacheDir, "cache"), 1024 * 1024 * 100)

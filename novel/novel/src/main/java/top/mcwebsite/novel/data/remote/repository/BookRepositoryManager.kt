@@ -1,10 +1,11 @@
-package top.mcwebsite.novel.data.remote.repository.impl
+package top.mcwebsite.novel.data.remote.repository
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import top.mcwebsite.novel.data.remote.repository.IBookRepository
+import top.mcwebsite.novel.data.remote.repository.impl.TaduBookRepository
+import top.mcwebsite.novel.data.remote.repository.impl.Yb3BookRepository
 import top.mcwebsite.novel.model.BookModel
 import top.mcwebsite.novel.model.Chapter
 import java.lang.IllegalStateException

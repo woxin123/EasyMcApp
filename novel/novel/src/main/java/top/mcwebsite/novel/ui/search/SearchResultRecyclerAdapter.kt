@@ -11,7 +11,8 @@ import top.mcwebsite.novel.databinding.ItemSearchBookResultBinding
 import top.mcwebsite.novel.model.BookModel
 import top.mcwebsite.novel.ui.search.SearchResultRecyclerAdapter.SearchResultRecyclerViewHolder
 
-class SearchResultRecyclerAdapter(private val viewModel: SearchViewModel) : RecyclerView.Adapter<SearchResultRecyclerViewHolder>() {
+class SearchResultRecyclerAdapter(private val viewModel: SearchViewModel) :
+    RecyclerView.Adapter<SearchResultRecyclerViewHolder>() {
 
     private val books = mutableListOf<BookModel>()
 
@@ -57,18 +58,18 @@ class SearchResultRecyclerAdapter(private val viewModel: SearchViewModel) : Recy
 
         fun bind(viewModel: SearchViewModel, book: BookModel) {
             binding.apply {
-                if (book.coverUrl != null) {
-                    bookCover.load(book.coverUrl) {
-                        transformations(
-                            RoundedCornersTransformation(
-                                dip2px(
-                                    binding.root.context,
-                                    2F
-                                ).toFloat()
-                            )
+                bookCover.load(book.coverUrl) {
+                    transformations(
+                        RoundedCornersTransformation(
+                            dip2px(
+                                binding.root.context,
+                                2F
+                            ).toFloat()
                         )
-                        placeholder(R.drawable.default_img_cover)
-                    }
+                    )
+                    placeholder(R.drawable.default_img_cover)
+                    error(R.drawable.default_img_cover)
+                    fallback(R.drawable.default_img_cover)
                 }
                 root.setOnClickListener {
                     viewModel.clickSearchItem(book)

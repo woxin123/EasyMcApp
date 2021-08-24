@@ -85,7 +85,7 @@ class TaduBookRepository() : IBookRepository {
             val doc = Jsoup.parse(html)
             val element = doc.getElementsByClass("bookIntro")[0]
              book.coverUrl =
-                element.getElementsByClass("bookImg")[0].getElementsByTag("img").attr("src")
+                element.getElementsByClass("bookImg")[0].getElementsByTag("img").attr("data-src")
 
             try {
                 book.update =

@@ -13,7 +13,7 @@ import top.mcwebsite.novel.data.local.datasource.IBookDatasource
 import top.mcwebsite.novel.data.local.db.entity.BookEntity
 import top.mcwebsite.novel.data.local.serizlizer.SearchHistories
 import top.mcwebsite.novel.data.local.serizlizer.SearchHistory
-import top.mcwebsite.novel.data.remote.repository.impl.BookRepositoryManager
+import top.mcwebsite.novel.data.remote.repository.BookRepositoryManager
 import top.mcwebsite.novel.model.BookModel
 import kotlin.collections.ArrayList
 

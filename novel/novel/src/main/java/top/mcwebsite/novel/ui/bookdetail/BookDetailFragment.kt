@@ -63,9 +63,11 @@ class BookDetailFragment : Fragment() {
         binding.apply {
             val book = viewModel.book
             bookName.text = book.name
-            if (book.coverUrl != null) {
+            if (!book.coverUrl.isNullOrBlank()) {
                 bookCover.load(book.coverUrl) {
                     transformations(RoundedCornersTransformation(dip2px(requireContext(), 2F).toFloat()))
+                    addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36 Edg/92.0.902.78")
+                    error(R.drawable.default_img_cover)
                 }
             }
             bookAuthor.text = book.author

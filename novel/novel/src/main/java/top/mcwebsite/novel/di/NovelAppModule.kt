@@ -12,7 +12,7 @@ import top.mcwebsite.novel.data.local.datasource.impl.BookDataSourceImpl
 import top.mcwebsite.novel.data.local.db.NovelDataBase
 import top.mcwebsite.novel.data.local.serizlizer.SearchHistories
 import top.mcwebsite.novel.data.local.serizlizer.SearchHistoriesSerializer
-import top.mcwebsite.novel.data.remote.repository.impl.BookRepositoryManager
+import top.mcwebsite.novel.data.remote.repository.BookRepositoryManager
 import top.mcwebsite.novel.data.remote.repository.impl.TaduBookRepository
 import top.mcwebsite.novel.data.remote.repository.impl.Yb3BookRepository
 import top.mcwebsite.novel.ui.bookdetail.BookDetailViewModel
