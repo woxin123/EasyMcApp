@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitFactory : KoinComponent {
 
-    private val context: Context by inject()
+//    private val context: Context by inject()
 
     private val okHttpClientBuild: OkHttpClient.Builder =
         OkHttpClient.Builder()
@@ -23,7 +23,7 @@ object RetrofitFactory : KoinComponent {
             .callTimeout(60, TimeUnit.SECONDS)
             .connectTimeout(60, TimeUnit.SECONDS)
             .retryOnConnectionFailure(true)
-            .cache(getCache())
+//            .cache(getCache())
 
     fun factory(baseUrl: String): Retrofit {
         val oKHttpClient = okHttpClientBuild.build()
@@ -44,7 +44,7 @@ object RetrofitFactory : KoinComponent {
         }
     }
 
-    private fun getCache(): Cache {
-        return Cache(File(context.cacheDir, "cache"), 1024 * 1024 * 100)
-    }
+//    private fun getCache(): Cache {
+//        return Cache(File(context.cacheDir, "cache"), 1024 * 1024 * 100)
+//    }
 }

@@ -15,5 +15,5 @@ interface ITaduApi {
     suspend fun getChapterList(@Url url: String): String
 
     @GET
-    suspend fun getChapterInfo(@Url url: String)
+    suspend fun getChapterInfo(@Url url: String): String
 }

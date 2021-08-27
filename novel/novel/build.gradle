@@ -94,6 +94,7 @@ dependencies {
     implementation libs.androidx.swiperefresh
     implementation libs.androidx.room.runtime
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.test.ext:junit-ktx:1.1.2'
     kapt libs.androidx.room.compiler
     implementation libs.androidx.room.ktx
     implementation libs.koin.core
@@ -108,6 +109,13 @@ dependencies {
     implementation libs.retrofit.convert.moshi
     implementation libs.jsoup
     testImplementation libs.junit
-    androidTestImplementation libs.androidx.test.junit
+    androidTestImplementation 'androidx.test:runner:1.4.0'
+    androidTestImplementation 'androidx.test:rules:1.3.0'
+    // Optional -- Hamcrest library
+    androidTestImplementation 'org.hamcrest:hamcrest-library:1.3'
+    // Optional -- UI testing with Espresso
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    // Optional -- UI testing with UI Automator
+    androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
     androidTestImplementation libs.androidx.test.espresso.core
 }

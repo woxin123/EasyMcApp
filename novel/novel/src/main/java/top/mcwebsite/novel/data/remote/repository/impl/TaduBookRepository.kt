@@ -18,26 +18,31 @@ class TaduBookRepository() : IBookRepository {
         val source = "tadu.com"
     }
 
-    private val retrofit by lazy {
+    private val taudApi by lazy {
         RetrofitFactory.factory(baseUrl).create(ITaduApi::class.java)
     }
 
     override suspend fun getBookInfo(book: BookModel): Flow<BookModel> {
-        val result = retrofit.getBookInfo(book.url)
+        val result = taudApi.getBookInfo(book.url)
         return parseBookInfo(result, book)
     }
 
     override suspend fun searchBook(key: String, page: Int, pageSize: Int): Flow<List<BookModel>> {
-        val result = retrofit.searchBook(mapOf("query" to key))
+        val result = taudApi.searchBook(mapOf("query" to key))
         return parseSearchBook(result)
     }
 
     override suspend fun getBookChapters(book: BookModel): Flow<List<Chapter>> {
-        TODO("Not yet implemented")
+        if (book.chapterUrl.isNullOrBlank()) {
+            return flow { error("book chapter 为空") }
+        }
+        val result = taudApi.getChapterList(book.chapterUrl!!)
+        return parseBookChapters(result)
     }
 
     override suspend fun getChapterInfo(book: BookModel, chapter: Chapter): Flow<Chapter> {
-        TODO("Not yet implemented")
+        val result = taudApi.getChapterInfo(chapter.url)
+        return parseChapterInfo(chapter, result)
     }
 
     private fun parseSearchBook(html: String): Flow<List<BookModel>> {
@@ -112,6 +117,46 @@ class TaduBookRepository() : IBookRepository {
             book.introduce = sb.toString()
             book.chapterUrl = baseUrl + element.getElementsByClass("readBtn")[0].getElementsByTag("a")[1].attr("href")
             emit(book)
+        }
+    }
+
+    private fun parseBookChapters(html: String): Flow<List<Chapter>> {
+        return flow {
+            val doc = Jsoup.parse(html)
+            val elements = doc.getElementsByClass("chapter")[0].getElementsByTag("a")
+            val chapters = mutableListOf<Chapter>()
+            for ((index, ele) in elements.withIndex()) {
+                val url = baseUrl + ele.attr("href").trim()
+                val title = ele.text()
+                val chapter = Chapter(index, title, url, "")
+                chapters.add(chapter)
+            }
+            emit(chapters)
+        }
+    }
+
+    private fun parseChapterInfo(chapter: Chapter, html: String): Flow<Chapter> {
+        return flow {
+            val docHtml = Jsoup.parse(html)
+            val realChapterUrl = docHtml.getElementById("bookPartResourceUrl").attr("value")
+            val result = taudApi.getChapterInfo(realChapterUrl)
+            val realHtmlContent = result.replace("callback{content:'", "<html><body>")
+                .replace("'}", "</body></html>")
+            val doc = Jsoup.parse(realHtmlContent)
+            val ps = doc.getElementsByTag("p")
+            val sb = StringBuilder()
+            for ((i, ele) in ps.withIndex()) {
+                val text = ele.text().trim()
+                text.replace(" ", "").replace(" ", "")
+                if (text.isNotEmpty()) {
+                    sb.append("\u3000\u3000" + text)
+                    if (i < ps.size - 1) {
+                        sb.append("\r\n")
+                    }
+                }
+            }
+            chapter.content = sb.toString()
+            emit(chapter)
         }
     }
 }

@@ -4,5 +4,8 @@ data class Chapter(
     val index: Int,
     val title: String,
     val url: String,
-    val content: String = "",
+    var content: String = "",
+
+    val bookId: Int = 0,
+
 )
