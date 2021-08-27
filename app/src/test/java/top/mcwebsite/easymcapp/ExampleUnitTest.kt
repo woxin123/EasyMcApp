@@ -8,10 +8,10 @@ import org.junit.runner.RunWith
 
 /**
  * Example local unit test, which will execute on the development machine (host).
+@RunWith(AndroidJUnit4::class)
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-@RunWith(AndroidJUnit4::class)
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
