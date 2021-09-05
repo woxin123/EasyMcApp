@@ -5,6 +5,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
+import top.mcwebsite.novel.model.BookModel
 import java.sql.Date
 
 @Parcelize
@@ -35,4 +36,10 @@ data class BookEntity(
     var lastReadIndex: Int = -1,
     @ColumnInfo(name = "last_read_chapter_title")
     var lastReadChapterTitle: String? = null,
-) : Parcelable
+) : Parcelable {
+    fun transform(): BookModel {
+        return BookModel(
+            name, author, coverUrl, introduce, bookType, lastChapter, url, chapterUrl, source
+        )
+    }
+}

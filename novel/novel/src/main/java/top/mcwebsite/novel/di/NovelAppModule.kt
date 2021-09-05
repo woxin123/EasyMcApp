@@ -20,6 +20,7 @@ import top.mcwebsite.novel.ui.bookshelf.BookshelfViewModel
 import top.mcwebsite.novel.ui.search.SearchViewModel
 import top.mcwebsite.novel.ui.discovery.DiscoveryViewModel
 import top.mcwebsite.novel.ui.read.ReadViewModel
+import top.mcwebsite.novel.ui.read.view.PageViewDrawer
 
 private val Context.searchHistoryDataStore : DataStore<SearchHistories> by dataStore(
     fileName = "search_history.pb",
@@ -53,6 +54,10 @@ val appModule = module {
         BookDataSourceImpl(get<NovelDataBase>().bookDao())
     }
 
+    single {
+        PageViewDrawer()
+    }
+
     viewModel {
         DiscoveryViewModel()
     }
@@ -66,6 +71,6 @@ val appModule = module {
     }
 
     viewModel {
-        ReadViewModel()
+        ReadViewModel(get())
     }
 }

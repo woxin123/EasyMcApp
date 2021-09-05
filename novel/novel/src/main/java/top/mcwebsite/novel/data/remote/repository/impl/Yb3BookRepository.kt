@@ -128,7 +128,7 @@ class Yb3BookRepository  : IBookRepository {
                 val temp = elem.text().trim()
                     .replace(" ", "").replace(" ", "");
                 if (temp.isNotEmpty()) {
-                    content.append("\u3000\u3000" + temp)
+                    content.append("" + temp)
                     if (index < elements.size - 1) {
                         content.append("\r\n")
                     }

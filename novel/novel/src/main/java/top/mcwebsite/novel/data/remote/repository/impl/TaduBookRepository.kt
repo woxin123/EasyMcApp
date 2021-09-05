@@ -108,7 +108,7 @@ class TaduBookRepository() : IBookRepository {
                 val temp = elem.text().trim()
                     .replace(" ", "").replace(" ", "")
                 if (temp.isNotEmpty()) {
-                    sb.append("\u3000\u3000" + temp)
+                    sb.append("" + temp)
                     if (index < introElements.size - 1) {
                         sb.append("\r\n")
                     }
