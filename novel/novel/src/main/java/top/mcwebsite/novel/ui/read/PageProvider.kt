@@ -164,4 +164,17 @@ class PageProvider(
         return true
     }
 
+    fun openChapter(chapterIndex: Int) {
+        val chapterPages = getChapterPage(chapterIndex)
+        chapterPosChangeEvent.value = chapterIndex
+        positionChangeEvent.value = 0
+        // 没有立即获取到数据需要加载
+        if (chapterPages == null) {
+            pageDrawer.status = PageViewDrawer.STATUS_LOADING
+            return
+        }
+        curPageList = chapterPages
+
+    }
+
 }

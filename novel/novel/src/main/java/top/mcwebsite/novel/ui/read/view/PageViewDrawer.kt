@@ -2,8 +2,6 @@ package top.mcwebsite.novel.ui.read.view
 
 import android.content.Context
 import android.graphics.*
-import android.util.DisplayMetrics
-import android.view.WindowManager
 import android.widget.Toast
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -12,7 +10,6 @@ import top.mcwebsite.common.ui.utils.dip2px
 import top.mcwebsite.common.ui.utils.dp
 import top.mcwebsite.common.ui.utils.halfToFull
 import top.mcwebsite.novel.config.ReadConfig
-import top.mcwebsite.novel.model.BookModel
 import top.mcwebsite.novel.model.Chapter
 import top.mcwebsite.novel.model.Page
 import top.mcwebsite.novel.ui.read.PageProvider
@@ -45,8 +42,7 @@ class PageViewDrawer : KoinComponent {
 
     private val context: Context by inject()
 
-    val readConfig = ReadConfig()
-
+    private val readConfig: ReadConfig by inject()
 
     // 绘制的配置
 
@@ -58,10 +54,10 @@ class PageViewDrawer : KoinComponent {
 
 
     // 页面的宽度
-    private val width: Int
+    private var width: Float = 0F
 
     // 页面的高度
-    private val height: Int
+    private var height: Float = 0F
 
     // 文字的字体大小
     private var fontSize: Float = dip2px(context, 14F).toFloat()
@@ -77,10 +73,10 @@ class PageViewDrawer : KoinComponent {
 
 
     // 绘制的宽度
-    private val visibleWidth: Float
+    private var visibleWidth: Float = 0F
 
     // 绘制的高度
-    private val visibleHeight: Float
+    private var visibleHeight: Float = 0F
 
     // 行间距
     private val lineSpace: Float = dip2px(context, 10F).toFloat()
@@ -117,22 +113,12 @@ class PageViewDrawer : KoinComponent {
 
     lateinit var pageProvider: PageProvider
 
-    // TODO
-    private var safeInsetTop: Int = 0
+    var safeInsetTop: Int = 0
 
-    private val batteryLevel = 50
+    private var batteryCapacity = 50
 
 
     init {
-        val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val metric = DisplayMetrics()
-        wm.defaultDisplay.getMetrics(metric)
-        width = metric.widthPixels
-        height = metric.heightPixels
-
-        visibleWidth = width - marginWidth * 2
-        visibleHeight = height - marginHeight * 2
-
         // 提示画笔初始化
         tipPaint.apply {
             color = Color.BLACK
@@ -163,6 +149,14 @@ class PageViewDrawer : KoinComponent {
         measureMarginWidth = marginWidth + width / 2
     }
 
+    fun initDrawer(width: Float, height: Float) {
+        this.width = width
+        this.height = height
+        visibleWidth = width - marginWidth * 2
+        visibleHeight = height - marginHeight * 2 - safeInsetTop
+
+    }
+
     fun drawPage(bitmap: Bitmap, isUpdate: Boolean) {
         if (pageWidget != null) {
             drawBackground(bitmap, isUpdate)
@@ -178,7 +172,7 @@ class PageViewDrawer : KoinComponent {
         val canvas = Canvas(bitmap)
         val tipMarginHeight = 3F.dp
         if (!isUpdate) {
-            canvas.drawColor(Color.WHITE)
+            canvas.drawColor(readConfig.backgroundColor)
             if (status != STATUS_INIT) {
                 val chapter = getCurrentChapter()
                 val tipTop = tipMarginHeight - tipPaint.fontMetrics.top + safeInsetTop
@@ -224,7 +218,7 @@ class PageViewDrawer : KoinComponent {
         canvas.drawRect(outFrame, batteryPaint)
 
         // 内框制作
-        val innerWidth = (outFrame.width() - innerMargin * 2 - border).times(batteryLevel / 100F)
+        val innerWidth = (outFrame.width() - innerMargin * 2 - border).times(batteryCapacity / 100F)
         val innerFrame = RectF(
             outFrameLeft + border + innerMargin, outFrameTop + border + innerMargin,
             outFrameLeft + border + innerWidth, outFrameBottom - border - innerMargin
@@ -336,12 +330,13 @@ class PageViewDrawer : KoinComponent {
     }
 
 
-    fun updateBattery(level: Int) {
-
+    fun updateBattery(capacity: Int) {
+        batteryCapacity = capacity
+        pageWidget?.drawCurPage(false)
     }
 
     fun updateTime() {
-
+        pageWidget?.drawCurPage(true)
     }
 
     private fun getCurrentPage(): Page {

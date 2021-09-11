@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import top.mcwebsite.novel.config.ReadConfig
 import top.mcwebsite.novel.data.local.datasource.IBookDatasource
 import top.mcwebsite.novel.data.local.db.entity.BookEntity
 import top.mcwebsite.novel.data.remote.repository.BookRepositoryManager
@@ -43,6 +44,9 @@ class ReadViewModel(
     val chapterList = _chapterList.asSharedFlow()
     private var chapters: List<Chapter> = emptyList()
 
+    private val _drawReadPageEvent = MutableSharedFlow<Unit>()
+    val drawReadPageEvent = _drawReadPageEvent.asSharedFlow()
+
     fun setBook(bookEntity: BookEntity) {
         this.bookEntity = bookEntity
         init()
@@ -73,6 +77,21 @@ class ReadViewModel(
             bookDataSource.update(bookEntity)
         }
 
+    }
+
+    fun openChapter(chapterIndex: Int) {
+        if (chapterIndex > chapters.size || chapterIndex < 0) {
+            // 发送事件
+            return
+        }
+        if (chapterIndex == pageProvider.chapterPos) {
+            // 发送事件
+            return
+        }
+        pageProvider.openChapter(chapterIndex)
+        viewModelScope.launch {
+            _drawReadPageEvent.emit(Unit)
+        }
     }
 
 

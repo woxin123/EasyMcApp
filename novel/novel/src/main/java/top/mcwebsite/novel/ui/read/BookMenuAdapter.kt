@@ -43,6 +43,9 @@ class BookMenuAdapter(private val viewModel: ReadViewModel) : RecyclerView.Adapt
         fun bind(chapter: Chapter, viewModel: ReadViewModel) {
             binding.apply {
                 title.text = chapter.title
+                root.setOnClickListener {
+                    viewModel.openChapter(adapterPosition)
+                }
             }
         }
 

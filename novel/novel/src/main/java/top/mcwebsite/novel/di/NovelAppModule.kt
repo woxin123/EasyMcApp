@@ -7,6 +7,7 @@ import androidx.room.Room
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+import top.mcwebsite.novel.config.ReadConfig
 import top.mcwebsite.novel.data.local.datasource.IBookDatasource
 import top.mcwebsite.novel.data.local.datasource.impl.BookDataSourceImpl
 import top.mcwebsite.novel.data.local.db.NovelDataBase
@@ -56,6 +57,10 @@ val appModule = module {
 
     single {
         PageViewDrawer()
+    }
+
+    single {
+        ReadConfig()
     }
 
     viewModel {

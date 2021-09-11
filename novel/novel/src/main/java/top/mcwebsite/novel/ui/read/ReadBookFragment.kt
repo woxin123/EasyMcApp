@@ -1,11 +1,18 @@
 package top.mcwebsite.novel.ui.read
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -20,6 +27,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import top.mcwebsite.novel.R
 import top.mcwebsite.novel.common.Constant
+import top.mcwebsite.novel.config.ReadConfig
 import top.mcwebsite.novel.databinding.FragmentReadBookBinding
 import top.mcwebsite.novel.ui.read.view.PageViewDrawer
 import top.mcwebsite.novel.ui.read.view.PageWidget
@@ -35,6 +43,8 @@ class ReadBookFragment : Fragment(), KoinComponent {
 
     private val bookMenuAdapter: BookMenuAdapter by lazy {  BookMenuAdapter(viewModel) }
 
+    private val readConfig: ReadConfig by inject()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         fullScreen()
@@ -45,6 +55,7 @@ class ReadBookFragment : Fragment(), KoinComponent {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_read_book, container, false)
         binding = FragmentReadBookBinding.bind(view)
@@ -61,6 +72,7 @@ class ReadBookFragment : Fragment(), KoinComponent {
         super.onViewCreated(view, savedInstanceState)
         initView()
         initObservable()
+        initData()
     }
 
     private fun initView() {
@@ -90,7 +102,23 @@ class ReadBookFragment : Fragment(), KoinComponent {
             }
             pageViewDrawer.pageWidget = page
             page.pageDrawer = pageViewDrawer
-            page.drawCurPage(false)
+
+
+        }
+        if (Build.VERSION.SDK_INT >= 28) {
+            activity?.window?.attributes?.let {
+                it.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
+                activity?.window?.attributes = it
+                binding.page.setOnApplyWindowInsetsListener { _, insets ->
+                    val displayCutout = insets.displayCutout
+                    if (displayCutout != null) {
+                        val top = displayCutout.safeInsetTop
+                        pageViewDrawer.safeInsetTop = top
+                        binding.page.postInvalidate()
+                    }
+                    insets.consumeSystemWindowInsets()
+                }
+            }
 
         }
     }
@@ -116,14 +144,49 @@ class ReadBookFragment : Fragment(), KoinComponent {
                         }
                     }
                 }
+
+                launch {
+                    viewModel.drawReadPageEvent.collect {
+                        binding.page.drawCurPage(false)
+                        binding.page.postInvalidate()
+                    }
+                }
             }
         }
+    }
+
+    private fun initData() {
+        registerBroadcast()
+    }
+
+    /**
+     * 注册所需得广播
+     */
+    private fun registerBroadcast() {
+        val intentFilter = IntentFilter().apply {
+            // 注册电池电量变化得广播
+            addAction(Intent.ACTION_BATTERY_CHANGED)
+            // 注册时间变化得广播
+            addAction(Intent.ACTION_TIME_TICK)
+        }
+        activity?.registerReceiver(object : BroadcastReceiver() {
+
+            override fun onReceive(context: Context?, intent: Intent) {
+                when (intent.action) {
+                    Intent.ACTION_BATTERY_CHANGED -> {
+                        val batteryCapacity = intent.getIntExtra("level", 0)
+                        pageViewDrawer.updateBattery(batteryCapacity)
+                    }
+                    Intent.ACTION_TIME_TICK -> pageViewDrawer.updateTime()
+                }
+            }
+
+        }, intentFilter)
     }
 
     private fun fullScreen() {
         immersionBar {
             hideBar(BarHide.FLAG_HIDE_STATUS_BAR)
-            fitsSystemWindows(true)
         }
     }
 

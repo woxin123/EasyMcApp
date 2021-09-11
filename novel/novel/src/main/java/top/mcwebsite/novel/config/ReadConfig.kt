@@ -19,7 +19,6 @@ class ReadConfig{
     var titleSize: Float by ReadConfigSP("title_text_size", 25F.dp)
 
     // 字体相关
-
-    var backgroundColor: Int by ReadConfigSP("background_color", Color.WHITE)
+    var backgroundColor: Int by ReadConfigSP("background_color", Color.parseColor("#CEC29D"))
 
 }

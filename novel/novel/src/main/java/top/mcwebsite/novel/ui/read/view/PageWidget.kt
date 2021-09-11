@@ -58,20 +58,19 @@ class PageWidget @JvmOverloads constructor(
     private val slop = ViewConfiguration.get(context).scaledTouchSlop
 
     init {
-        val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val metric = DisplayMetrics()
-        wm.defaultDisplay.getMetrics(metric)
-        viewWidth = metric.widthPixels
-        viewHeight = metric.heightPixels
-        curPageBitmap = Bitmap.createBitmap(viewWidth, viewHeight, Bitmap.Config.RGB_565)
-        nextPageBitmap = Bitmap.createBitmap(viewWidth, viewHeight, Bitmap.Config.RGB_565)
 
-        animationProvider = NoneAnimation(curPageBitmap, nextPageBitmap, viewWidth, viewHeight)
     }
 
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+        viewWidth = w
+        viewHeight = h
+        pageDrawer.initDrawer(w.toFloat(), h.toFloat())
+        curPageBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.RGB_565)
+        nextPageBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.RGB_565)
 
-    fun getCurPage(): Bitmap {
-        return curPageBitmap
+        animationProvider = NoneAnimation(curPageBitmap, nextPageBitmap, w, h)
+        pageDrawer.drawPage(nextPageBitmap, false)
     }
 
     fun drawNextPage() {
