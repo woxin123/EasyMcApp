@@ -55,10 +55,7 @@ class BookShelfFragment : Fragment() {
     }
 
     private fun initObservable() {
-        lifecycleScope.launch {
-            Log.d("mengchen", "sadaskjdsad")
 
-        }
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
@@ -68,7 +65,6 @@ class BookShelfFragment : Fragment() {
                 }
                 launch {
                     viewModel.clickItemEvent.collect {
-                        Log.d("mengchen", findNavController().currentDestination.toString())
                         val action =
                             BookShelfFragmentDirections.actionBookShelfFragmentToReadBookFragment(
                                 it

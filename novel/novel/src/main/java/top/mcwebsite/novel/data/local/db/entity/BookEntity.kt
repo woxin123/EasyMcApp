@@ -32,8 +32,10 @@ data class BookEntity(
     var lastReadTime: Long,
     @ColumnInfo(name = "read_duration")
     var readDuration: Long,
-    @ColumnInfo(name = "last_read_index")
-    var lastReadIndex: Int = -1,
+    @ColumnInfo(name = "last_read_chapter_position")
+    var lastReadChapterPos: Int = -1,
+    @ColumnInfo(name = "last_read_position")
+    var lastReadPosition: Int = 0,
     @ColumnInfo(name = "last_read_chapter_title")
     var lastReadChapterTitle: String? = null,
 ) : Parcelable {

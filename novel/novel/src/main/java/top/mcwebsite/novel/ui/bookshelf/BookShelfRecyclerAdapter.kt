@@ -49,7 +49,7 @@ class BookShelfRecyclerAdapter(private val viewModel: BookshelfViewModel) : Recy
                     )
                 )
             }
-            if (book.lastReadChapterTitle.isNullOrBlank()) {
+            if (book.lastReadChapterPos == -1) {
                 binding.bookProgress.text = "未读"
             } else {
                 binding.bookProgress.text = book.lastReadChapterTitle

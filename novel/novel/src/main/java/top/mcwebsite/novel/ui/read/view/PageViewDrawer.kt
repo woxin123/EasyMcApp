@@ -11,21 +11,13 @@ import top.mcwebsite.common.ui.utils.convertString
 import top.mcwebsite.common.ui.utils.dip2px
 import top.mcwebsite.common.ui.utils.dp
 import top.mcwebsite.common.ui.utils.halfToFull
+import top.mcwebsite.novel.config.ReadConfig
 import top.mcwebsite.novel.model.BookModel
 import top.mcwebsite.novel.model.Chapter
 import top.mcwebsite.novel.model.Page
 import top.mcwebsite.novel.ui.read.PageProvider
-import java.text.DecimalFormat
-import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
-
-enum class Status {
-    OPENING,
-    FINISH,
-    FAIL,
-}
-
 class PageViewDrawer : KoinComponent {
 
 
@@ -45,11 +37,15 @@ class PageViewDrawer : KoinComponent {
 
         const val STATUS_CATEGORY_EMPTY = 7 // 获取到的目录为空
 
+        const val STATUS_INIT = 8
+
     }
 
-    var status = STATUS_LOADING
+    var status = STATUS_INIT
 
     private val context: Context by inject()
+
+    val readConfig = ReadConfig()
 
 
     // 绘制的配置
@@ -60,8 +56,6 @@ class PageViewDrawer : KoinComponent {
     // 电池边界宽度
     private var borderWidth: Int = dip2px(context, 1F)
 
-    private val rect1 = RectF()
-    private val rect2 = RectF()
 
     // 页面的宽度
     private val width: Int
@@ -71,16 +65,6 @@ class PageViewDrawer : KoinComponent {
 
     // 文字的字体大小
     private var fontSize: Float = dip2px(context, 14F).toFloat()
-
-    // 时间格式
-    private val sdf: SimpleDateFormat
-
-    // 时间
-    private var data: String = ""
-
-    // 进度格式
-    private val df: DecimalFormat
-
 
     // 上下与边缘的距离
     private var marginHeight: Float = dip2px(context, 30F).toFloat()
@@ -98,53 +82,17 @@ class PageViewDrawer : KoinComponent {
     // 绘制的高度
     private val visibleHeight: Float
 
-    // 每页可以显示内容的宽度
-    private var mLineCount: Int = 0
-
-    // 状态栏距离底部的高度
-    private val statusMarginBottom: Float = dip2px(context, 3F).toFloat()
-
     // 行间距
     private val lineSpace: Float = dip2px(context, 10F).toFloat()
 
     // 段间距
     private val paragraphSpace: Float = dip2px(context, 30F).toFloat()
-    private var mTitlePara: Float = fontSize + dip2px(context, 4F).toFloat()
-
-    // 字体高度
-    private var fontHeight: Float = 0F
-
-    // 字体
-    private lateinit var typeFace: Typeface
+    private var titlePara: Float = readConfig.textSize + dip2px(context, 4F).toFloat()
 
 
     // 绘制的配置
-
-    // 当前是否为第一页
-    private var isFirstPage: Int = 0
-
-    // 当前是否为最后一页
-    private var isLastPage: Int = 0
-
     // PageWidget
     var pageWidget: PageWidget? = null
-
-    // 现在的进度
-    private var currentProgress: Int = 0
-
-    // 本书的 Model
-    private lateinit var bookModel: BookModel
-
-
-    private var mStatus = Status.OPENING
-
-    private var currentChapterIndex: Int = 0
-
-    private var currentPage: Page = Page()
-    private var prePage: Page = Page()
-    private var nextPage: Page = Page()
-
-    lateinit var bookBgBitmap: Bitmap
 
     // 绘制标题的画笔
     private val titlePaint = Paint()
@@ -185,10 +133,6 @@ class PageViewDrawer : KoinComponent {
         visibleWidth = width - marginWidth * 2
         visibleHeight = height - marginHeight * 2
 
-        sdf = SimpleDateFormat("HH:mm", Locale.getDefault())
-        data = sdf.format(Date())
-        df = DecimalFormat("#0.0")
-
         // 提示画笔初始化
         tipPaint.apply {
             color = Color.BLACK
@@ -199,26 +143,18 @@ class PageViewDrawer : KoinComponent {
         }
 
         textPaint.textAlign = Paint.Align.LEFT // 左对齐
-        textPaint.textSize = 20F.dp
+        textPaint.textSize = readConfig.textSize
         textPaint.color = Color.BLACK
         textPaint.isSubpixelText = true
 
-        titlePaint.textSize = dip2px(context, 25F).toFloat()
+        titlePaint.textSize = readConfig.titleSize
         titlePaint.style = Paint.Style.FILL_AND_STROKE
         titlePaint.typeface = Typeface.DEFAULT_BOLD
 
         batteryPaint.textSize = dip2px(context, 12F).toFloat()
         batteryPaint.color = Color.BLACK
 
-        initBg()
         measureMarginWidth()
-    }
-
-    private fun initBg() {
-        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565)
-        val canvas = Canvas(bitmap)
-        canvas.drawColor(Color.WHITE)
-        bookBgBitmap = bitmap
     }
 
     private fun measureMarginWidth() {
@@ -243,17 +179,18 @@ class PageViewDrawer : KoinComponent {
         val tipMarginHeight = 3F.dp
         if (!isUpdate) {
             canvas.drawColor(Color.WHITE)
-            if (status == STATUS_FINISH) {
+            if (status != STATUS_INIT) {
                 val chapter = getCurrentChapter()
                 val tipTop = tipMarginHeight - tipPaint.fontMetrics.top + safeInsetTop
 
                 canvas.drawText(chapter.title, marginWidth, tipTop, tipPaint)
-
-                val y = height - tipPaint.fontMetrics.bottom - tipMarginHeight
-                val percent: String =
-                    (pageProvider.getCurPage().position + 1).toString() + "/" + pageProvider.getCurPageCount()
-                        .toString()
-                canvas.drawText(percent, marginWidth, y, tipPaint)
+                if (status == STATUS_FINISH) {
+                    val y = height - tipPaint.fontMetrics.bottom - tipMarginHeight
+                    val percent: String =
+                        (pageProvider.getCurPage().position + 1).toString() + "/" + pageProvider.getCurPageCount()
+                            .toString()
+                    canvas.drawText(percent, marginWidth, y, tipPaint)
+                }
             }
         }
         // 绘制电池
@@ -306,11 +243,12 @@ class PageViewDrawer : KoinComponent {
 
         if (status != STATUS_FINISH) {
             val tip = when (status) {
-                STATUS_LOADING -> "正在拼命加载"
+                STATUS_LOADING -> "正在拼命加载..."
                 STATUS_ERROR -> "加载失败"
                 STATUS_EMPTY -> "内容为空"
                 STATUS_PARING -> "正在排版中..."
                 STATUS_CATEGORY_EMPTY -> "目录为空"
+                STATUS_INIT -> "初始化中..."
                 else -> "未知状态"
             }
             val fontMetrics = textPaint.fontMetrics
@@ -331,15 +269,15 @@ class PageViewDrawer : KoinComponent {
         val interval = textInterval + textPaint.textSize
         val para = textPara + textPaint.textSize
         val titleInterval = titleInterval + titlePaint.textSize
-        val titlePara = mTitlePara + textPaint.textSize
+        val realTitlePara = titlePara + textPaint.textSize
         var str = ""
         val currentPage = getCurrentPage()
         // 对标题进行绘制
         for (index in 0 until currentPage.titleLines) {
-            str = currentPage.lines.get(index)
+            str = currentPage.lines[index]
             // 设置顶部间距
             if (index == 0) {
-                top += mTitlePara
+                top += this.titlePara
             }
 
             // 计算文字显示的起始点
@@ -348,11 +286,11 @@ class PageViewDrawer : KoinComponent {
             canvas.drawText(str, start, top, titlePaint)
 
             // 设置尾部间距
-            if (index == currentPage.titleLines - 1) {
-                top += titlePara
+            top += if (index == currentPage.titleLines - 1) {
+                realTitlePara
             } else {
                 // 行间距
-                top += titleInterval
+                titleInterval
             }
         }
 
@@ -391,37 +329,9 @@ class PageViewDrawer : KoinComponent {
 
     }
 
-    fun openBook(bookModel: BookModel) {
-
-    }
-
-    fun getNextPage(): Page {
-        TODO()
-    }
-
-    fun getPrePage(): Page {
-        TODO()
-    }
 
 
-    fun getNextLines(): List<String> {
-        TODO()
-    }
-
-    fun getPreLines(): List<String> {
-        TODO()
-    }
-
-    fun preChapter() {
-
-    }
-
-
-    fun nextChapter() {
-
-    }
-
-    fun getCurrentChapter(): Chapter {
+    private fun getCurrentChapter(): Chapter {
         return pageProvider.getCurChapter()
     }
 
@@ -459,7 +369,7 @@ class PageViewDrawer : KoinComponent {
                 paragraph = "  $paragraph\n".halfToFull()
             } else {
                 // 设置顶部的高度
-                rHeight -= mTitlePara
+                rHeight -= titlePara
             }
             var wordCount = 0
             var subString = ""
@@ -510,7 +420,7 @@ class PageViewDrawer : KoinComponent {
             }
 
             if (showTitle) {
-                rHeight = rHeight - mTitlePara + titleInterval
+                rHeight = rHeight - titlePara + titleInterval
                 showTitle = false
             }
 

@@ -1,6 +1,7 @@
 package top.mcwebsite.novel.ui.read
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -102,10 +103,15 @@ class ReadBookFragment : Fragment(), KoinComponent {
                         binding.totalChapter.text = "共 ${it.size + 1} 章"
                         bookMenuAdapter.setBookMenu(it)
                         pageViewDrawer.pageProvider = viewModel.pageProvider
+                        pageViewDrawer.status = PageViewDrawer.STATUS_LOADING
                         launch {
                             viewModel.pageProvider.curChapterLoadedEvent.collect {
-                                binding.page.drawCurPage(false)
-                                binding.page.postInvalidate()
+                                Log.d("mengchen", "第 $it 章节加载好了")
+                                if (it == viewModel.pageProvider.chapterPos) {
+                                    Log.d("mengchen", "第 $it 章节需要重新绘制")
+                                    binding.page.drawCurPage(false)
+                                    binding.page.postInvalidate()
+                                }
                             }
                         }
                     }
@@ -121,5 +127,9 @@ class ReadBookFragment : Fragment(), KoinComponent {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        viewModel.updateBookEntity()
+    }
 
 }

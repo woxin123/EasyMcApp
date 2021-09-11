@@ -108,10 +108,8 @@ class PageWidget @JvmOverloads constructor(
                 if (!isMove) {
                     isMove = abs(downX - x) > slop || abs(downY - y) > slop
                 }
-                Log.d("mengchen", "moveX = $moveX, moveY = $moveY")
                 if (isMove) {
                     if (moveX == 0F && moveY == 0F) {
-                        Log.d("mengchen", "isNext = $isNext")
                         isNext = x - downX <= 0
                         cancelPage = false
                         if (isNext) {

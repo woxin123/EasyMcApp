@@ -4,6 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
+import org.jsoup.parser.Parser
 import top.mcwebsite.novel.api.ITaduApi
 import top.mcwebsite.novel.data.remote.repository.IBookRepository
 import top.mcwebsite.novel.model.BookModel
@@ -93,16 +94,14 @@ class TaduBookRepository() : IBookRepository {
                 element.getElementsByClass("bookImg")[0].getElementsByTag("img").attr("data-src")
 
             try {
-                book.update =
-                    doc.getElementsByClass("newUpdate")[0].getElementsByTag("span").text().trim()
-                        .replace(" ", "").replace("  ", "").substring(5)
-                book.lastChapter = doc.getElementsByClass("newUpdate")[0].getElementsByTag("a").text().toString().trim()
+                book.lastChapter = doc.selectFirst("#content > div.boxCenter.box.clearfix > div.lf > div > div:nth-child(2) > div.upDate > a").text()
+                book.update = doc.selectFirst("#content > div.boxCenter.box.clearfix > div.lf > div > div:nth-child(2) > div.upDate > span").text()
             } catch (e: Exception) {
                 book.update = null
                 book.lastChapter = null
             }
 
-            val introElements = element.getElementsByTag("p")[0].textNodes()
+            val introElements = doc.getElementsByClass("boxT")[0].getElementsByTag("p")[0].textNodes()
             val sb = StringBuilder()
             for ((index, elem) in introElements.withIndex()) {
                 val temp = elem.text().trim()
@@ -115,7 +114,7 @@ class TaduBookRepository() : IBookRepository {
                 }
             }
             book.introduce = sb.toString()
-            book.chapterUrl = baseUrl + element.getElementsByClass("readBtn")[0].getElementsByTag("a")[1].attr("href")
+            book.chapterUrl = book.url
             emit(book)
         }
     }
@@ -123,12 +122,13 @@ class TaduBookRepository() : IBookRepository {
     private fun parseBookChapters(html: String): Flow<List<Chapter>> {
         return flow {
             val doc = Jsoup.parse(html)
-            val elements = doc.getElementsByClass("chapter")[0].getElementsByTag("a")
+            val eme = doc.selectFirst("#content > div.boxCenter.boxT.clearfix > div.lf.lfT")
+            val aItem = eme.getElementsByTag("a")
             val chapters = mutableListOf<Chapter>()
-            for ((index, ele) in elements.withIndex()) {
-                val url = baseUrl + ele.attr("href").trim()
-                val title = ele.text()
-                val chapter = Chapter(index, title, url, "")
+            for ((index, item) in aItem.withIndex()) {
+                val title = item.text()
+                val url = baseUrl + item.attr("href")
+                val chapter = Chapter(index, title, url, "", -1)
                 chapters.add(chapter)
             }
             emit(chapters)
