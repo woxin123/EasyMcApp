@@ -17,7 +17,6 @@ import top.mcwebsite.novel.data.remote.repository.BookRepositoryManager
 import top.mcwebsite.novel.model.BookModel
 import top.mcwebsite.novel.ui.read.page.PageViewDrawer
 
-@ExperimentalCoroutinesApi
 class ReadViewModel(
     private val bookRepository: BookRepositoryManager,
     private val bookDataSource: IBookDatasource,
@@ -44,6 +43,12 @@ class ReadViewModel(
 
     private val _drawReadPageEvent = MutableSharedFlow<Unit>()
     val drawReadPageEvent = _drawReadPageEvent.asSharedFlow()
+
+    private val _menuStatus = MutableStateFlow(false)
+    val menuStatus = _menuStatus.asStateFlow()
+
+    private val _bookMenuStatus = MutableStateFlow(false)
+    val bookMenuStatus = _bookMenuStatus.asStateFlow()
 
     fun setBook(bookEntity: BookEntity) {
         this.bookEntity = bookEntity
@@ -141,5 +146,19 @@ class ReadViewModel(
         }
     }
 
+    fun changeMenuStatus(isShow: Boolean) {
+        viewModelScope.launch {
+            _menuStatus.emit(isShow)
+        }
+    }
+
+    fun changeBookMenuStatus(isShow: Boolean) {
+        viewModelScope.launch {
+            _bookMenuStatus.emit(isShow)
+            if (isShow) {
+                _menuStatus.emit(false)
+            }
+        }
+    }
 
 }

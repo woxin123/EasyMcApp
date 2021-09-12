@@ -62,10 +62,6 @@ val appModule = module {
     }
 
     single {
-        PageViewDrawer()
-    }
-
-    single {
         ReadConfig()
     }
 

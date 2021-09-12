@@ -13,12 +13,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gyf.immersionbar.BarHide
+import com.gyf.immersionbar.components.ImmersionFragment
 import com.gyf.immersionbar.ktx.immersionBar
+import com.gyf.immersionbar.ktx.showStatusBar
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -32,7 +37,7 @@ import top.mcwebsite.novel.ui.read.page.PageViewDrawer
 import top.mcwebsite.novel.ui.read.view.PageWidget
 
 
-class ReadBookFragment : Fragment(), KoinComponent {
+class ReadBookFragment : ImmersionFragment(), KoinComponent {
 
     private val viewModel: ReadViewModel by viewModel()
 
@@ -46,7 +51,6 @@ class ReadBookFragment : Fragment(), KoinComponent {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        fullScreen()
 
     }
 
@@ -79,10 +83,11 @@ class ReadBookFragment : Fragment(), KoinComponent {
 
             // 初始化 menu recycler view
             bookMenu.adapter = bookMenuAdapter
-            bookMenu.layoutManager = LinearLayoutManager(requireContext())
+            bookMenu.layoutManager = CenterLinearLayoutManager(requireContext())
             page.touchListener = object : PageWidget.TouchListener {
                 override fun center() {
-                    Toast.makeText(requireContext(), "点击了中间区域", Toast.LENGTH_SHORT).show()
+                    viewModel.changeMenuStatus(true)
+
                 }
 
                 override fun prePage(): Boolean {
@@ -104,6 +109,23 @@ class ReadBookFragment : Fragment(), KoinComponent {
             page.pageDrawer = pageViewDrawer
             viewModel.pageProvider.pageDrawer = pageViewDrawer
             pageViewDrawer.pageProvider = viewModel.pageProvider
+            centerArea.setOnClickListener {
+                viewModel.changeMenuStatus(false)
+            }
+
+            bookMenuTv.setOnClickListener {
+                viewModel.changeBookMenuStatus(true)
+            }
+
+            // 禁止侧滑栏手动启动
+            root.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+            // 返回键可以返回
+            root.isFocusableInTouchMode = false
+            root.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
+                override fun onDrawerClosed(drawerView: View) {
+                    viewModel.changeBookMenuStatus(false)
+                }
+            })
         }
         if (Build.VERSION.SDK_INT >= 28) {
             activity?.window?.attributes?.let {
@@ -130,6 +152,8 @@ class ReadBookFragment : Fragment(), KoinComponent {
                     viewModel.chapterList.collect {
                         binding.totalChapter.text = "共 ${it.size + 1} 章"
                         bookMenuAdapter.setBookMenu(it)
+                        val progress = (viewModel.bookEntity.lastReadChapterPos * 1F / it.size) * 100
+                        binding.seekBar.progress = progress.toInt()
                     }
                 }
 
@@ -146,6 +170,28 @@ class ReadBookFragment : Fragment(), KoinComponent {
                     viewModel.drawReadPageEvent.collect {
                         binding.page.drawCurPage(false)
                         binding.page.postInvalidate()
+                    }
+                }
+
+                launch {
+                    viewModel.menuStatus.collect {
+                        if (it) {
+                            binding.readMenuLayout.visibility = View.VISIBLE
+                            showBar()
+                        } else {
+                            binding.readMenuLayout.visibility = View.GONE
+                            hideBar()
+                        }
+                    }
+                }
+
+                launch {
+                    viewModel.bookMenuStatus.collect {
+                        if (it) {
+                            (binding.bookMenu.layoutManager as LinearLayoutManager)
+                                .scrollToPositionWithOffset(viewModel.pageProvider.chapterPos, binding.bookMenu.height / 3)
+                            binding.root.openDrawer(GravityCompat.START)
+                        }
                     }
                 }
             }
@@ -181,15 +227,51 @@ class ReadBookFragment : Fragment(), KoinComponent {
         }, intentFilter)
     }
 
-    private fun fullScreen() {
-        immersionBar {
-            hideBar(BarHide.FLAG_HIDE_STATUS_BAR)
-        }
-    }
-
     override fun onPause() {
         super.onPause()
         viewModel.updateBookEntity()
+    }
+
+    override fun initImmersionBar() {
+        hideBar()
+    }
+
+    private fun hideBar() {
+        immersionBar {
+            hideBar(BarHide.FLAG_HIDE_BAR)
+            fitsSystemWindows(false)
+        }
+    }
+
+    override fun onVisible() {
+        super.onVisible()
+        if (viewModel.menuStatus.value) {
+            showBar()
+        } else {
+            hideBar()
+        }
+    }
+
+    override fun onInvisible() {
+        super.onInvisible()
+        immersionBar {
+            hideBar(BarHide.FLAG_SHOW_BAR)
+            statusBarColor(R.color.colorPrimary)
+            removeSupportAllView()
+            // 先置为 false 切换到默认状态
+            fitsSystemWindows(false)
+            // 再设置为 true
+            fitsSystemWindows(true)
+        }
+    }
+
+    private fun showBar() {
+        immersionBar {
+            hideBar(BarHide.FLAG_HIDE_NAVIGATION_BAR)
+            showStatusBar()
+            titleBarMarginTop(binding.readMenuLayout)
+            statusBarColor(R.color.colorPrimary)
+        }
     }
 
 }
