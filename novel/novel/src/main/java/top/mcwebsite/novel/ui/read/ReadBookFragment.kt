@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -29,7 +28,7 @@ import top.mcwebsite.novel.R
 import top.mcwebsite.novel.common.Constant
 import top.mcwebsite.novel.config.ReadConfig
 import top.mcwebsite.novel.databinding.FragmentReadBookBinding
-import top.mcwebsite.novel.ui.read.view.PageViewDrawer
+import top.mcwebsite.novel.ui.read.page.PageViewDrawer
 import top.mcwebsite.novel.ui.read.view.PageWidget
 
 
@@ -39,7 +38,7 @@ class ReadBookFragment : Fragment(), KoinComponent {
 
     private lateinit var binding: FragmentReadBookBinding
 
-    private val pageViewDrawer: PageViewDrawer by inject()
+    private lateinit var  pageViewDrawer: PageViewDrawer
 
     private val bookMenuAdapter: BookMenuAdapter by lazy {  BookMenuAdapter(viewModel) }
 
@@ -59,7 +58,6 @@ class ReadBookFragment : Fragment(), KoinComponent {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_read_book, container, false)
         binding = FragmentReadBookBinding.bind(view)
-        pageViewDrawer.pageWidget = binding.page
 
         arguments?.let {
             viewModel.setBook(it.getParcelable(Constant.BOOK_ENTITY)!!)
@@ -100,10 +98,12 @@ class ReadBookFragment : Fragment(), KoinComponent {
                 }
 
             }
+            pageViewDrawer = PageViewDrawer()
+            pageViewDrawer.pageWidget = binding.page
             pageViewDrawer.pageWidget = page
             page.pageDrawer = pageViewDrawer
-
-
+            viewModel.pageProvider.pageDrawer = pageViewDrawer
+            pageViewDrawer.pageProvider = viewModel.pageProvider
         }
         if (Build.VERSION.SDK_INT >= 28) {
             activity?.window?.attributes?.let {
@@ -130,17 +130,14 @@ class ReadBookFragment : Fragment(), KoinComponent {
                     viewModel.chapterList.collect {
                         binding.totalChapter.text = "共 ${it.size + 1} 章"
                         bookMenuAdapter.setBookMenu(it)
-                        pageViewDrawer.pageProvider = viewModel.pageProvider
-                        pageViewDrawer.status = PageViewDrawer.STATUS_LOADING
-                        launch {
-                            viewModel.pageProvider.curChapterLoadedEvent.collect {
-                                Log.d("mengchen", "第 $it 章节加载好了")
-                                if (it == viewModel.pageProvider.chapterPos) {
-                                    Log.d("mengchen", "第 $it 章节需要重新绘制")
-                                    binding.page.drawCurPage(false)
-                                    binding.page.postInvalidate()
-                                }
-                            }
+                    }
+                }
+
+                launch {
+                    viewModel.pageProvider.curChapterLoadedEvent.collect {
+                        if (it == viewModel.pageProvider.chapterPos) {
+                            binding.page.drawCurPage(false)
+                            binding.page.postInvalidate()
                         }
                     }
                 }

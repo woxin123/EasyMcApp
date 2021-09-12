@@ -42,7 +42,7 @@ class BookRepositoryManager : IBookRepository, KoinComponent{
         return getRepositoryBySource(book.source).getBookChapters(book)
     }
 
-    override suspend fun getChapterInfo(book: BookModel, chapter: Chapter): Flow<Chapter> {
+    override suspend fun getChapterInfo(book: BookModel, chapter: Chapter): Flow<String> {
         return getRepositoryBySource(book.source).getChapterInfo(book, chapter)
     }
 

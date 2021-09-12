@@ -1,14 +1,14 @@
 package top.mcwebsite.novel.ui.read
 
-import android.util.Log
 import android.util.LruCache
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import top.mcwebsite.novel.data.local.db.entity.BookEntity
-import top.mcwebsite.novel.model.Chapter
+import top.mcwebsite.novel.data.local.db.entity.ChapterEntity
 import top.mcwebsite.novel.model.Page
-import top.mcwebsite.novel.ui.read.view.PageViewDrawer
+import top.mcwebsite.novel.ui.read.page.PageViewDrawer
 import java.lang.IllegalStateException
 
 /**
@@ -16,10 +16,10 @@ import java.lang.IllegalStateException
  */
 class PageProvider(
     private val bookEntity: BookEntity,
-    private val chapterList: List<Chapter>,
-    private val requestChapter: suspend (Int) -> Flow<Chapter>,
+    private val requestChapter: (Int) -> ChapterEntity,
+    private val chapterSize: () -> Int,
+    private val requestChapterContent: suspend (Int) -> Flow<String>,
     private val scope: CoroutineScope,
-    private val pageDrawer: PageViewDrawer
 ) {
 
     private val positionChangeEvent: MutableStateFlow<Int> =
@@ -32,7 +32,9 @@ class PageProvider(
 
     private val cache = LruCache<Int, List<Page>>(20)
 
-    private val _curChapterLoadedEvent = MutableSharedFlow<Int>()
+    lateinit var pageDrawer: PageViewDrawer
+
+    private val _curChapterLoadedEvent = MutableSharedFlow<Int>(replay = 1)
 
     val curChapterLoadedEvent = _curChapterLoadedEvent.asSharedFlow()
 
@@ -53,16 +55,14 @@ class PageProvider(
             chapterPosChangeEvent.collect {
                 chapterPos = it
                 bookEntity.lastReadChapterPos = it
-                bookEntity.lastReadChapterTitle = chapterList[it].title
+                if (chapterSize() > bookEntity.lastReadChapterPos) {
+                    bookEntity.lastReadChapterTitle = requestChapter(it).title
+                }
             }
         }
-
-        getCurrentChapterPage()
-        getChapterPage(chapterPos + 1)
-        getChapterPage(chapterPos - 1)
     }
 
-    fun adjustCurPageList() {
+    private fun adjustCurPageList() {
         curPageList = getChapterPage(chapterPos) ?: throw IllegalStateException("错误的状态")
         if (position == Int.MIN_VALUE) {
             positionChangeEvent.value = curPageList.size - 1
@@ -73,10 +73,10 @@ class PageProvider(
         pageDrawer.status = PageViewDrawer.STATUS_FINISH
     }
 
-    private fun getCurrentChapterPage() {
+    fun initCurChapter() {
         scope.launch {
-            requestChapter(chapterPos).collect {
-                curPageList = pageDrawer.loadPage(it)
+            requestChapterContent(chapterPos).collect {
+                curPageList = pageDrawer.loadPage(requestChapter(chapterPos), it)
                 cache.put(chapterPos, curPageList.toList())
                 pageDrawer.status = PageViewDrawer.STATUS_FINISH
                 _curChapterLoadedEvent.emit(chapterPos)
@@ -86,15 +86,16 @@ class PageProvider(
 
 
     private fun getChapterPage(chapterPosition: Int): List<Page>? {
-        if (chapterPosition < 0 || chapterPosition >= chapterList.size) {
+        if (chapterPosition < 0 || chapterPosition >= chapterSize()) {
             return null
         }
         if (cache[chapterPosition] != null) {
             return cache[chapterPosition]
         }
-        scope.launch {
-            requestChapter(chapterPosition).collect {
-                val pages = pageDrawer.loadPage(it)
+        // 分配到 IO 线程执行，这里立即返回
+        scope.launch(Dispatchers.IO) {
+            requestChapterContent(chapterPosition).collect {
+                val pages = pageDrawer.loadPage(requestChapter(chapterPosition), it)
                 cache.put(chapterPosition, pages)
                 if (chapterPosition == chapterPos) {
                     adjustCurPageList()
@@ -109,9 +110,8 @@ class PageProvider(
         return curPageList[position]
     }
 
-    fun getCurChapter(): Chapter {
-        Log.d("mengchen", "chapter pos = $chapterPos")
-        return chapterList[chapterPos]
+    fun getCurChapter(): ChapterEntity {
+        return requestChapter(chapterPos)
     }
 
     fun getCurPageCount(): Int {
@@ -123,7 +123,7 @@ class PageProvider(
             positionChangeEvent.value += 1
             return true
         }
-        if (chapterPos + 1 >= chapterList.size) {
+        if (chapterPos + 1 >= chapterSize()) {
             return false
         }
         chapterPosChangeEvent.value += 1
@@ -152,15 +152,15 @@ class PageProvider(
         }
         chapterPosChangeEvent.value -= 1
         curPageList = getChapterPage(chapterPos) ?: emptyList()
-        // 提前加载一章
-        getChapterPage(chapterPos - 1)
         if (curPageList.isEmpty()) {
-            Log.d("mengchen", "status_loading")
             pageDrawer.status = PageViewDrawer.STATUS_LOADING
             positionChangeEvent.value = Int.MIN_VALUE
             return true
         }
         positionChangeEvent.value = curPageList.size - 1
+        // 提前加载一章
+        getChapterPage(chapterPos - 1)
+
         return true
     }
 

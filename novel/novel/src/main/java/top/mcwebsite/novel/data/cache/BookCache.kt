@@ -5,41 +5,52 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import top.mcwebsite.common.ui.utils.FileUtils
 import top.mcwebsite.novel.data.local.db.entity.BookEntity
+import top.mcwebsite.novel.data.local.db.entity.ChapterEntity
 import top.mcwebsite.novel.model.BookModel
 import top.mcwebsite.novel.model.Chapter
 import java.io.*
 
-class BookCache(
-    private val bookEntity: BookEntity
-): KoinComponent {
+object BookCache: KoinComponent {
 
     private val context: Context by inject()
 
     private fun getCachePath(bid: String, title: String): String {
-        return FileUtils.getCachePath(context) + bid + File.separator + title
+        val file = File(FileUtils.getCachePath(context) + File.separator + bid)
+        if (!file.exists()) {
+            file.mkdirs()
+        }
+        return FileUtils.getCachePath(context) + File.separator + bid + File.separator + title
     }
 
-    private fun cacheChapter(bid: String, chapter: Chapter) {
+    private fun getBookChaptersCachePath(bid: String): String {
+        val file = File(FileUtils.getCachePath(context) + File.separator + bid)
+        if (!file.exists()) {
+            file.mkdirs()
+        }
+        return file.absolutePath + File.separator + "chapters"
+    }
+
+    fun cacheChapter(bid: String, chapter: ChapterEntity, content: String) {
         val file = File(getCachePath(bid, chapter.title))
         // 文件存在，说明缓存成功了
         if (!file.exists()) {
             return
         }
         BufferedWriter(FileWriter(file)).use {
-            it.write(chapter.content)
+            it.write(content)
             it.flush()
         }
     }
 
-    private fun getChapter(bid: String, chapter: Chapter) {
-        val file = File(getCachePath(bid, chapter.title))
+    fun getChapter(bid: String, chapter: ChapterEntity): String {
+        val file = File(getCachePath(bid, chapter.title)).apply {
+            createNewFile()
+        }
         val sb = StringBuilder()
         FileReader(file).use {
-            it.readLines().forEach { sb.append(it) }
+            it.readLines().forEach { sb.append(it + "\n") }
         }
-        chapter.content = sb.toString()
+        return sb.toString()
     }
-
-
 
 }

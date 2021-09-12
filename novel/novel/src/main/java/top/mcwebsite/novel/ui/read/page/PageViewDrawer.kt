@@ -1,4 +1,4 @@
-package top.mcwebsite.novel.ui.read.view
+package top.mcwebsite.novel.ui.read.page
 
 import android.content.Context
 import android.graphics.*
@@ -10,9 +10,11 @@ import top.mcwebsite.common.ui.utils.dip2px
 import top.mcwebsite.common.ui.utils.dp
 import top.mcwebsite.common.ui.utils.halfToFull
 import top.mcwebsite.novel.config.ReadConfig
+import top.mcwebsite.novel.data.local.db.entity.ChapterEntity
 import top.mcwebsite.novel.model.Chapter
 import top.mcwebsite.novel.model.Page
 import top.mcwebsite.novel.ui.read.PageProvider
+import top.mcwebsite.novel.ui.read.view.PageWidget
 import java.util.*
 import kotlin.collections.ArrayList
 class PageViewDrawer : KoinComponent {
@@ -325,7 +327,7 @@ class PageViewDrawer : KoinComponent {
 
 
 
-    private fun getCurrentChapter(): Chapter {
+    private fun getCurrentChapter(): ChapterEntity {
         return pageProvider.getCurChapter()
     }
 
@@ -344,14 +346,14 @@ class PageViewDrawer : KoinComponent {
     }
 
 
-    fun loadPage(chapter: Chapter): List<Page> {
+    fun loadPage(chapter: ChapterEntity, content: String): List<Page> {
         // 生成的页面
         val pages = mutableListOf<Page>()
         var rHeight = visibleHeight
         var titleLineCount = 0
         var showTitle = true
         var paragraph = chapter.title
-        val reader = (paragraph + "\r\n" + chapter.content).reader()
+        val reader = (paragraph + "\r\n" + content).reader()
         val lines = mutableListOf<String>()
         for (line in reader.readLines()) {
             paragraph = line

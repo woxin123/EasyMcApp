@@ -1,12 +1,21 @@
 package top.mcwebsite.novel.model
 
+import top.mcwebsite.novel.data.local.db.entity.ChapterEntity
+
 data class Chapter(
     val index: Int,
     val title: String,
     val url: String,
-    // TODO 这个属性得去掉，占内存
-    var content: String = "",
 
     val bookId: Int = 0,
 
-)
+) {
+    fun transformToEntity(): ChapterEntity {
+        return ChapterEntity(
+            bid = bookId,
+            index = this.index,
+            title = this.title,
+            url = this.url
+        )
+    }
+}

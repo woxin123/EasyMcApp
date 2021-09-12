@@ -11,5 +11,5 @@ interface IBookRepository {
 
     suspend fun getBookChapters(book: BookModel): Flow<List<Chapter>>
 
-    suspend fun getChapterInfo(book: BookModel, chapter: Chapter): Flow<Chapter>
+    suspend fun getChapterInfo(book: BookModel, chapter: Chapter): Flow<String>
 }

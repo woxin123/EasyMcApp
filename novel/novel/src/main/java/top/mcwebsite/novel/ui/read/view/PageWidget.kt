@@ -5,15 +5,12 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.util.AttributeSet
-import android.util.DisplayMetrics
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
-import android.view.WindowManager
 import android.view.animation.LinearInterpolator
-import android.widget.FrameLayout
 import android.widget.Scroller
+import top.mcwebsite.novel.ui.read.page.PageViewDrawer
 import top.mcwebsite.novel.ui.read.view.animation.*
 import kotlin.math.abs
 

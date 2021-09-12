@@ -4,14 +4,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import top.mcwebsite.novel.data.local.db.entity.ChapterEntity
 import top.mcwebsite.novel.databinding.ItemBookMenuBinding
 import top.mcwebsite.novel.model.Chapter
 
 class BookMenuAdapter(private val viewModel: ReadViewModel) : RecyclerView.Adapter<BookMenuAdapter.BookMenuViewHolder>() {
 
-    private val data = mutableListOf<Chapter>()
+    private val data = mutableListOf<ChapterEntity>()
 
-    fun setBookMenu(chapters: List<Chapter>) {
+    fun setBookMenu(chapters: List<ChapterEntity>) {
         data.clear()
         data.addAll(chapters)
         notifyDataSetChanged()
@@ -40,7 +41,7 @@ class BookMenuAdapter(private val viewModel: ReadViewModel) : RecyclerView.Adapt
             }
         }
 
-        fun bind(chapter: Chapter, viewModel: ReadViewModel) {
+        fun bind(chapter: ChapterEntity, viewModel: ReadViewModel) {
             binding.apply {
                 title.text = chapter.title
                 root.setOnClickListener {

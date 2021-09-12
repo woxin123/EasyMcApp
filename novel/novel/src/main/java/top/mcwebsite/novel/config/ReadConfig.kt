@@ -11,6 +11,7 @@ class ReadConfig{
 
     // 缓存相关
     var lruCacheSize: Int by ReadConfigSP("lru_cache_size", 20)
+    val enableFileCache: Boolean by ReadConfigSP("enable_file_cache", true)
     // 缓存相关
 
     // 字体相关

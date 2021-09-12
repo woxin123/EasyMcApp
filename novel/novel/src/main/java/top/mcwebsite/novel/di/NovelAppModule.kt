@@ -9,7 +9,9 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import top.mcwebsite.novel.config.ReadConfig
 import top.mcwebsite.novel.data.local.datasource.IBookDatasource
+import top.mcwebsite.novel.data.local.datasource.IChapterDatasource
 import top.mcwebsite.novel.data.local.datasource.impl.BookDataSourceImpl
+import top.mcwebsite.novel.data.local.datasource.impl.ChapterDatasourceImpl
 import top.mcwebsite.novel.data.local.db.NovelDataBase
 import top.mcwebsite.novel.data.local.serizlizer.SearchHistories
 import top.mcwebsite.novel.data.local.serizlizer.SearchHistoriesSerializer
@@ -21,7 +23,7 @@ import top.mcwebsite.novel.ui.bookshelf.BookshelfViewModel
 import top.mcwebsite.novel.ui.search.SearchViewModel
 import top.mcwebsite.novel.ui.discovery.DiscoveryViewModel
 import top.mcwebsite.novel.ui.read.ReadViewModel
-import top.mcwebsite.novel.ui.read.view.PageViewDrawer
+import top.mcwebsite.novel.ui.read.page.PageViewDrawer
 
 private val Context.searchHistoryDataStore : DataStore<SearchHistories> by dataStore(
     fileName = "search_history.pb",
@@ -55,6 +57,10 @@ val appModule = module {
         BookDataSourceImpl(get<NovelDataBase>().bookDao())
     }
 
+    single<IChapterDatasource> {
+        ChapterDatasourceImpl(get<NovelDataBase>().chapterDao())
+    }
+
     single {
         PageViewDrawer()
     }
@@ -76,6 +82,6 @@ val appModule = module {
     }
 
     viewModel {
-        ReadViewModel(get(), get())
+        ReadViewModel(get(), get(), get())
     }
 }

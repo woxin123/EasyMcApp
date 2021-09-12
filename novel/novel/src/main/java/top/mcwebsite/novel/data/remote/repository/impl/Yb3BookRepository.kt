@@ -36,7 +36,7 @@ class Yb3BookRepository  : IBookRepository {
         return parseBookChapters(result)
     }
 
-    override suspend fun getChapterInfo(book: BookModel, chapter: Chapter): Flow<Chapter> {
+    override suspend fun getChapterInfo(book: BookModel, chapter: Chapter): Flow<String> {
         val result = retrofit.getChapterInfo(chapter.url)
         return parseChapter(chapter, result)
     }
@@ -119,7 +119,7 @@ class Yb3BookRepository  : IBookRepository {
         }
     }
 
-    private fun parseChapter(chapter: Chapter, html: String): Flow<Chapter> {
+    private fun parseChapter(chapter: Chapter, html: String): Flow<String> {
         return flow {
             val doc = Jsoup.parse(html)
             val elements = doc.getElementById("content").textNodes()
@@ -135,12 +135,7 @@ class Yb3BookRepository  : IBookRepository {
                 }
             }
             emit(
-                Chapter(
-                    index = chapter.index,
-                    title = chapter.title,
-                    content = content.toString(),
-                    url = chapter.url,
-                )
+                content.toString()
             )
         }
     }

@@ -41,7 +41,7 @@ class TaduBookRepository() : IBookRepository {
         return parseBookChapters(result)
     }
 
-    override suspend fun getChapterInfo(book: BookModel, chapter: Chapter): Flow<Chapter> {
+    override suspend fun getChapterInfo(book: BookModel, chapter: Chapter): Flow<String> {
         val result = taudApi.getChapterInfo(chapter.url)
         return parseChapterInfo(chapter, result)
     }
@@ -128,14 +128,14 @@ class TaduBookRepository() : IBookRepository {
             for ((index, item) in aItem.withIndex()) {
                 val title = item.text()
                 val url = baseUrl + item.attr("href")
-                val chapter = Chapter(index, title, url, "", -1)
+                val chapter = Chapter(index, title, url, -1)
                 chapters.add(chapter)
             }
             emit(chapters)
         }
     }
 
-    private fun parseChapterInfo(chapter: Chapter, html: String): Flow<Chapter> {
+    private fun parseChapterInfo(chapter: Chapter, html: String): Flow<String> {
         return flow {
             val docHtml = Jsoup.parse(html)
             val realChapterUrl = docHtml.getElementById("bookPartResourceUrl").attr("value")
@@ -149,14 +149,14 @@ class TaduBookRepository() : IBookRepository {
                 val text = ele.text().trim()
                 text.replace(" ", "").replace(" ", "")
                 if (text.isNotEmpty()) {
-                    sb.append("\u3000\u3000" + text)
+                    sb.append(text)
                     if (i < ps.size - 1) {
                         sb.append("\r\n")
                     }
                 }
             }
-            chapter.content = sb.toString()
-            emit(chapter)
+
+            emit(sb.toString())
         }
     }
 }
