@@ -77,12 +77,8 @@ class SearchFragment : Fragment() {
             searchResultRecycler.adapter = searchResultRecyclerAdapter
             searchResultRecycler.layoutManager =
                 LinearLayoutManager(this@SearchFragment.requireContext())
-            viewModel.searchResult.observe(this.viewLifecycleOwner) {
-                loadingDialog.dismiss()
-                showOrHideRecent(false)
-                binding.searchResultRecycle.visibility = View.VISIBLE
-                searchResultRecyclerAdapter.setData(it)
-            }
+
+
         }
     }
 
@@ -100,6 +96,13 @@ class SearchFragment : Fragment() {
                 imm?.hideSoftInputFromWindow(it.windowToken, 0)
                 findNavController().popBackStack()
             }
+        }
+        viewModel.searchResult.observe(this.viewLifecycleOwner) {
+            loadingDialog.dismiss()
+            showOrHideRecent(false)
+            binding.sourceErrorView.root.visibility = View.GONE
+            binding.searchResultRecycle.visibility = View.VISIBLE
+            searchResultRecyclerAdapter.setData(it)
         }
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -120,6 +123,31 @@ class SearchFragment : Fragment() {
                 launch {
                     viewModel.searchItemUpdateEvent.collect {
                         searchResultRecyclerAdapter.updateBookItem(it.first, it.second)
+                    }
+                }
+                launch {
+                    viewModel.searchFailedEvent.collect { bookSourceException ->
+                        loadingDialog.dismiss()
+                        binding.apply {
+                            showOrHideRecent(false)
+                            sourceErrorView.apply {
+                                root.visibility = View.VISIBLE
+                                errorMessage.text = resources.getString(R.string.book_source_error, bookSourceException.bookSource)
+                                removeAndRetry.text = resources.getString(R.string.remove_book_source_and_retry, bookSourceException.bookSource)
+                                sourceErrorView.apply {
+                                    fun retry() {
+                                        this@SearchFragment.viewModel.search()
+                                    }
+                                    removeAndRetry.setOnClickListener {
+                                        this@SearchFragment.viewModel.removeSearchBookRepository(bookSourceException.bookSource)
+                                        retry()
+                                    }
+                                    retry.setOnClickListener {
+                                        retry()
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }

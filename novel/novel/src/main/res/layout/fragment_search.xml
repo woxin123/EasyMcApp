@@ -130,6 +130,13 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:visibility="gone"/>
 
+            <include
+                android:id="@+id/source_error_view"
+                layout="@layout/book_source_error"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

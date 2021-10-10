@@ -3,12 +3,17 @@ package top.mcwebsite.novel.ui.home
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.coroutineScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import top.mcwebsite.novel.R
+import java.lang.IllegalStateException
+import java.lang.RuntimeException
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,5 +40,6 @@ class MainActivity : AppCompatActivity() {
                 bottomNavigationView.visibility = View.GONE
             }
         }
+
     }
 }

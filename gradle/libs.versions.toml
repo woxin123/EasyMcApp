@@ -27,7 +27,8 @@ androidx-navigation-gradlePlugin = { module = "androidx.navigation:navigation-sa
 androidx-navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
 androidx-navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
 
-androidx-datasource = "androidx.datastore:datastore:1.0.0-rc02"
+androidx-datastore-proto = "androidx.datastore:datastore:1.0.0-rc02"
+androidx-datastore-preferences = "androidx.datastore:datastore-preferences:1.0.0"
 
 androidx-swiperefresh = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 

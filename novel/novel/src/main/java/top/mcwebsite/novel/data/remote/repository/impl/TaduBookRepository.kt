@@ -10,6 +10,7 @@ import top.mcwebsite.novel.data.remote.repository.IBookRepository
 import top.mcwebsite.novel.model.BookModel
 import top.mcwebsite.novel.model.Chapter
 import top.mcwebsite.novel.data.remote.net.RetrofitFactory
+import top.mcwebsite.novel.data.remote.repository.exception.BookSourceException
 
 class TaduBookRepository() : IBookRepository {
 
@@ -29,8 +30,14 @@ class TaduBookRepository() : IBookRepository {
     }
 
     override suspend fun searchBook(key: String, page: Int, pageSize: Int): Flow<List<BookModel>> {
-        val result = taudApi.searchBook(mapOf("query" to key))
-        return parseSearchBook(result)
+        return try {
+            val result = taudApi.searchBook(mapOf("query" to key))
+            parseSearchBook(result)
+        } catch (e: Exception) {
+            flow {
+                throw BookSourceException(source, e)
+            }
+        }
     }
 
     override suspend fun getBookChapters(book: BookModel): Flow<List<Chapter>> {

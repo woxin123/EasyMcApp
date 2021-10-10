@@ -24,4 +24,7 @@
     <string name="settings">Settings</string>
     <string name="next_chapter">Next</string>
     <string name="prev_chapter">Prev</string>
+    <string name="remove_book_source_and_retry">Remove %s and retry</string>
+    <string name="retry">Retry</string>
+    <string name="book_source_error">%s error, please select the process method:</string>
 </resources>

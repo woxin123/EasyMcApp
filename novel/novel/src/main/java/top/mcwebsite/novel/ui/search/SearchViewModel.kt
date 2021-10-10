@@ -1,5 +1,6 @@
 package top.mcwebsite.novel.ui.search
 
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,10 +15,16 @@ import top.mcwebsite.novel.data.local.db.entity.BookEntity
 import top.mcwebsite.novel.data.local.serizlizer.SearchHistories
 import top.mcwebsite.novel.data.local.serizlizer.SearchHistory
 import top.mcwebsite.novel.data.remote.repository.BookRepositoryManager
+import top.mcwebsite.novel.data.remote.repository.exception.BookSourceException
 import top.mcwebsite.novel.model.BookModel
+import java.lang.Exception
 import kotlin.collections.ArrayList
 
 class SearchViewModel(private val bookDataSource: IBookDatasource) : ViewModel(), KoinComponent {
+
+    companion object {
+        private const val TAG = "SearchViewModel"
+    }
 
     val searchContent = MutableLiveData<String>()
 
@@ -47,6 +54,9 @@ class SearchViewModel(private val bookDataSource: IBookDatasource) : ViewModel()
 
     private val _searchItemUpdateEvent = MutableSharedFlow<Pair<BookModel, Int>>()
     val searchItemUpdateEvent = _searchItemUpdateEvent.asSharedFlow()
+
+    private val _searchFailedEvent = MutableSharedFlow<BookSourceException>()
+    val searchFailedEvent = _searchFailedEvent.asSharedFlow()
 
     private var bookshelf = listOf<BookEntity>()
 
@@ -92,7 +102,13 @@ class SearchViewModel(private val bookDataSource: IBookDatasource) : ViewModel()
 
     private fun realSearch(key: String) {
         viewModelScope.launch {
-            bookRepositoryManager.searchBook(key, 0, 10).collect {
+            bookRepositoryManager.searchBook(key, 0, 10)
+                .catch {
+                    _searchFailedEvent.emit(it as BookSourceException)
+                    Log.e(TAG, "search error, exception: ${it.message}")
+                    it.printStackTrace()
+                }
+                .collect {
                 updateSearchResult(it)
                 _searchResult.value = it
             }
@@ -150,6 +166,10 @@ class SearchViewModel(private val bookDataSource: IBookDatasource) : ViewModel()
                 }
             }
         }
+    }
+
+    fun removeSearchBookRepository(source: String) {
+        bookRepositoryManager.removeSearchBookRepositoryBySource(source)
     }
 
 }
