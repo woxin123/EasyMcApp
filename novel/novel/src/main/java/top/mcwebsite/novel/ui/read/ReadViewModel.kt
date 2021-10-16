@@ -50,6 +50,9 @@ class ReadViewModel(
     private val _bookMenuStatus = MutableStateFlow(false)
     val bookMenuStatus = _bookMenuStatus.asStateFlow()
 
+    private val _openChapter = MutableSharedFlow<Int>()
+    val openChapter = _openChapter.asSharedFlow()
+
     fun setBook(bookEntity: BookEntity) {
         this.bookEntity = bookEntity
         init()
@@ -142,6 +145,7 @@ class ReadViewModel(
         }
         pageProvider.openChapter(chapterIndex)
         viewModelScope.launch {
+            _openChapter.emit(chapterIndex)
             _drawReadPageEvent.emit(Unit)
         }
     }

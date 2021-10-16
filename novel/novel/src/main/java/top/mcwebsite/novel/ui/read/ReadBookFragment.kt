@@ -49,11 +49,6 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
 
     private val readConfig: ReadConfig by inject()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -174,6 +169,12 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
                 }
 
                 launch {
+                    viewModel.openChapter.collect {
+                        bookMenuAdapter.updateChapterMenuSelect(it)
+                    }
+                }
+
+                launch {
                     viewModel.menuStatus.collect {
                         if (it) {
                             binding.readMenuLayout.visibility = View.VISIBLE
@@ -191,6 +192,7 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
                             (binding.bookMenu.layoutManager as LinearLayoutManager)
                                 .scrollToPositionWithOffset(viewModel.pageProvider.chapterPos, binding.bookMenu.height / 3)
                             binding.root.openDrawer(GravityCompat.START)
+                            bookMenuAdapter.updateChapterMenuSelect(viewModel.pageProvider.chapterPos)
                         }
                     }
                 }
