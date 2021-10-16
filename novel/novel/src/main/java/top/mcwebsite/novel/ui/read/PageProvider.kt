@@ -74,14 +74,7 @@ class PageProvider(
     }
 
     fun initCurChapter() {
-        scope.launch {
-            requestChapterContent(chapterPos).collect {
-                curPageList = pageDrawer.loadPage(requestChapter(chapterPos), it)
-                cache.put(chapterPos, curPageList.toList())
-                pageDrawer.status = PageViewDrawer.STATUS_FINISH
-                _curChapterLoadedEvent.emit(chapterPos)
-            }
-        }
+        curPageList = getChapterPage(chapterPos) ?: emptyList()
     }
 
 
