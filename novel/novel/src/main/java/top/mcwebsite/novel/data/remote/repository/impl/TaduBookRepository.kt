@@ -15,7 +15,7 @@ import top.mcwebsite.novel.data.remote.repository.exception.BookSourceException
 class TaduBookRepository() : IBookRepository {
 
     companion object {
-        const val baseUrl = "http://www.tadu.com"
+        const val baseUrl = "https://www.tadu.com"
 
         val source = "tadu.com"
     }
@@ -60,7 +60,7 @@ class TaduBookRepository() : IBookRepository {
                 val doc = Jsoup.parse(html)
                 val elements = doc.getElementsByClass("bookList")[0].getElementsByTag("li")
                 if (elements.isNullOrEmpty()) {
-                    emit(emptyList<BookModel>())
+                    emit(emptyList())
                 }
                 for (elem in elements) {
                     books.add(
