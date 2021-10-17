@@ -183,7 +183,15 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="5dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            app:fastScrollEnabled="true"
+            app:fastScrollVerticalThumbDrawable="@drawable/book_menu_scroller_drawable"
+            app:fastScrollVerticalTrackDrawable="@drawable/book_menu_scroller_bg_drawable"
+            app:fastScrollHorizontalThumbDrawable="@drawable/book_menu_scroller_drawable"
+            app:fastScrollHorizontalTrackDrawable="@drawable/book_menu_scroller_bg_drawable" />
+<!--            android:scrollbars="vertical"-->
+<!--            android:scrollbarThumbVertical="@drawable/book_menu_scroller_drawable"-->
+<!--    />-->
 
     </LinearLayout>
 

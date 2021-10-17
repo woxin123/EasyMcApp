@@ -10,6 +10,9 @@
         <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/drawable/bg_round_corner.xml" value="0.2515625" />
         <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/drawable/bg_search_content.xml" value="0.2515625" />
         <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/drawable/bg_search_header.xml" value="0.4276041666666667" />
+        <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/drawable/book_menu_scroller_bg_drawable.xml" value="0.34427083333333336" />
+        <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/drawable/book_menu_scroller_drawable.xml" value="0.34427083333333336" />
+        <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/drawable/book_menu_scroller_shape.xml" value="0.20520833333333333" />
         <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/drawable/button_outline.xml" value="0.4276041666666667" />
         <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.2515625" />
         <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/drawable/ic_baseline_clear_24.xml" value="0.4276041666666667" />
@@ -23,7 +26,7 @@
         <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/layout/fragment_discovery.xml" value="0.21927083333333333" />
         <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/layout/fragment_novel_home.xml" value="0.23541666666666666" />
         <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/layout/fragment_rank.xml" value="0.4026268115942029" />
-        <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/layout/fragment_read_book.xml" value="0.5" />
+        <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/layout/fragment_read_book.xml" value="0.1" />
         <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/layout/fragment_search.xml" value="0.396875" />
         <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/layout/item_book_menu.xml" value="0.2046875" />
         <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/layout/item_book_shelf.xml" value="0.4026268115942029" />
