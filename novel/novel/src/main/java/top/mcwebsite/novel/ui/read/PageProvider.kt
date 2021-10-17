@@ -24,8 +24,11 @@ class PageProvider(
 
     private val positionChangeEvent: MutableStateFlow<Int> =
         MutableStateFlow(bookEntity.lastReadPosition)
-    private val chapterPosChangeEvent: MutableStateFlow<Int> =
+
+    private val _chapterPosChangeEvent: MutableStateFlow<Int> =
         MutableStateFlow(bookEntity.lastReadChapterPos)
+
+    val chapterPosChangeEvent = _chapterPosChangeEvent.asStateFlow()
 
     var position = 0
     var chapterPos = 0
@@ -42,7 +45,7 @@ class PageProvider(
 
     init {
         if (bookEntity.lastReadChapterPos == -1) {
-            chapterPosChangeEvent.value = 0
+            _chapterPosChangeEvent.value = 0
             chapterPos = 0
         }
         scope.launch {
@@ -52,7 +55,7 @@ class PageProvider(
             }
         }
         scope.launch {
-            chapterPosChangeEvent.collect {
+            _chapterPosChangeEvent.collect {
                 chapterPos = it
                 bookEntity.lastReadChapterPos = it
                 if (chapterSize() > bookEntity.lastReadChapterPos) {
@@ -119,7 +122,7 @@ class PageProvider(
         if (chapterPos + 1 >= chapterSize()) {
             return false
         }
-        chapterPosChangeEvent.value += 1
+        _chapterPosChangeEvent.value += 1
         // 获取当前章节
         curPageList = getChapterPage(chapterPos) ?: emptyList()
         // 提前加载一章
@@ -143,7 +146,7 @@ class PageProvider(
         if (chapterPos - 1 < 0) {
             return false
         }
-        chapterPosChangeEvent.value -= 1
+        _chapterPosChangeEvent.value -= 1
         curPageList = getChapterPage(chapterPos) ?: emptyList()
         if (curPageList.isEmpty()) {
             pageDrawer.status = PageViewDrawer.STATUS_LOADING
@@ -159,7 +162,7 @@ class PageProvider(
 
     fun openChapter(chapterIndex: Int) {
         val chapterPages = getChapterPage(chapterIndex)
-        chapterPosChangeEvent.value = chapterIndex
+        _chapterPosChangeEvent.value = chapterIndex
         positionChangeEvent.value = 0
         // 没有立即获取到数据需要加载
         if (chapterPages == null) {

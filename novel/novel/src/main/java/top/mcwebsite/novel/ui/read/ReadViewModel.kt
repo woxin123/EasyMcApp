@@ -39,7 +39,7 @@ class ReadViewModel(
 
     private var _chapterList = MutableSharedFlow<List<ChapterEntity>>()
     val chapterList = _chapterList.asSharedFlow()
-    private var chapters: List<ChapterEntity> = emptyList()
+    var chapters: List<ChapterEntity> = emptyList()
 
     private val _drawReadPageEvent = MutableSharedFlow<Unit>()
     val drawReadPageEvent = _drawReadPageEvent.asSharedFlow()

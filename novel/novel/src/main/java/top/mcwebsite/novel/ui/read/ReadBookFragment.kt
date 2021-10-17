@@ -196,6 +196,14 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
                         }
                     }
                 }
+
+                launch {
+                    viewModel.pageProvider.chapterPosChangeEvent.collect {
+                        binding.seekBar
+                        val progress = (it * 1F / viewModel.chapters.size) * 100
+                        binding.seekBar.progress = progress.toInt()
+                    }
+                }
             }
         }
     }

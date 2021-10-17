@@ -152,33 +152,7 @@ class SearchFragment : Fragment() {
                 }
             }
         }
-        // 这种方式有问题
-//        lifecycleScope.launch {
-//            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-//                launch {
-//                    viewModel.searchEvent.collect {
-//                        loadingDialog.showLoading("Searching...", delayShowClose = 2000) {
-//                            viewModel.cancelSearch()
-//                        }
-//                    }
-//                }
-//                launch {
-//                    viewModel.clickSearchResultEvent.collect {
-//                        findNavController().navigate(
-//                            R.id.action_searchFragment_to_bookDetailFragment,
-//                            Bundle().apply {
-//                                putParcelable(Constant.BOOK_MODEL, it)
-//                            })
-//                    }
-//                }
-//                launch {
-//                    viewModel.searchItemUpdateEvent.collect {
-//                        searchResultRecyclerAdapter.updateBookItem(it.first, it.second)
-//                    }
-//                }
-//            }
-//
-//        }
+
 
     }
 }
