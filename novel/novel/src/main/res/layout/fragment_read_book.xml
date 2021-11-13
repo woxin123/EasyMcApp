@@ -69,7 +69,8 @@
                 android:id="@+id/bottom_menu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white">
+                android:background="@color/white"
+                tools:visibility="gone">
 
                 <TextView
                     android:id="@+id/prev_chapter"
@@ -135,6 +136,7 @@
                         app:drawableTopCompat="@drawable/ic_baseline_brightness_3_24" />
 
                     <TextView
+                        android:id="@+id/read_settings"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -189,11 +191,10 @@
             app:fastScrollVerticalTrackDrawable="@drawable/book_menu_scroller_bg_drawable"
             app:fastScrollHorizontalThumbDrawable="@drawable/book_menu_scroller_drawable"
             app:fastScrollHorizontalTrackDrawable="@drawable/book_menu_scroller_bg_drawable" />
-<!--            android:scrollbars="vertical"-->
-<!--            android:scrollbarThumbVertical="@drawable/book_menu_scroller_drawable"-->
-<!--    />-->
 
     </LinearLayout>
+
+
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -4,7 +4,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
-import org.jsoup.parser.Parser
 import top.mcwebsite.novel.api.ITaduApi
 import top.mcwebsite.novel.data.remote.repository.IBookRepository
 import top.mcwebsite.novel.model.BookModel
@@ -145,7 +144,7 @@ class TaduBookRepository() : IBookRepository {
     private fun parseChapterInfo(chapter: Chapter, html: String): Flow<String> {
         return flow {
             val docHtml = Jsoup.parse(html)
-            val realChapterUrl = docHtml.getElementById("bookPartResourceUrl").attr("value")
+            val realChapterUrl = docHtml.getElementById("bookPartResourceUrl").attr("values")
             val result = taudApi.getChapterInfo(realChapterUrl)
             val realHtmlContent = result.replace("callback{content:'", "<html><body>")
                 .replace("'}", "</body></html>")

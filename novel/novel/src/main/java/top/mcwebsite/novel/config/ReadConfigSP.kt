@@ -41,6 +41,7 @@ class ReadConfigSP<T>(
 
     private fun <T> putPreference(name: String, value: T) = with(prefs.edit()) {
         when (value) {
+            is Int -> putInt(name, value)
             is Long -> putLong(name, value)
             is String -> putString(name, value)
             is Boolean -> putBoolean(name, value)

@@ -11,4 +11,5 @@
     <color name="gray">#c1c1c1</color>
 
     <color name="colorPrimary">#03A9F4</color>
+    <color name="red">#FF0000</color>
 </resources>

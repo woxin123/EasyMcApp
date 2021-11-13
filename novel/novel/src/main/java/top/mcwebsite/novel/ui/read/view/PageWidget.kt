@@ -78,8 +78,10 @@ class PageWidget @JvmOverloads constructor(
         pageDrawer.drawPage(nextPageBitmap, isUpdate)
     }
 
-    fun setBgColor(color: Int) {
-        bgColor = color
+    fun updateColor() {
+        pageDrawer.updateColor()
+        drawCurPage(false)
+        invalidate()
     }
 
     @SuppressLint("ClickableViewAccessibility")

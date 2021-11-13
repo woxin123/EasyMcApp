@@ -6,12 +6,11 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -23,15 +22,18 @@ import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.components.ImmersionFragment
 import com.gyf.immersionbar.ktx.immersionBar
 import com.gyf.immersionbar.ktx.showStatusBar
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import top.mcwebsite.common.ui.utils.dp
+import top.mcwebsite.common.ui.view.CircleView
 import top.mcwebsite.novel.R
 import top.mcwebsite.novel.common.Constant
+import top.mcwebsite.novel.config.ReadColor
 import top.mcwebsite.novel.config.ReadConfig
+import top.mcwebsite.novel.config.readColors
 import top.mcwebsite.novel.databinding.FragmentReadBookBinding
 import top.mcwebsite.novel.ui.read.page.PageViewDrawer
 import top.mcwebsite.novel.ui.read.view.PageWidget
@@ -48,6 +50,25 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
     private val bookMenuAdapter: BookMenuAdapter by lazy {  BookMenuAdapter(viewModel) }
 
     private val readConfig: ReadConfig by inject()
+
+    private var lastBatteryLevel = -1
+
+    private val readConfigSettingsFragment: ReadConfigSettingsFragment by lazy {
+        ReadConfigSettingsFragment().apply {
+            onReadSettingChangeListener = object : ReadConfigSettingsFragment.OnReadSettingChangeListener {
+                override fun onColorChange(readColor: ReadColor) {
+                    readConfig.textColor = readColor.textColor
+                    readConfig.backgroundColor = readColor.backgroundColor
+                    binding.page.updateColor()
+                }
+
+                override fun onTextChange() {
+                    TODO("Not yet implemented")
+                }
+
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -110,6 +131,11 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
 
             bookMenuTv.setOnClickListener {
                 viewModel.changeBookMenuStatus(true)
+            }
+
+            readSettings.setOnClickListener {
+                viewModel.changeMenuStatus(false)
+                readConfigSettingsFragment.show(childFragmentManager, null)
             }
 
             // 禁止侧滑栏手动启动
@@ -228,7 +254,10 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
                 when (intent.action) {
                     Intent.ACTION_BATTERY_CHANGED -> {
                         val batteryCapacity = intent.getIntExtra("level", 0)
-                        pageViewDrawer.updateBattery(batteryCapacity)
+                        if (lastBatteryLevel != batteryCapacity) {
+                            pageViewDrawer.updateBattery(batteryCapacity)
+                            lastBatteryLevel = batteryCapacity
+                        }
                     }
                     Intent.ACTION_TIME_TICK -> pageViewDrawer.updateTime()
                 }
@@ -240,6 +269,10 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
     override fun onPause() {
         super.onPause()
         viewModel.updateBookEntity()
+    }
+
+    override fun onStop() {
+        super.onStop()
     }
 
     override fun initImmersionBar() {

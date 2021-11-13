@@ -27,4 +27,13 @@
     <string name="remove_book_source_and_retry">Remove %s and retry</string>
     <string name="retry">Retry</string>
     <string name="book_source_error">%s error, please select the process method:</string>
+    <string name="brightness">Brightness</string>
+    <string name="background">Background</string>
+    <string name="page_mode">Page mode</string>
+    <string name="follow_system">Follow system</string>
+    <string name="text_size">Text Size</string>
+    <string name="a_minus">A-</string>
+    <string name="a_add">A+</string>
+    <string name="system_fonts">System fonts</string>
+    <string name="more_setting">More settings</string>
 </resources>

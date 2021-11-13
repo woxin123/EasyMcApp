@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="20dp"
+    android:paddingBottom="30dp">
+
+
+    <TextView
+        android:id="@+id/brightness"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="@string/brightness"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Brightness" />
+
+    <SeekBar
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/brightness"
+        app:layout_constraintEnd_toStartOf="@id/follow_system_cb"
+        app:layout_constraintStart_toEndOf="@id/brightness"
+        app:layout_constraintTop_toTopOf="@id/brightness" />
+
+    <CheckBox
+        android:id="@+id/follow_system_cb"
+        style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/follow_system"
+        app:layout_constraintBottom_toBottomOf="@id/brightness"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/brightness"
+        tools:text="follow system" />
+
+    <TextView
+        android:id="@+id/text_size_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/text_size"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/brightness"
+        app:layout_constraintTop_toBottomOf="@id/brightness"
+        tools:text="Text size" />
+
+    <TextView
+        android:id="@+id/minus_text_size_btn"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="15dp"
+        android:background="@drawable/button_radius__bg"
+        android:gravity="center"
+        android:text="@string/a_minus"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/text_size_btn"
+        app:layout_constraintStart_toEndOf="@id/text_size_btn"
+        app:layout_constraintTop_toTopOf="@id/text_size_btn"
+        tools:text="A-" />
+
+    <TextView
+        android:id="@+id/text_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="10"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/minus_text_size_btn"
+        app:layout_constraintStart_toEndOf="@id/minus_text_size_btn"
+        app:layout_constraintTop_toTopOf="@id/minus_text_size_btn"
+        tools:text="50" />
+
+    <TextView
+        android:id="@+id/add_text_size_btn"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="15dp"
+        android:background="@drawable/button_radius__bg"
+        android:gravity="center"
+        android:text="@string/a_add"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/text_size_btn"
+        app:layout_constraintStart_toEndOf="@id/text_size"
+        app:layout_constraintTop_toTopOf="@id/text_size_btn"
+        tools:text="A-" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/button_radius__bg"
+        android:gravity="center"
+        android:text="@string/system_fonts"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/add_text_size_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/add_text_size_btn"
+        app:layout_constraintTop_toTopOf="@id/add_text_size_btn"
+        tools:text="System Fonts" />
+
+    <TextView
+        android:id="@+id/background_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/background"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/brightness"
+        app:layout_constraintTop_toBottomOf="@id/text_size"
+        tools:text="Background" />
+
+    <HorizontalScrollView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="16dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="@id/background_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/background_tv"
+        app:layout_constraintTop_toTopOf="@id/background_tv">
+
+
+        <LinearLayout
+            android:id="@+id/background_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
+
+    </HorizontalScrollView>
+
+
+    <TextView
+        android:id="@+id/page_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/page_mode"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/brightness"
+        app:layout_constraintTop_toBottomOf="@id/background_tv" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/page_mode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/page_mode"
+        app:layout_constraintTop_toTopOf="@id/page_mode">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_radius__bg"
+            android:gravity="center"
+            tools:text="仿真" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_radius__bg"
+            android:gravity="center"
+            tools:text="覆盖" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_radius__bg"
+            android:gravity="center"
+            tools:text="平移" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_radius__bg"
+            android:gravity="center"
+            tools:text="上下" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/button_radius__bg"
+        android:gravity="center"
+        android:text="@string/more_setting"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/page_mode"
+        tools:text="更多设置" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

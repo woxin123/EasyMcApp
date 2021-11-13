@@ -17,6 +17,7 @@ import top.mcwebsite.novel.ui.read.PageProvider
 import top.mcwebsite.novel.ui.read.view.PageWidget
 import java.util.*
 import kotlin.collections.ArrayList
+
 class PageViewDrawer : KoinComponent {
 
 
@@ -119,6 +120,8 @@ class PageViewDrawer : KoinComponent {
 
     private var batteryCapacity = 50
 
+    private var backgroundColor = readConfig.backgroundColor
+
 
     init {
         // 提示画笔初始化
@@ -132,7 +135,7 @@ class PageViewDrawer : KoinComponent {
 
         textPaint.textAlign = Paint.Align.LEFT // 左对齐
         textPaint.textSize = readConfig.textSize
-        textPaint.color = Color.BLACK
+        textPaint.color = readConfig.textColor
         textPaint.isSubpixelText = true
 
         titlePaint.textSize = readConfig.titleSize
@@ -162,9 +165,7 @@ class PageViewDrawer : KoinComponent {
     fun drawPage(bitmap: Bitmap, isUpdate: Boolean) {
         if (pageWidget != null) {
             drawBackground(bitmap, isUpdate)
-            if (!isUpdate) {
-                drawContent(bitmap)
-            }
+            drawContent(bitmap)
         } else {
             Toast.makeText(context, "绘制出错，wuwuwuwuwu", Toast.LENGTH_SHORT).show()
         }
@@ -174,7 +175,7 @@ class PageViewDrawer : KoinComponent {
         val canvas = Canvas(bitmap)
         val tipMarginHeight = 3F.dp
         if (!isUpdate) {
-            canvas.drawColor(readConfig.backgroundColor)
+            canvas.drawColor(backgroundColor)
             if (status != STATUS_INIT) {
                 val chapter = getCurrentChapter()
                 val tipTop = tipMarginHeight - tipPaint.fontMetrics.top + safeInsetTop
@@ -232,6 +233,14 @@ class PageViewDrawer : KoinComponent {
         val time = Date().convertString("HH:mm")
         val x = outFrameLeft - tipPaint.measureText(time) - 4F.dp
         canvas.drawText(time, x, y, tipPaint)
+    }
+
+    fun updateColor() {
+        backgroundColor = readConfig.backgroundColor
+        textPaint.color = readConfig.textColor
+        titlePaint.color = readConfig.textColor
+        batteryPaint.color = readConfig.textColor
+        tipPaint.color = readConfig.textColor
     }
 
     private fun drawContent(bitmap: Bitmap) {
@@ -324,7 +333,6 @@ class PageViewDrawer : KoinComponent {
     fun cancelPage() {
 
     }
-
 
 
     private fun getCurrentChapter(): ChapterEntity {
