@@ -7,12 +7,10 @@ data class Chapter(
     val title: String,
     val url: String,
 
-    val bookId: Int = 0,
-
 ) {
-    fun transformToEntity(): ChapterEntity {
+    fun transformToEntity(bid: Int): ChapterEntity {
         return ChapterEntity(
-            bid = bookId,
+            bid = bid,
             index = this.index,
             title = this.title,
             url = this.url

@@ -1,5 +1,6 @@
 package top.mcwebsite.novel.ui.read
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -109,12 +110,13 @@ class ReadViewModel(
 
     private suspend fun getBookChapters(book: BookEntity): Flow<List<ChapterEntity>> {
         val chapters = chapterDatasource.getChaptersByBid(book.bid)
+        Log.e(TAG, "book = $book chapters = $chapters")
         return if (chapters.isEmpty()) {
             bookRepository.getBookChapters(bookModel).map { list ->
                 val entities = mutableListOf<ChapterEntity>()
-                list.forEach { entities.add(it.transformToEntity()) }
+                list.forEach { entities.add(it.transformToEntity(book.bid)) }
                 // 顺便存储一下
-                chapterDatasource.insert(*list.toTypedArray())
+                chapterDatasource.insert(*entities.toTypedArray())
                 entities.toList()
             }
         } else {

@@ -134,7 +134,7 @@ class TaduBookRepository() : IBookRepository {
             for ((index, item) in aItem.withIndex()) {
                 val title = item.text()
                 val url = baseUrl + item.attr("href")
-                val chapter = Chapter(index, title, url, -1)
+                val chapter = Chapter(index, title, url)
                 chapters.add(chapter)
             }
             emit(chapters)

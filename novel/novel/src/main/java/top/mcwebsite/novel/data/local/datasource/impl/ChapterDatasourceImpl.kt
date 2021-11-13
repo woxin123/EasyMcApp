@@ -10,7 +10,7 @@ class ChapterDatasourceImpl(
     private val chapterDao: ChapterDao
 ) : IChapterDatasource {
     override suspend fun getChaptersByBid(bid: Int): List<ChapterEntity> {
-        return chapterDao.getChaptersByBId(bid)
+        return chapterDao.getAll()
     }
 
     override suspend fun getChaptersByBidFlow(bid: Int): Flow<List<ChapterEntity>> {
@@ -21,9 +21,7 @@ class ChapterDatasourceImpl(
         chapterDao.update(chapter)
     }
 
-    override suspend fun insert(vararg chapter: Chapter) {
-        chapterDao.insert(*mutableListOf<ChapterEntity>().apply {
-            chapter.forEach { add(it.transformToEntity()) }
-        }.toTypedArray())
+    override suspend fun insert(vararg chapterEntity: ChapterEntity) {
+        chapterDao.insertAll(*chapterEntity)
     }
 }

@@ -12,5 +12,5 @@ interface IChapterDatasource {
 
     suspend fun update(chapter: ChapterEntity)
 
-    suspend fun insert(vararg chapter: Chapter)
+    suspend fun insert(vararg chapterEntity: ChapterEntity)
 }

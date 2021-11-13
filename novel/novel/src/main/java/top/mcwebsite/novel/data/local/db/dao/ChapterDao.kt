@@ -7,6 +7,9 @@ import top.mcwebsite.novel.data.local.db.entity.ChapterEntity
 @Dao
 interface ChapterDao {
 
+    @Query("SELECT * FROM chapter")
+    suspend fun getAll(): List<ChapterEntity>
+
     @Query("SELECT * FROM chapter WHERE bid = :bid")
     suspend fun getChaptersByBId(bid: Int): List<ChapterEntity>
 
@@ -14,7 +17,7 @@ interface ChapterDao {
     fun getChaptersByBidFlow(bid: Int): Flow<List<ChapterEntity>>
 
     @Insert
-    suspend fun insert(vararg chapter: ChapterEntity)
+    suspend fun insertAll(vararg chapter: ChapterEntity)
 
 
     @Update
