@@ -94,7 +94,7 @@ class SearchFragment : Fragment() {
             binding.searchContent.let {
                 it.clearFocus()
                 imm?.hideSoftInputFromWindow(it.windowToken, 0)
-                findNavController().popBackStack()
+                findNavController().navigateUp()
             }
         }
         viewModel.searchResult.observe(this.viewLifecycleOwner) {

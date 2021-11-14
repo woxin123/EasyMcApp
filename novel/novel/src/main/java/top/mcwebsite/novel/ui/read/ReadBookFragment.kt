@@ -77,13 +77,14 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
+        requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 quit()
                 findNavController().navigateUp()
             }
 
         })
+
     }
 
     override fun onCreateView(
