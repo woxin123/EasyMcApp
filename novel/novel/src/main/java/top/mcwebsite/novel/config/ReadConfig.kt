@@ -26,4 +26,6 @@ class ReadConfig {
     // 字体相关
     var backgroundColor: Int by ReadConfigSP("background_color", Color.parseColor("#CEC29D"))
 
+    var brightness: Float by ReadConfigSP("brightness", -1F)
+
 }

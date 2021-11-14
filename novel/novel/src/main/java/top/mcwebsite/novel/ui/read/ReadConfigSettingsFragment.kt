@@ -6,11 +6,13 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatDialog
 import androidx.core.view.forEach
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -33,6 +35,8 @@ class ReadConfigSettingsFragment(
         fun onColorChange(readColor: ReadColor)
 
         fun onTextChange()
+
+        fun onBrightnessChange(brightness: Float)
     }
 
     private val readConfig: ReadConfig by inject()
@@ -58,22 +62,8 @@ class ReadConfigSettingsFragment(
 
     private fun initView() {
         initReadColorList()
-        binding.textSize.text = readConfig.textSize.toInt().toString()
-        binding.addTextSizeBtn.setOnClickListener {
-            if (readConfig.textSize < ReadConfig.MAX_TEXT_SIZE) {
-                readConfig.textSize++
-            }
-            binding.textSize.text = readConfig.textSize.toInt().toString()
-            onReadSettingChangeListener?.onTextChange()
-        }
-
-        binding.minusTextSizeBtn.setOnClickListener {
-            if (readConfig.textSize > ReadConfig.MIN_TEXT_SIZE) {
-                readConfig.textSize--
-            }
-            binding.textSize.text = readConfig.textSize.toInt().toString()
-            onReadSettingChangeListener?.onTextChange()
-        }
+        initTextSize()
+        initBrightness()
     }
 
     private fun initReadColorList() {
@@ -114,5 +104,56 @@ class ReadConfigSettingsFragment(
         }
     }
 
+    private fun initTextSize() {
+        binding.textSize.text = readConfig.textSize.toInt().toString()
+        binding.addTextSizeBtn.setOnClickListener {
+            if (readConfig.textSize < ReadConfig.MAX_TEXT_SIZE) {
+                readConfig.textSize++
+            }
+            binding.textSize.text = readConfig.textSize.toInt().toString()
+            onReadSettingChangeListener?.onTextChange()
+        }
+
+        binding.minusTextSizeBtn.setOnClickListener {
+            if (readConfig.textSize > ReadConfig.MIN_TEXT_SIZE) {
+                readConfig.textSize--
+            }
+            binding.textSize.text = readConfig.textSize.toInt().toString()
+            onReadSettingChangeListener?.onTextChange()
+        }
+    }
+
+    private fun initBrightness() {
+        binding.brightnessSeekBar.max = 100
+        if (readConfig.brightness == -1F) {
+            binding.followSystemCb.isChecked = true
+            val screenBrightness = (getScreenBrightness() * 100).toInt()
+            binding.brightnessSeekBar.progress = screenBrightness
+        } else {
+            binding.brightnessSeekBar.progress = (readConfig.brightness * 100).toInt()
+        }
+        binding.brightnessSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                onReadSettingChangeListener?.onBrightnessChange(progress.toFloat() / 100)
+                if (binding.followSystemCb.isChecked) {
+                    binding.followSystemCb.isChecked = false
+                }
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            }
+
+        })
+        binding.followSystemCb.setOnClickListener {
+            onReadSettingChangeListener?.onBrightnessChange(-1F)
+        }
+    }
+
+    private fun getScreenBrightness(): Float {
+        return Settings.System.getInt(requireActivity().contentResolver, Settings.System.SCREEN_BRIGHTNESS, 125).toFloat() / 255F
+    }
 
 }

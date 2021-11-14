@@ -12,11 +12,13 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.components.ImmersionFragment
@@ -57,7 +59,6 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
         ReadConfigSettingsFragment().apply {
             onReadSettingChangeListener = object : ReadConfigSettingsFragment.OnReadSettingChangeListener {
                 override fun onColorChange(readColor: ReadColor) {
-
                     binding.page.updateColor()
                 }
 
@@ -65,8 +66,24 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
                     binding.page.updateTextSize()
                 }
 
+                override fun onBrightnessChange(brightness: Float) {
+                    readConfig.brightness = brightness
+                    setCurrentPageBrightness(brightness)
+                }
+
             }
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                quit()
+                findNavController().navigateUp()
+            }
+
+        })
     }
 
     override fun onCreateView(
@@ -93,6 +110,7 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
     }
 
     private fun initView() {
+        setCurrentPageBrightness(readConfig.brightness)
         binding.apply {
             bookName.text = viewModel.bookEntity.name
 
@@ -274,6 +292,12 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
         super.onStop()
     }
 
+    private fun setCurrentPageBrightness(brightness: Float) {
+        val lp = requireActivity().window.attributes
+        lp.screenBrightness = brightness
+        requireActivity().window.attributes = lp
+    }
+
     override fun initImmersionBar() {
         hideBar()
     }
@@ -314,6 +338,14 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
             titleBarMarginTop(binding.readMenuLayout)
             statusBarColor(R.color.colorPrimary)
         }
+    }
+
+    private fun quit() {
+        resetScreenBrightness()
+    }
+
+    private fun resetScreenBrightness() {
+        setCurrentPageBrightness(-1F)
     }
 
 }

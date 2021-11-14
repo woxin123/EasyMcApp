@@ -20,6 +20,7 @@
         tools:text="Brightness" />
 
     <SeekBar
+        android:id="@+id/brightness_seekBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/brightness"
