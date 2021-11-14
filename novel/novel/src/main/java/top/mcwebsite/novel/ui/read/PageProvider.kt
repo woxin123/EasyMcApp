@@ -10,6 +10,7 @@ import top.mcwebsite.novel.data.local.db.entity.ChapterEntity
 import top.mcwebsite.novel.model.Page
 import top.mcwebsite.novel.ui.read.page.PageViewDrawer
 import java.lang.IllegalStateException
+import java.util.concurrent.atomic.AtomicInteger
 
 /**
  * 用来提供 page
@@ -33,7 +34,10 @@ class PageProvider(
     var position = 0
     var chapterPos = 0
 
-    private val cache = LruCache<Int, List<Page>>(20)
+    /**
+     * lru cache
+     */
+    private val cache = LruCache<Int, Pair<List<Page>, Int>>(20)
 
     lateinit var pageDrawer: PageViewDrawer
 
@@ -42,6 +46,9 @@ class PageProvider(
     val curChapterLoadedEvent = _curChapterLoadedEvent.asSharedFlow()
 
     private var curPageList: List<Page> = emptyList()
+
+    // 这个变量用于表示当前 page 的版本，如果 page 的版本更新了，那么当前缓存中的 page 就需要重新计算了
+    private val pageVersion: AtomicInteger = AtomicInteger(0)
 
     init {
         if (bookEntity.lastReadChapterPos == -1) {
@@ -86,13 +93,16 @@ class PageProvider(
             return null
         }
         if (cache[chapterPosition] != null) {
-            return cache[chapterPosition]
+            val pair = cache[chapterPosition]
+            if (pair.second == pageVersion.get()) {
+                return pair.first
+            }
         }
         // 分配到 IO 线程执行，这里立即返回
         scope.launch(Dispatchers.IO) {
             requestChapterContent(chapterPosition).collect {
                 val pages = pageDrawer.loadPage(requestChapter(chapterPosition), it)
-                cache.put(chapterPosition, pages)
+                cache.put(chapterPosition, pages to pageVersion.get())
                 if (chapterPosition == chapterPos) {
                     adjustCurPageList()
                 }
@@ -100,6 +110,18 @@ class PageProvider(
             }
         }
         return null
+    }
+
+    fun reloadCurPage() {
+        pageVersion.incrementAndGet()
+        // 分配到 IO 线程执行，这里立即返回
+        scope.launch(Dispatchers.IO) {
+            requestChapterContent(chapterPos).collect {
+                val pages = pageDrawer.loadPage(requestChapter(chapterPos), it)
+                cache.put(chapterPos, pages to pageVersion.get())
+                curPageList = pages
+            }
+        }
     }
 
     fun getCurPage(): Page {

@@ -57,13 +57,12 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
         ReadConfigSettingsFragment().apply {
             onReadSettingChangeListener = object : ReadConfigSettingsFragment.OnReadSettingChangeListener {
                 override fun onColorChange(readColor: ReadColor) {
-                    readConfig.textColor = readColor.textColor
-                    readConfig.backgroundColor = readColor.backgroundColor
+
                     binding.page.updateColor()
                 }
 
                 override fun onTextChange() {
-                    TODO("Not yet implemented")
+                    binding.page.updateTextSize()
                 }
 
             }

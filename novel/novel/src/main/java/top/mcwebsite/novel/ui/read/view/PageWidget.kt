@@ -84,6 +84,12 @@ class PageWidget @JvmOverloads constructor(
         invalidate()
     }
 
+    fun updateTextSize() {
+        pageDrawer.updateTextSize()
+        drawCurPage(false)
+        invalidate()
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
         super.onTouchEvent(event)

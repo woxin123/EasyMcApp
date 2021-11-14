@@ -134,13 +134,12 @@ class PageViewDrawer : KoinComponent {
         }
 
         textPaint.textAlign = Paint.Align.LEFT // 左对齐
-        textPaint.textSize = readConfig.textSize
         textPaint.color = readConfig.textColor
         textPaint.isSubpixelText = true
 
-        titlePaint.textSize = readConfig.titleSize
         titlePaint.style = Paint.Style.FILL_AND_STROKE
         titlePaint.typeface = Typeface.DEFAULT_BOLD
+        updateTextSizeInternal()
 
         batteryPaint.textSize = dip2px(context, 12F).toFloat()
         batteryPaint.color = Color.BLACK
@@ -241,6 +240,16 @@ class PageViewDrawer : KoinComponent {
         titlePaint.color = readConfig.textColor
         batteryPaint.color = readConfig.textColor
         tipPaint.color = readConfig.textColor
+    }
+
+    private fun updateTextSizeInternal() {
+        textPaint.textSize = readConfig.textSize
+        titlePaint.textSize = readConfig.textSize + 5F.dp
+    }
+
+    fun updateTextSize() {
+        updateTextSizeInternal()
+        pageProvider.reloadCurPage()
     }
 
     private fun drawContent(bitmap: Bitmap) {

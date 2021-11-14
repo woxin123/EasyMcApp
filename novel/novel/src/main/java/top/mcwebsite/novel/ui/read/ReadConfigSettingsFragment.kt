@@ -53,6 +53,30 @@ class ReadConfigSettingsFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initView()
+    }
+
+    private fun initView() {
+        initReadColorList()
+        binding.textSize.text = readConfig.textSize.toInt().toString()
+        binding.addTextSizeBtn.setOnClickListener {
+            if (readConfig.textSize < ReadConfig.MAX_TEXT_SIZE) {
+                readConfig.textSize++
+            }
+            binding.textSize.text = readConfig.textSize.toInt().toString()
+            onReadSettingChangeListener?.onTextChange()
+        }
+
+        binding.minusTextSizeBtn.setOnClickListener {
+            if (readConfig.textSize > ReadConfig.MIN_TEXT_SIZE) {
+                readConfig.textSize--
+            }
+            binding.textSize.text = readConfig.textSize.toInt().toString()
+            onReadSettingChangeListener?.onTextChange()
+        }
+    }
+
+    private fun initReadColorList() {
         readColors.forEach { readColor ->
             val colorView = LayoutInflater.from(context)
                 .inflate(R.layout.layout_read_color, binding.backgroundList, false).apply {
@@ -72,10 +96,12 @@ class ReadConfigSettingsFragment(
 
                         for (index in 0 until binding.backgroundList.childCount) {
                             binding.backgroundList.getChildAt(index).apply {
-                                findViewById<View>(R.id.selected).visibility = View.GONE 
+                                findViewById<View>(R.id.selected).visibility = View.GONE
                             }
                         }
                         selected.visibility = View.VISIBLE
+                        readConfig.textColor = readColor.textColor
+                        readConfig.backgroundColor = readColor.backgroundColor
                         onReadSettingChangeListener?.onColorChange(readColor)
                     }
                 }
