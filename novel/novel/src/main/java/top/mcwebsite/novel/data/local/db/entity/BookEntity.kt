@@ -12,7 +12,7 @@ import java.sql.Date
 @Entity(tableName = "book")
 data class BookEntity(
     @PrimaryKey(autoGenerate = true)
-    val bid: Int = 0,
+    var bid: Int = 0,
     val name: String,
     val author: String,
     var coverUrl: String? = null,

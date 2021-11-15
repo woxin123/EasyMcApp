@@ -4,13 +4,12 @@ import kotlinx.coroutines.flow.Flow
 import top.mcwebsite.novel.data.local.datasource.IChapterDatasource
 import top.mcwebsite.novel.data.local.db.dao.ChapterDao
 import top.mcwebsite.novel.data.local.db.entity.ChapterEntity
-import top.mcwebsite.novel.model.Chapter
 
 class ChapterDatasourceImpl(
     private val chapterDao: ChapterDao
 ) : IChapterDatasource {
     override suspend fun getChaptersByBid(bid: Int): List<ChapterEntity> {
-        return chapterDao.getAll()
+        return chapterDao.getChaptersByBId(bid)
     }
 
     override suspend fun getChaptersByBidFlow(bid: Int): Flow<List<ChapterEntity>> {

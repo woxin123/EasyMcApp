@@ -182,6 +182,10 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
             }
 
         }
+        binding.backBtn.setOnClickListener {
+            quit()
+            findNavController().navigateUp()
+        }
     }
 
     private fun initObservable() {
