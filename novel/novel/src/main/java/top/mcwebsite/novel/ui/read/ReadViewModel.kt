@@ -9,6 +9,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import top.mcwebsite.novel.config.ReadConfig
 import top.mcwebsite.novel.data.cache.BookCache
+import top.mcwebsite.novel.data.cache.isCached
 import top.mcwebsite.novel.data.local.datasource.IBookDatasource
 import top.mcwebsite.novel.data.local.datasource.IChapterDatasource
 import top.mcwebsite.novel.data.local.db.entity.BookEntity
@@ -161,6 +162,19 @@ class ReadViewModel(
             _bookMenuStatus.emit(isShow)
             if (isShow) {
                 _menuStatus.emit(false)
+            }
+        }
+    }
+
+    fun download() {
+        viewModelScope.launch {
+            chapters.forEach { chapterEntity ->
+                if (!chapterEntity.isCached(bookEntity.bid.toString())) {
+                    bookRepository.getChapterInfo(bookModel, chapterEntity.transformToModel())
+                        .collect {
+                            BookCache.cacheChapter(bookEntity.bid.toString(), chapterEntity, it)
+                        }
+                }
             }
         }
     }

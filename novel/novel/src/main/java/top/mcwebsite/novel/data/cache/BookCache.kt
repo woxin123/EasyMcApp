@@ -14,7 +14,7 @@ object BookCache: KoinComponent {
 
     private val context: Context by inject()
 
-    private fun getCachePath(bid: String, title: String): String {
+    fun getCachePath(bid: String, title: String): String {
         val file = File(FileUtils.getCachePath(context) + File.separator + bid)
         if (!file.exists()) {
             file.mkdirs()
@@ -33,7 +33,7 @@ object BookCache: KoinComponent {
     fun cacheChapter(bid: String, chapter: ChapterEntity, content: String) {
         val file = File(getCachePath(bid, chapter.title))
         // 文件存在，说明缓存成功了
-        if (!file.exists()) {
+        if (file.exists()) {
             return
         }
         BufferedWriter(FileWriter(file)).use {
@@ -43,8 +43,9 @@ object BookCache: KoinComponent {
     }
 
     fun getChapter(bid: String, chapter: ChapterEntity): String {
-        val file = File(getCachePath(bid, chapter.title)).apply {
-            createNewFile()
+        val file = File(getCachePath(bid, chapter.title))
+        if (!file.exists()) {
+            return ""
         }
         val sb = StringBuilder()
         FileReader(file).use {
@@ -53,4 +54,9 @@ object BookCache: KoinComponent {
         return sb.toString()
     }
 
+}
+
+fun ChapterEntity.isCached(bid: String): Boolean {
+    val file  = File(BookCache.getCachePath(bid, this.title))
+    return file.exists() && file.length() > 0
 }

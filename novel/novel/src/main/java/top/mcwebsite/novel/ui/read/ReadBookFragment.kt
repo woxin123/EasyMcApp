@@ -186,6 +186,10 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
             quit()
             findNavController().navigateUp()
         }
+        binding.downloadBtn.setOnClickListener {
+            Toast.makeText(requireContext(), getText(R.string.start_download), Toast.LENGTH_SHORT).show()
+            viewModel.download()
+        }
     }
 
     private fun initObservable() {
