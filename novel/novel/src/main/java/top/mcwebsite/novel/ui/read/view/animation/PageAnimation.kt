@@ -32,21 +32,21 @@ abstract class PageAnimation(
     protected var touchY: Float = 0F
 
     // 上一个触碰点
-    protected var lastX: Float = 0F
-    protected var lastY: Float = 0F
+    private var lastX: Float = 0F
+    private var lastY: Float = 0F
 
     protected var isRunning: Boolean = false
 
-    var direction: Direction = Direction.NONE
+    open var direction: Direction = Direction.NONE
 
-    fun setStartPoint(x: Float, y: Float) {
+    open fun setStartPoint(x: Float, y: Float) {
         startX = x
         startY = y
         lastX = startX
         lastY = startY
     }
 
-    fun setTouchPoint(x: Float, y: Float) {
+    open fun setTouchPoint(x: Float, y: Float) {
         lastX = touchX
         lastY = touchY
         touchX = x

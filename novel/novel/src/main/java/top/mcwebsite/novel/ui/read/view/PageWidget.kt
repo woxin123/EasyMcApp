@@ -1,15 +1,17 @@
 package top.mcwebsite.novel.ui.read.view
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Rect
+import android.transition.Slide
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
 import android.view.animation.LinearInterpolator
 import android.widget.Scroller
+import top.mcwebsite.novel.ui.read.page.PageMode
 import top.mcwebsite.novel.ui.read.page.PageViewDrawer
 import top.mcwebsite.novel.ui.read.view.animation.*
 import kotlin.math.abs
@@ -23,38 +25,31 @@ class PageWidget @JvmOverloads constructor(
     private var viewWidth = 0
     private var viewHeight = 0
 
-    private var downX = 0F
-    private var downY = 0F
-
-    private var moveX = 0F
-    private var moveY = 0F
-
-    private var isRunning = false
-
-    private var cancelPage = false
-
-    private var isLastOrFirstPage = false
-
     private var isMove = false
 
-    private var isNext = false
-
-    private var bgColor = 0xFFCE29C
-
-    private lateinit var animationProvider: AnimationProvider
-
-    private lateinit var curPageBitmap: Bitmap
-    private lateinit var nextPageBitmap: Bitmap
+    private lateinit var pageAnim: PageAnimation
 
     lateinit var pageDrawer: PageViewDrawer
 
     lateinit var touchListener: TouchListener
 
-    private val scroller: Scroller = Scroller(context, LinearInterpolator())
-
     private val slop = ViewConfiguration.get(context).scaledTouchSlop
 
-    init {
+    private var pageMode: PageMode = PageMode.SIMULATION
+
+
+    private val pageAnimListener = object : PageAnimation.OnPageChangeListener {
+        override fun hasPrev(): Boolean {
+            return this@PageWidget.hasPrePage()
+        }
+
+        override fun hasNext(): Boolean {
+            return this@PageWidget.hasNextPage()
+        }
+
+        override fun pageCancel() {
+            this@PageWidget.pageCancel()
+        }
 
     }
 
@@ -62,20 +57,40 @@ class PageWidget @JvmOverloads constructor(
         super.onSizeChanged(w, h, oldw, oldh)
         viewWidth = w
         viewHeight = h
+        centerRect = Rect(viewWidth / 5, viewHeight / 3, viewWidth * 4 / 5, viewHeight * 2 / 3)
         pageDrawer.initDrawer(w.toFloat(), h.toFloat())
-        curPageBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.RGB_565)
-        nextPageBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.RGB_565)
 
-        animationProvider = NoneAnimation(curPageBitmap, nextPageBitmap, w, h)
-        pageDrawer.drawPage(nextPageBitmap, false)
+        setPageMode(pageMode)
+        pageDrawer.drawPage(getNextBitmap(), false)
+    }
+
+    fun setPageMode(pageMode: PageMode) {
+        this.pageMode = pageMode
+        pageAnim = when (pageMode) {
+            PageMode.SIMULATION -> SimulationPageAnim(viewWidth, viewHeight, this, pageAnimListener)
+            PageMode.COVER -> CoverPageAnim(viewWidth, viewHeight, this, pageAnimListener)
+            PageMode.SLIDE -> SlidePageAnim(viewWidth, viewHeight, this, pageAnimListener)
+            PageMode.NONE -> NonePageAnimation(viewWidth, viewHeight, this, pageAnimListener)
+            else -> {
+                NonePageAnimation(viewWidth, viewHeight, this, pageAnimListener)
+            }
+        }
+        drawCurPage(false)
     }
 
     fun drawNextPage() {
-        pageDrawer.drawPage(nextPageBitmap, false)
+        if (pageAnim is HorizontalPageAnim) {
+            (pageAnim as HorizontalPageAnim).changePage()
+        }
+        pageDrawer.drawPage(getNextBitmap(), false)
     }
 
     fun drawCurPage(isUpdate: Boolean) {
-        pageDrawer.drawPage(nextPageBitmap, isUpdate)
+        pageDrawer.drawPage(getNextBitmap(), isUpdate)
+    }
+
+    private fun getNextBitmap(): Bitmap {
+        return pageAnim.getNextBitmap()
     }
 
     fun updateColor() {
@@ -90,126 +105,52 @@ class PageWidget @JvmOverloads constructor(
         invalidate()
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+    private var startX: Int = 0
+    private var startY: Int = 0
+
+    private lateinit var centerRect: Rect
+
     override fun onTouchEvent(event: MotionEvent): Boolean {
         super.onTouchEvent(event)
-        val x = event.x
-        val y = event.y
+
+        val x = event.x.toInt()
+        val y = event.y.toInt()
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
-                downX = x
-                downY = y
-                moveX = 0F
-                moveY = 0F
-                isLastOrFirstPage = false
-                isNext = false
+                startX = x
+                startY = y
                 isMove = false
-                isRunning = false
-                animationProvider.setStartPoint(downX, downY)
-                abortAnimation()
+                pageAnim.onTouchEvent(event)
             }
             MotionEvent.ACTION_MOVE -> {
                 if (!isMove) {
-                    isMove = abs(downX - x) > slop || abs(downY - y) > slop
+                    isMove = abs(startX - event.x) > slop || abs(startY - event.y) > slop
                 }
                 if (isMove) {
-                    if (moveX == 0F && moveY == 0F) {
-                        isNext = x - downX <= 0
-                        cancelPage = false
-                        if (isNext) {
-                            val hasNextPage = pageChangeListener.hasNext()
-                            animationProvider.direction = Direction.NEXT
-                            if (!hasNextPage) {
-                                isLastOrFirstPage = true
-                                return true
-                            }
-                        } else {
-                            val isPrePage = pageChangeListener.hasPrev()
-                            animationProvider.direction = Direction.PRE
-                            if (!isPrePage) {
-                                isLastOrFirstPage = true
-                                return true
-                            }
-                        }
-                    }
-                    moveX = x
-                    moveY = y
+                    pageAnim.onTouchEvent(event)
                 }
-
-
             }
             MotionEvent.ACTION_UP -> {
                 if (!isMove) {
-                    cancelPage = false
-                    if (downX > viewWidth / 5 && downX < viewWidth * 4 / 5 && downY > viewHeight / 3 && downY < viewHeight * 2 / 3) {
+                    if (centerRect.contains(x, y)) {
                         touchListener.center()
+                        return true
                     }
-                    return true
                 }
-
-//                isNext = x >= viewWidth / 2
-//
-//                if (isNext) {
-//                    val hasNext = pageChangeListener.hasNext() ?: false
-//                    animationProvider.direction = Direction.NEXT
-//                    if (!hasNext) {
-//                        return true
-//                    }
-//                } else {
-//                    val hasPre = pageChangeListener?.hasPrev() ?: false
-//                    animationProvider.direction = Direction.PRE
-//                    if (!hasPre) {
-//                        return true
-//                    }
-//                }
-//                if (cancelPage) {
-//                    touchListener.cancel()
-//                }
-//                if (!isLastOrFirstPage) {
-//                    isRunning = true
-//                    animationProvider.startAnimation(scroller)
-//                    postInvalidate()
-//                }
-                if (!isLastOrFirstPage) {
-                    animationProvider.startAnimation(scroller)
-                    postInvalidate()
-                }
+                pageAnim.onTouchEvent(event)
             }
         }
         return true
     }
 
     override fun computeScroll() {
-        if (scroller.computeScrollOffset()) {
-            val x = scroller.currX
-            val y = scroller.currY
-            animationProvider.setTouchPoint(x.toFloat(), y.toFloat())
-            if (scroller.finalX == x && scroller.finalY == y) {
-                isRunning = false
-            }
-            postInvalidate()
-        }
+        pageAnim.scrollAnim()
         super.computeScroll()
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        canvas?.drawColor(bgColor)
-        canvas?.let {
-            if (isRunning) {
-                animationProvider.drawMove(canvas)
-            } else {
-                animationProvider.drawStatic(canvas)
-            }
-        }
-    }
-
-    fun abortAnimation() {
-        if (!scroller.isFinished) {
-            scroller.abortAnimation()
-            animationProvider.setTouchPoint(scroller.finalX.toFloat(), scroller.finalY.toFloat())
-            postInvalidate()
-        }
+        pageAnim.draw(canvas)
     }
 
     private fun hasPrePage(): Boolean {
@@ -226,25 +167,6 @@ class PageWidget @JvmOverloads constructor(
         touchListener.cancel()
         return pageDrawer.cancelPage()
     }
-
-
-
-    var pageChangeListener: OnPageChangeListener = object : OnPageChangeListener {
-        override fun hasPrev(): Boolean {
-            return this@PageWidget.hasPrePage()
-        }
-
-        override fun hasNext(): Boolean {
-            return this@PageWidget.hasNextPage()
-        }
-
-        override fun pageCancel() {
-            this@PageWidget.pageCancel()
-        }
-
-    }
-
-
 
     interface TouchListener {
         fun center()

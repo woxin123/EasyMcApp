@@ -37,6 +37,7 @@ import top.mcwebsite.novel.config.ReadColor
 import top.mcwebsite.novel.config.ReadConfig
 import top.mcwebsite.novel.config.readColors
 import top.mcwebsite.novel.databinding.FragmentReadBookBinding
+import top.mcwebsite.novel.ui.read.page.PageMode
 import top.mcwebsite.novel.ui.read.page.PageViewDrawer
 import top.mcwebsite.novel.ui.read.view.PageWidget
 
@@ -69,6 +70,11 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
                 override fun onBrightnessChange(brightness: Float) {
                     readConfig.brightness = brightness
                     setCurrentPageBrightness(brightness)
+                }
+
+                override fun setPageMode(pageMode: PageMode) {
+                    readConfig.pageMode = pageMode.ordinal
+                    binding.page.setPageMode(pageMode)
                 }
 
             }
@@ -133,7 +139,6 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
                 }
 
                 override fun cancel() {
-                    Toast.makeText(requireContext(), "cancel", Toast.LENGTH_SHORT).show()
                 }
 
             }

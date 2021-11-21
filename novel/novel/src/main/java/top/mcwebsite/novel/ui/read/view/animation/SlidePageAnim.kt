@@ -8,12 +8,10 @@ import kotlin.math.abs
 class SlidePageAnim(
     screenWidth: Int,
     screenHeight: Int,
-    marginWidth: Int = 0,
-    marginHeight: Int = 0,
     view: View?,
     listener: OnPageChangeListener
 ) : HorizontalPageAnim(
-    screenWidth, screenHeight, marginWidth, marginHeight, view, listener
+    screenWidth, screenHeight, 0, 0, view, listener
 ) {
 
     private val srcRect = Rect(0, 0, viewWidth, viewHeight)

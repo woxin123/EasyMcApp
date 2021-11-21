@@ -44,7 +44,13 @@
         <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/menu/bottom_item_menu.xml" value="0.23541666666666666" />
         <entry key="..\:/code/android/EasyMCApp/novel/novel/src/main/res/xml/network_config.xml" value="0.23541666666666666" />
         <entry key="..\:/code/android/EasyMCApp/tools/debug/crash/src/main/res/layout/activity_default_crash.xml" value="0.23854166666666668" />
+        <entry key="novel/novel/src/main/res/drawable/button_radius__bg.xml" value="0.3411458333333333" />
+        <entry key="novel/novel/src/main/res/drawable/button_radius_press.xml" value="0.3411458333333333" />
+        <entry key="novel/novel/src/main/res/drawable/button_radius_selected.xml" value="0.3411458333333333" />
+        <entry key="novel/novel/src/main/res/drawable/circle_bg.xml" value="0.3411458333333333" />
         <entry key="novel/novel/src/main/res/layout/fragment_read_book.xml" value="0.3458333333333333" />
+        <entry key="novel/novel/src/main/res/layout/item_page_mode.xml" value="0.325" />
+        <entry key="novel/novel/src/main/res/layout/layout_read_settings.xml" value="0.5" />
       </map>
     </option>
   </component>

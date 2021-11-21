@@ -15,6 +15,8 @@ import android.widget.LinearLayout
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatDialog
 import androidx.core.view.forEach
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.core.component.KoinComponent
@@ -26,6 +28,7 @@ import top.mcwebsite.novel.config.ReadColor
 import top.mcwebsite.novel.config.ReadConfig
 import top.mcwebsite.novel.config.readColors
 import top.mcwebsite.novel.databinding.LayoutReadSettingsBinding
+import top.mcwebsite.novel.ui.read.page.PageMode
 import java.util.zip.Inflater
 
 class ReadConfigSettingsFragment(
@@ -37,6 +40,8 @@ class ReadConfigSettingsFragment(
         fun onTextChange()
 
         fun onBrightnessChange(brightness: Float)
+
+        fun setPageMode(pageMode: PageMode)
     }
 
     private val readConfig: ReadConfig by inject()
@@ -102,6 +107,11 @@ class ReadConfigSettingsFragment(
                 }
             )
         }
+        binding.pageModeRecyclerView.adapter =
+            PageModeAdapter(arrayListOf(PageMode.SIMULATION, PageMode.COVER, PageMode.SLIDE, PageMode.NONE), readConfig.pageMode) { pageMode ->
+                onReadSettingChangeListener?.setPageMode(pageMode)
+            }
+        binding.pageModeRecyclerView.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
     }
 
     private fun initTextSize() {

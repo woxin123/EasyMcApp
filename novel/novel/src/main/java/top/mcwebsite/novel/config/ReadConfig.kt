@@ -28,4 +28,6 @@ class ReadConfig {
 
     var brightness: Float by ReadConfigSP("brightness", -1F)
 
+    var pageMode: Int by ReadConfigSP("page_mode", 0)
+
 }

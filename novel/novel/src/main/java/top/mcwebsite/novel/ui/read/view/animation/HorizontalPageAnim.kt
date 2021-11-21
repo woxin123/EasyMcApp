@@ -22,8 +22,8 @@ abstract class HorizontalPageAnim (
 
     protected var isCancel: Boolean = false
 
-    private var moveX: Float = 0F
-    private var moveY: Float = 0F
+    private var moveX: Int = 0
+    private var moveY: Int = 0
 
     private var isMove: Boolean = false
 
@@ -47,18 +47,19 @@ abstract class HorizontalPageAnim (
     abstract fun drawMove(canvas: Canvas)
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        val x = event.x
-        val y = event.y
+        val x = event.x.toInt()
+        val y = event.y.toInt()
+        setTouchPoint(x.toFloat(), y.toFloat())
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
-                moveX = 0F
-                moveY = 0F
+                moveX = 0
+                moveY = 0
 
                 isMove = false
                 noNext = false
                 isRunning = false
                 isCancel = false
-                setStartPoint(x, y)
+                setStartPoint(x.toFloat(), y.toFloat())
                 abortAnim()
             }
             MotionEvent.ACTION_MOVE -> {
@@ -69,7 +70,7 @@ abstract class HorizontalPageAnim (
 
                 if (isMove) {
 
-                    if (moveX == 0F && moveY == 0F) {
+                    if (moveX == 0 && moveY == 0) {
 
                         if (x - startX > 0) {
                             isNext = false
@@ -89,7 +90,7 @@ abstract class HorizontalPageAnim (
                             }
                         }
                     } else {
-                        isCancel = if (!isNext) {
+                        isCancel = if (isNext) {
                             x - moveX > 0
                         } else {
                             x - moveX < 0
