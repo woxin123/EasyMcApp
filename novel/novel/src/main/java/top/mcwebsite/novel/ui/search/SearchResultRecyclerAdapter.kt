@@ -78,7 +78,7 @@ class SearchResultRecyclerAdapter(private val viewModel: SearchViewModel) :
                 bookAuthor.text = book.author
                 bookSource.text =
                     binding.root.context.getString(R.string.from_source, book.source)
-                bookType.text = book.bookType
+                bookType.text = if (book.bookType.isNullOrBlank()) root.resources.getText(R.string.unknown) else book.bookType
                 bookLast.text = book.lastChapter
                 if (book.atBookShelf) {
                     addToBookshelf.text = root.resources.getString(R.string.added)

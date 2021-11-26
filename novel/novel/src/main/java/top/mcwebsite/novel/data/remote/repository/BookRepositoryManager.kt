@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import top.mcwebsite.novel.data.remote.repository.impl.IdejianBookRepository
 import top.mcwebsite.novel.data.remote.repository.impl.TaduBookRepository
 import top.mcwebsite.novel.data.remote.repository.impl.Yb3BookRepository
 import top.mcwebsite.novel.model.BookModel
@@ -17,12 +18,15 @@ class BookRepositoryManager : IBookRepository, KoinComponent {
 
     private val taduBookRepository by inject<TaduBookRepository>()
 
+    private val idejianBookRepository by inject<IdejianBookRepository>()
+
     private val repositories = mutableListOf<IBookRepository>()
     private val searchRepositories = mutableListOf<IBookRepository>()
 
     init {
         repositories.add(yb3BookRepository)
         repositories.add(taduBookRepository)
+        repositories.add(idejianBookRepository)
         searchRepositories.addAll(repositories)
     }
 
@@ -59,6 +63,7 @@ class BookRepositoryManager : IBookRepository, KoinComponent {
         return when (source) {
             Yb3BookRepository.source -> yb3BookRepository
             TaduBookRepository.source -> taduBookRepository
+            IdejianBookRepository.SOURCE -> idejianBookRepository
             else -> throw IllegalStateException("unknown source")
         }
     }

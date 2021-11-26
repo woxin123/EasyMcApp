@@ -16,6 +16,7 @@ import top.mcwebsite.novel.data.local.db.NovelDataBase
 import top.mcwebsite.novel.data.local.serizlizer.SearchHistories
 import top.mcwebsite.novel.data.local.serizlizer.SearchHistoriesSerializer
 import top.mcwebsite.novel.data.remote.repository.BookRepositoryManager
+import top.mcwebsite.novel.data.remote.repository.impl.IdejianBookRepository
 import top.mcwebsite.novel.data.remote.repository.impl.TaduBookRepository
 import top.mcwebsite.novel.data.remote.repository.impl.Yb3BookRepository
 import top.mcwebsite.novel.ui.bookdetail.BookDetailViewModel
@@ -39,6 +40,8 @@ val appModule = module {
     single { TaduBookRepository() }
 
     single { Yb3BookRepository() }
+
+    single { IdejianBookRepository() }
 
     single { BookRepositoryManager() }
         viewModel {

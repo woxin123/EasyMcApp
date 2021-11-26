@@ -1,6 +1,5 @@
 package top.mcwebsite.novel
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Test
 
 import org.junit.Assert.*

@@ -1,7 +1,6 @@
 package top.mcwebsite.novel
 
 import android.util.Log
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
@@ -68,8 +67,6 @@ class TaduRepositoryTest {
             index = 0,
             title = "龙血沸腾",
             url = "http://www.tadu.com/book/597817/77701629/",
-            content = "",
-            bookId = 0
         )
         taduRepositoy.getChapterInfo(bookModel, chapter).collect {
             println(it.toString())
