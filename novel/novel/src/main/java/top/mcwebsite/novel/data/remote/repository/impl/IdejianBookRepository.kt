@@ -3,12 +3,12 @@ package top.mcwebsite.novel.data.remote.repository.impl
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.jsoup.Jsoup
-import retrofit2.http.Url
 import top.mcwebsite.novel.api.IIdejianAPI
 import top.mcwebsite.novel.data.remote.net.RetrofitFactory
 import top.mcwebsite.novel.data.remote.repository.IBookRepository
 import top.mcwebsite.novel.model.BookModel
 import top.mcwebsite.novel.model.Chapter
+import top.mcwebsite.novel.model.RankCategory
 import java.lang.StringBuilder
 import java.net.URL
 
@@ -158,5 +158,9 @@ class IdejianBookRepository : IBookRepository {
             }
         }
         return sb.toString()
+    }
+
+    override suspend fun getRankList(): Flow<List<RankCategory>> {
+        TODO("Not yet implemented")
     }
 }

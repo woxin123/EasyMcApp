@@ -21,4 +21,6 @@ interface IYb3Api {
     @GET
     suspend fun getChapterInfo(@Url url: String): String
 
+    @GET
+    suspend fun getRankList(@Url url: String): String
 }

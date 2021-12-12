@@ -1,12 +1,9 @@
 package top.mcwebsite.novel.api
 
-import kotlinx.coroutines.flow.Flow
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.Url
-import top.mcwebsite.novel.model.BookModel
-import top.mcwebsite.novel.model.Chapter
 
 interface IIdejianAPI {
 

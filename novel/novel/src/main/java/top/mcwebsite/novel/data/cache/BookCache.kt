@@ -3,7 +3,6 @@ package top.mcwebsite.novel.data.cache
 import android.content.Context
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import top.mcwebsite.common.ui.utils.FileUtils
 import top.mcwebsite.novel.data.local.db.entity.BookEntity
 import top.mcwebsite.novel.data.local.db.entity.ChapterEntity
 import top.mcwebsite.novel.model.BookModel
@@ -15,15 +14,15 @@ object BookCache: KoinComponent {
     private val context: Context by inject()
 
     fun getCachePath(bid: String, title: String): String {
-        val file = File(FileUtils.getCachePath(context) + File.separator + bid)
+        val file = File(getCachePath(context) + File.separator + bid)
         if (!file.exists()) {
             file.mkdirs()
         }
-        return FileUtils.getCachePath(context) + File.separator + bid + File.separator + title
+        return getCachePath(context) + File.separator + bid + File.separator + title
     }
 
     private fun getBookChaptersCachePath(bid: String): String {
-        val file = File(FileUtils.getCachePath(context) + File.separator + bid)
+        val file = File(getCachePath(context) + File.separator + bid)
         if (!file.exists()) {
             file.mkdirs()
         }
@@ -53,6 +52,16 @@ object BookCache: KoinComponent {
         }
         return sb.toString()
     }
+
+    private fun getCachePath(context: Context): String {
+        val cachePath = context.filesDir!!.absolutePath + "/book"
+        val cacheFile = File(cachePath)
+        if (!cacheFile.exists()) {
+            cacheFile.mkdirs()
+        }
+        return cachePath
+    }
+
 
 }
 

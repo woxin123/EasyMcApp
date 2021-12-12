@@ -1,5 +1,6 @@
 package top.mcwebsite.novel.ui.read
 
+import android.util.Log
 import android.util.LruCache
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +24,11 @@ class PageProvider(
     private val scope: CoroutineScope,
 ) {
 
+    companion object {
+        const val NEXT_PAGE = 1
+        const val PRE_PAGE = -1
+    }
+
     private val positionChangeEvent: MutableStateFlow<Int> =
         MutableStateFlow(bookEntity.lastReadPosition)
 
@@ -33,6 +39,13 @@ class PageProvider(
 
     var position = 0
     var chapterPos = 0
+
+    /**
+     * 0 表示没有翻页
+     * 1 表示下一页
+     * -1 表示上一页
+     */
+    var lastTurnPageState = 0
 
     /**
      * lru cache
@@ -138,12 +151,14 @@ class PageProvider(
 
     fun changeToNextPage(): Boolean {
         if (position + 1 < curPageList.size && position != Int.MAX_VALUE && position != Int.MIN_VALUE) {
+            lastTurnPageState = NEXT_PAGE
             positionChangeEvent.value += 1
             return true
         }
         if (chapterPos + 1 >= chapterSize()) {
             return false
         }
+        lastTurnPageState = NEXT_PAGE
         _chapterPosChangeEvent.value += 1
         // 获取当前章节
         curPageList = getChapterPage(chapterPos) ?: emptyList()
@@ -162,12 +177,14 @@ class PageProvider(
 
     fun changeToPrePage(): Boolean {
         if (position - 1 >= 0 && position != Int.MAX_VALUE && position != Int.MIN_VALUE) {
+            lastTurnPageState = PRE_PAGE
             positionChangeEvent.value -= 1
             return true
         }
         if (chapterPos - 1 < 0) {
             return false
         }
+        lastTurnPageState = PRE_PAGE
         _chapterPosChangeEvent.value -= 1
         curPageList = getChapterPage(chapterPos) ?: emptyList()
         if (curPageList.isEmpty()) {
@@ -180,6 +197,14 @@ class PageProvider(
         getChapterPage(chapterPos - 1)
 
         return true
+    }
+
+    fun cancelPage() {
+        Log.d("mengchen", "cancel page")
+        when (lastTurnPageState) {
+            NEXT_PAGE -> changeToPrePage()
+            PRE_PAGE -> changeToNextPage()
+        }
     }
 
     fun openChapter(chapterIndex: Int) {

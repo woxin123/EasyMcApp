@@ -1,6 +1,7 @@
 package top.mcwebsite.common.ui.utils
 
 
+// TODO remove
 fun String.halfToFull(): String {
     val chars = this.toCharArray()
     for ((i, c) in chars.withIndex()) {

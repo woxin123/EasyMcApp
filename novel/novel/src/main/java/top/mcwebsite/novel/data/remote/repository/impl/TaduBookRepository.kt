@@ -10,6 +10,7 @@ import top.mcwebsite.novel.model.BookModel
 import top.mcwebsite.novel.model.Chapter
 import top.mcwebsite.novel.data.remote.net.RetrofitFactory
 import top.mcwebsite.novel.data.remote.repository.exception.BookSourceException
+import top.mcwebsite.novel.model.RankCategory
 
 class TaduBookRepository() : IBookRepository {
 
@@ -164,5 +165,9 @@ class TaduBookRepository() : IBookRepository {
 
             emit(sb.toString())
         }
+    }
+
+    override suspend fun getRankList(): Flow<List<RankCategory>> {
+        TODO("Not yet implemented")
     }
 }

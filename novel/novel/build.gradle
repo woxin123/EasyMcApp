@@ -79,6 +79,7 @@ dependencies {
 //    implementation project(":tools:debug:crash")
 
     implementation libs.kotlin.stdlib
+    implementation libs.kotlin.reflect
     implementation libs.androidx.core
     implementation libs.androidx.appcompat
     implementation libs.androidx.fragment

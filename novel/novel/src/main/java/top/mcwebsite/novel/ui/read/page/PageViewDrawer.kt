@@ -2,6 +2,7 @@ package top.mcwebsite.novel.ui.read.page
 
 import android.content.Context
 import android.graphics.*
+import android.util.Log
 import android.widget.Toast
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -340,7 +341,7 @@ class PageViewDrawer : KoinComponent {
     }
 
     fun cancelPage() {
-
+        pageProvider.cancelPage()
     }
 
 

@@ -48,8 +48,15 @@
         <entry key="novel/novel/src/main/res/drawable/button_radius_press.xml" value="0.3411458333333333" />
         <entry key="novel/novel/src/main/res/drawable/button_radius_selected.xml" value="0.3411458333333333" />
         <entry key="novel/novel/src/main/res/drawable/circle_bg.xml" value="0.3411458333333333" />
+        <entry key="novel/novel/src/main/res/layout/fragment_book_detail.xml" value="0.3428442028985507" />
+        <entry key="novel/novel/src/main/res/layout/fragment_book_shelf.xml" value="0.3428442028985507" />
+        <entry key="novel/novel/src/main/res/layout/fragment_rank.xml" value="0.3428442028985507" />
+        <entry key="novel/novel/src/main/res/layout/fragment_rank_novel_item.xml" value="0.265625" />
         <entry key="novel/novel/src/main/res/layout/fragment_read_book.xml" value="0.3458333333333333" />
+        <entry key="novel/novel/src/main/res/layout/item_book_shelf.xml" value="0.1" />
         <entry key="novel/novel/src/main/res/layout/item_page_mode.xml" value="0.325" />
+        <entry key="novel/novel/src/main/res/layout/item_rank_book.xml" value="0.22" />
+        <entry key="novel/novel/src/main/res/layout/item_rank_category.xml" value="0.3378623188405797" />
         <entry key="novel/novel/src/main/res/layout/layout_read_settings.xml" value="0.5" />
       </map>
     </option>
@@ -60,5 +67,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.265625" />
+      </ProjectState>
+    </option>
   </component>
 </project>

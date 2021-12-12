@@ -85,12 +85,24 @@
         android:id="@+id/rankFragment"
         android:name="top.mcwebsite.novel.ui.rank.RankFragment"
         android:label="fragment_rank"
-        tools:layout="@layout/fragment_rank" />
+        tools:layout="@layout/fragment_rank" >
+        <action
+            android:id="@+id/action_rankFragment_to_bookDetailFragment"
+            app:destination="@id/bookDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/meFragment"
         android:name="top.mcwebsite.novel.ui.me.MeFragment"
         android:label="fragment_me"
         tools:layout="@layout/fragment_me" />
+    <fragment
+        android:id="@+id/ABCNovelRankFragment"
+        android:name="top.mcwebsite.novel.ui.rank.item.ABCNovelRankFragment"
+        android:label="ABCNovelRankFragment" >
+        <action
+            android:id="@+id/action_ABCNovelRankFragment_to_bookDetailFragment"
+            app:destination="@id/bookDetailFragment" />
+    </fragment>
 
 
 </navigation>

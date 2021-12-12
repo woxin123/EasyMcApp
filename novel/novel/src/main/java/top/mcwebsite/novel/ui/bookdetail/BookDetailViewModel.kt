@@ -7,10 +7,11 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import top.mcwebsite.novel.data.remote.repository.BookRepositoryManager
 import top.mcwebsite.novel.data.remote.repository.IBookRepository
 import top.mcwebsite.novel.model.BookModel
 
-class BookDetailViewModel(private val bookRepository: IBookRepository) : ViewModel() {
+class BookDetailViewModel(private val bookRepository: BookRepositoryManager) : ViewModel() {
 
     lateinit var book: BookModel
 

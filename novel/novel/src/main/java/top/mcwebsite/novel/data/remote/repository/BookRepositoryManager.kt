@@ -10,9 +10,10 @@ import top.mcwebsite.novel.data.remote.repository.impl.TaduBookRepository
 import top.mcwebsite.novel.data.remote.repository.impl.Yb3BookRepository
 import top.mcwebsite.novel.model.BookModel
 import top.mcwebsite.novel.model.Chapter
+import top.mcwebsite.novel.model.RankCategory
 import java.lang.IllegalStateException
 
-class BookRepositoryManager : IBookRepository, KoinComponent {
+class BookRepositoryManager :  KoinComponent {
 
     private val yb3BookRepository by inject<Yb3BookRepository>()
 
@@ -31,11 +32,11 @@ class BookRepositoryManager : IBookRepository, KoinComponent {
     }
 
 
-    override suspend fun getBookInfo(book: BookModel): Flow<BookModel> {
+    suspend fun getBookInfo(book: BookModel): Flow<BookModel> {
         return getRepositoryBySource(book.source).getBookInfo(book)
     }
 
-    override suspend fun searchBook(key: String, page: Int, pageSize: Int): Flow<List<BookModel>> {
+    suspend fun searchBook(key: String, page: Int, pageSize: Int): Flow<List<BookModel>> {
         val res = searchRepositories
             .map {
                 it.searchBook(key, page, pageSize)
@@ -51,12 +52,16 @@ class BookRepositoryManager : IBookRepository, KoinComponent {
         }
     }
 
-    override suspend fun getBookChapters(book: BookModel): Flow<List<Chapter>> {
+    suspend fun getBookChapters(book: BookModel): Flow<List<Chapter>> {
         return getRepositoryBySource(book.source).getBookChapters(book)
     }
 
-    override suspend fun getChapterInfo(book: BookModel, chapter: Chapter): Flow<String> {
+    suspend fun getChapterInfo(book: BookModel, chapter: Chapter): Flow<String> {
         return getRepositoryBySource(book.source).getChapterInfo(book, chapter)
+    }
+
+    suspend fun getRankList(source: String): Flow<List<RankCategory>> {
+        return getRepositoryBySource(source).getRankList()
     }
 
     private fun getRepositoryBySource(source: String): IBookRepository {

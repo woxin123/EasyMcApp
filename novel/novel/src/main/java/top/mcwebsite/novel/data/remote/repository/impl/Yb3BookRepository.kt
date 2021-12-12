@@ -9,12 +9,15 @@ import top.mcwebsite.novel.model.BookModel
 import top.mcwebsite.novel.model.Chapter
 import top.mcwebsite.novel.data.remote.net.RetrofitFactory
 import top.mcwebsite.novel.data.remote.repository.exception.BookSourceException
+import top.mcwebsite.novel.model.RankCategory
 
 class Yb3BookRepository  : IBookRepository {
 
     companion object {
         const val baseUrl = "https://www.yb3.cc"
         val source = "yb3.cc"
+
+        private const val RANK_URL = "$baseUrl/paihangbang"
     }
 
     private val retrofit by lazy {
@@ -145,5 +148,33 @@ class Yb3BookRepository  : IBookRepository {
                 content.toString()
             )
         }
+    }
+
+    override suspend fun getRankList(): Flow<List<RankCategory>> {
+        return flow {
+            val html = retrofit.getRankList(RANK_URL)
+            emit(parseRankList(html))
+        }
+    }
+
+    private fun parseRankList(html: String): List<RankCategory> {
+        val doc = Jsoup.parse(html)
+        val rankElements = doc.getElementsByClass("index_toplist")
+        val rankCategories = mutableListOf<RankCategory>()
+        for (ele in rankElements) {
+            val categoryName = ele.getElementsByTag("span")[0].text()
+            val bookElements = ele.getElementsByTag("ul")[0].getElementsByTag("li")
+            val bookModels = mutableListOf<BookModel>()
+            for (bookElement in bookElements) {
+                val author = bookElement.getElementsByTag("span")[0].text()
+                val bookLinkElement = bookElement.getElementsByTag("a")
+                val bookName = bookLinkElement.attr("title")
+                val url = baseUrl + bookLinkElement.attr("href")
+                bookModels.add(BookModel(bookName, author, null, "",
+                    null, null, url, null, source, null, false))
+            }
+            rankCategories.add(RankCategory(source, categoryName, bookModels))
+        }
+        return rankCategories
     }
 }
