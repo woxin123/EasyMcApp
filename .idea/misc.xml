@@ -50,6 +50,7 @@
         <entry key="novel/novel/src/main/res/drawable/circle_bg.xml" value="0.3411458333333333" />
         <entry key="novel/novel/src/main/res/layout/fragment_book_detail.xml" value="0.3428442028985507" />
         <entry key="novel/novel/src/main/res/layout/fragment_book_shelf.xml" value="0.3428442028985507" />
+        <entry key="novel/novel/src/main/res/layout/fragment_me.xml" value="0.19947916666666668" />
         <entry key="novel/novel/src/main/res/layout/fragment_rank.xml" value="0.3428442028985507" />
         <entry key="novel/novel/src/main/res/layout/fragment_rank_novel_item.xml" value="0.265625" />
         <entry key="novel/novel/src/main/res/layout/fragment_read_book.xml" value="0.3458333333333333" />
