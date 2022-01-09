@@ -130,6 +130,7 @@ class ReadViewModel(
 
     fun updateBookEntity() {
         viewModelScope.launch {
+            bookEntity.lastReadTime = System.currentTimeMillis()
             bookDataSource.update(bookEntity)
         }
 
