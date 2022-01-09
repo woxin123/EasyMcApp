@@ -23,6 +23,7 @@ import top.mcwebsite.novel.ui.bookdetail.BookDetailViewModel
 import top.mcwebsite.novel.ui.bookshelf.BookshelfViewModel
 import top.mcwebsite.novel.ui.search.SearchViewModel
 import top.mcwebsite.novel.ui.discovery.DiscoveryViewModel
+import top.mcwebsite.novel.ui.home.MainViewModel
 import top.mcwebsite.novel.ui.rank.RankViewModel
 import top.mcwebsite.novel.ui.read.ReadViewModel
 import top.mcwebsite.novel.ui.read.page.PageViewDrawer
@@ -45,6 +46,10 @@ val appModule = module {
     single { IdejianBookRepository() }
 
     single { BookRepositoryManager() }
+
+    viewModel {
+        MainViewModel()
+    }
 
     viewModel {
         SearchViewModel(get())

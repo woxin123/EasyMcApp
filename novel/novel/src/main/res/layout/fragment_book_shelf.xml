@@ -1,59 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.bookshelf.BookShelfFragment">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="top.mcwebsite.novel.ui.bookshelf.BookshelfViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/header_title"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        tools:context=".ui.bookshelf.BookShelfFragment">
 
-        <TextView
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/header_normal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_ids="book_self_tv, menu" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/edit_views"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="book_self_edit_tv, select_all, finish, delete_btn" />
+
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/header_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="book_self_tv, book_self_edit_tv"
+            app:barrierDirection="bottom" />
+
+        <TextView
+            android:id="@+id/book_self_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
             android:text="@string/book_shelf"
             android:textColor="@android:color/black"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:id="@+id/menu"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginEnd="20dp"
             android:contentDescription="@null"
             android:src="@drawable/ic_menu"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/book_self_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/book_self_tv" />
+
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefresh"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toTopOf="@id/delete_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header_barrier">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <TextView
+            android:id="@+id/book_self_edit_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/book_shelf"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/select_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/black"
+            android:text="@string/select_all"
+            android:onClick="@{() -> viewModel.onSelectAllClick()}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/book_self_edit_tv"
+            app:layout_constraintBottom_toBottomOf="@id/book_self_edit_tv"
+            tools:text="Select All" />
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefresh"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_title">
+        <TextView
+            android:id="@+id/finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:textColor="@color/black"
+            android:text="@string/finish"
+            android:onClick="@{() -> viewModel.onFinishClick()}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/book_self_edit_tv"
+            app:layout_constraintBottom_toBottomOf="@id/book_self_edit_tv"
+            tools:text="Finish" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview"
+        <TextView
+            android:id="@+id/delete_btn"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="50dp"
+            android:textSize="16sp"
+            android:textColor="@color/red"
+            android:gravity="center"
+            android:text="@string/delete"
+            android:background="#FAFAFA"
+            android:elevation="4dp"
+            android:onClick="@{() -> viewModel.deleteSelectedBooks()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="Delete" />
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

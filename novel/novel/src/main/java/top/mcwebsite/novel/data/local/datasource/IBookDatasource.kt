@@ -17,4 +17,6 @@ interface IBookDatasource {
 
     suspend fun update(bookEntity: BookEntity)
 
+    suspend fun removeBooks(books: List<BookEntity>)
+
 }

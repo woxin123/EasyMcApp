@@ -24,4 +24,8 @@ class BookDataSourceImpl(
     override suspend fun update(bookEntity: BookEntity) {
         bookDao.update(bookEntity)
     }
+
+    override suspend fun removeBooks(books: List<BookEntity>) {
+        bookDao.delete(books)
+    }
 }

@@ -2,29 +2,36 @@ package top.mcwebsite.novel.ui.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import androidx.lifecycle.coroutineScope
-import androidx.navigation.findNavController
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import top.mcwebsite.novel.R
-import java.lang.IllegalStateException
-import java.lang.RuntimeException
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import top.mcwebsite.common.android.ext.setVisible
 
 class MainActivity : AppCompatActivity() {
 
     private val showBottomNavigationViewDestIds = mutableListOf<Int>()
 
+    private lateinit var bottomNavigationView: BottomNavigationView
+
+    private val viewModel: MainViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        initObservable()
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_tab)
+        bottomNavigationView = findViewById(R.id.bottom_tab)
         bottomNavigationView
             .setupWithNavController(navController)
         showBottomNavigationViewDestIds.apply {
@@ -34,12 +41,18 @@ class MainActivity : AppCompatActivity() {
             add(R.id.meFragment)
         }
         navController.addOnDestinationChangedListener { _, destation, _ ->
-            if (showBottomNavigationViewDestIds.contains(destation.id)) {
-                bottomNavigationView.visibility = View.VISIBLE
-            } else {
-                bottomNavigationView.visibility = View.GONE
-            }
+            bottomNavigationView.setVisible(showBottomNavigationViewDestIds.contains(destation.id))
         }
 
+    }
+
+    private fun initObservable() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                viewModel.bottomNavigationStatus.collect {
+                    bottomNavigationView.setVisible(it)
+                }
+            }
+        }
     }
 }
