@@ -41,14 +41,14 @@ class MainActivity : AppCompatActivity() {
             add(R.id.meFragment)
         }
         navController.addOnDestinationChangedListener { _, destation, _ ->
-            bottomNavigationView.setVisible(showBottomNavigationViewDestIds.contains(destation.id))
+            viewModel.changeBottomNavigationStatus(showBottomNavigationViewDestIds.contains(destation.id))
         }
 
     }
 
     private fun initObservable() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.bottomNavigationStatus.collect {
                     bottomNavigationView.setVisible(it)
                 }
