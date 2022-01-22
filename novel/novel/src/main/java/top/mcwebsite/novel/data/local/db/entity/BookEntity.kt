@@ -38,6 +38,8 @@ data class BookEntity(
     var lastReadPosition: Int = 0,
     @ColumnInfo(name = "last_read_chapter_title")
     var lastReadChapterTitle: String? = null,
+    @ColumnInfo(name = "is_update")
+    var isUpdate: Boolean = false,
 ) : Parcelable {
     fun transform(): BookModel {
         return BookModel(

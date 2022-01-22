@@ -80,11 +80,11 @@ val appModule = module {
     }
 
     viewModel {
-        BookDetailViewModel(get<BookRepositoryManager>())
+        BookDetailViewModel(get())
     }
 
     viewModel {
-        BookshelfViewModel(get())
+        BookshelfViewModel(get(), get(), get())
     }
 
     viewModel {

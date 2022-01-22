@@ -36,6 +36,10 @@ class BookShelfRecyclerAdapter(private val viewModel: BookshelfViewModel) : Recy
         }
     }
 
+    fun setBookUpdate(index: Int) {
+        notifyItemChanged(index)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookShelfRecyclerViewHolder {
         return BookShelfRecyclerViewHolder.from(parent)
     }
@@ -109,6 +113,8 @@ class BookShelfRecyclerAdapter(private val viewModel: BookshelfViewModel) : Recy
                 binding.checkbox.visibility = View.GONE
                 binding.checkedBackground.visibility = View.GONE
             }
+
+            binding.updateTv.setVisible(book.isUpdate)
 
             binding.root.setOnClickListener {
                 if (!isEditing) {

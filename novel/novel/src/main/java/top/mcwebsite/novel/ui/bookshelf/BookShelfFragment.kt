@@ -1,22 +1,17 @@
 package top.mcwebsite.novel.ui.bookshelf
 
-import android.icu.text.PluralRules
-import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.annotation.RequiresApi
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import top.mcwebsite.common.android.ext.setVisible
@@ -24,8 +19,6 @@ import top.mcwebsite.common.android.ext.showShortToast
 import top.mcwebsite.novel.R
 import top.mcwebsite.novel.databinding.FragmentBookShelfBinding
 import top.mcwebsite.novel.ui.home.MainViewModel
-import java.util.*
-import kotlin.reflect.jvm.internal.impl.descriptors.Visibilities.Local
 
 class BookShelfFragment : Fragment() {
 
@@ -70,6 +63,10 @@ class BookShelfFragment : Fragment() {
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(this.viewLifecycleOwner, editStatusBackPressedCallback)
+
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel.onRefreshBooks()
+        }
     }
 
     private fun initObservable() {
@@ -124,6 +121,19 @@ class BookShelfFragment : Fragment() {
                 launch {
                     viewModel.onFinishEvent.collect {
                         adapter.closeEdit()
+                    }
+                }
+                launch {
+                    viewModel.updatedBookEvent.collect {
+                        binding.swipeRefresh.isRefreshing = false
+                        if (it.isEmpty()) {
+                            return@collect
+                        }
+                        requireContext().showShortToast("有 ${it.size} 本书有更新")
+                        it.forEach {
+                            adapter.setBookUpdate(it.first)
+                        }
+
                     }
                 }
             }

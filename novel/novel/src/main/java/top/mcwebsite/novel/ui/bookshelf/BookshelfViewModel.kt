@@ -6,11 +6,21 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import top.mcwebsite.novel.data.local.datasource.IBookDatasource
+import top.mcwebsite.novel.data.local.datasource.IChapterDatasource
 import top.mcwebsite.novel.data.local.db.entity.BookEntity
+import top.mcwebsite.novel.data.local.db.entity.ChapterEntity
+import top.mcwebsite.novel.data.remote.repository.BookRepositoryManager
+import top.mcwebsite.novel.model.Chapter
 
-class BookshelfViewModel(private val bookDataSource: IBookDatasource): ViewModel() {
+class BookshelfViewModel(
+    private val bookDataSource: IBookDatasource,
+    private val chapterSource: IChapterDatasource,
+    private val bookRepositoryManager: BookRepositoryManager,
+): ViewModel() {
 
     private val _bookshelfEvent = MutableSharedFlow<List<BookEntity>>(1)
     val bookshelfEvent = _bookshelfEvent.asSharedFlow()
@@ -35,6 +45,9 @@ class BookshelfViewModel(private val bookDataSource: IBookDatasource): ViewModel
 
     private val _onFinishEvent = MutableSharedFlow<Unit>()
     val onFinishEvent = _onFinishEvent.asSharedFlow()
+
+    private val _updatedBookEvent = MutableSharedFlow<List<Pair<Int, BookEntity>>>()
+    val updatedBookEvent = _updatedBookEvent.asSharedFlow()
 
     init {
         viewModelScope.launch {
@@ -92,6 +105,27 @@ class BookshelfViewModel(private val bookDataSource: IBookDatasource): ViewModel
                 _checkedBookNum.emit(0)
             }
         }
+    }
+
+    fun onRefreshBooks() {
+        viewModelScope.launch {
+            val updatedBook = mutableListOf<Pair<Int, BookEntity>>()
+            _bookshelfEvent.first().forEachIndexed { index, book ->
+                bookRepositoryManager.getBookChapters(book.transform()).collect {
+                    val oldChapters = chapterSource.getChaptersByBid(book.bid)
+                    if (isUpdate(oldChapters, it)) {
+                        updatedBook.add(index to book)
+                        book.isUpdate = true
+                        bookDataSource.update(book)
+                    }
+                }
+            }
+            _updatedBookEvent.emit(updatedBook)
+        }
+    }
+
+    private fun isUpdate(oldChapterList: List<ChapterEntity>, newChapterEntity: List<Chapter>): Boolean {
+        return newChapterEntity.size > oldChapterList.size
     }
 
 }

@@ -33,6 +33,19 @@
                 android:theme="@style/BookDeleteCheckBox"
                 android:visibility="gone" />
 
+            <TextView
+                android:id="@+id/update_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/update"
+                android:textSize="10sp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="4dp"
+                android:textColor="@color/white"
+                android:background="@color/red"
+                android:padding="2dp"
+                android:visibility="gone"/>
+
         </FrameLayout>
 
         <TextView

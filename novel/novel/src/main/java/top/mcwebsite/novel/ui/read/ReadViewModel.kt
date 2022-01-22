@@ -3,6 +3,7 @@ package top.mcwebsite.novel.ui.read
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
@@ -60,6 +61,10 @@ class ReadViewModel(
 
     private fun init() {
         bookModel = bookEntity.transform()
+        viewModelScope.launch(Dispatchers.IO) {
+            bookEntity.isUpdate = false
+            bookDataSource.update(bookEntity)
+        }
 
         pageProvider = PageProvider(
             bookEntity,
