@@ -1,0 +1,3 @@
+int string calender_title 0x0
+int string settings_title 0x0
+int string tasks_title 0x0

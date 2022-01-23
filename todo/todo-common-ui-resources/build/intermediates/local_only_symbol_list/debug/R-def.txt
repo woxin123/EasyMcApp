@@ -1,0 +1,5 @@
+R_DEF: Internal format may change without notice
+local
+string calender_title
+string settings_title
+string tasks_title

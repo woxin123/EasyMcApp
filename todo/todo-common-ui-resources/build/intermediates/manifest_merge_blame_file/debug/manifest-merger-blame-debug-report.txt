@@ -1,0 +1,8 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="top.mcwebsite.easymcapp.todo_common_ui_resources" >
+4
+5    <uses-sdk android:minSdkVersion="21" />
+5-->/home/mengchen/code/android/EasyMcApp/todo/todo-common-ui-resources/src/main/AndroidManifest.xml
+6
+7</manifest>

@@ -1,0 +1,354 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:2:1-26:12
+INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:2:1-26:12
+INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:2:1-26:12
+INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:2:1-26:12
+MERGED from [io.insert-koin:koin-android:3.1.5] /home/mengchen/.gradle/caches/transforms-3/ae48b582ccd0ae9fa65c86e56729f921/transformed/jetified-koin-android-3.1.5/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.accompanist:accompanist-insets:0.21.5-rc] /home/mengchen/.gradle/caches/transforms-3/5fb24948fbb9946d289bd0b40073b458/transformed/jetified-accompanist-insets-0.21.5-rc/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.accompanist:accompanist-navigation-animation:0.21.5-rc] /home/mengchen/.gradle/caches/transforms-3/a4b089e10a2a0f8ec1a6cf89905b6c41/transformed/jetified-accompanist-navigation-animation-0.21.5-rc/AndroidManifest.xml:17:1-24:12
+MERGED from [:common] /home/mengchen/code/android/EasyMcApp/common/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.compose.ui:ui-tooling:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/0297a2f66f2ba113e5de57dea0e9528a/transformed/jetified-ui-tooling-1.1.0-rc01/AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.compose.material:material:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/9341f9696840ca37cbfdbeb55a969c57/transformed/jetified-material-1.1.0-rc01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-tooling-data:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/5b25932c0b70513257247fa75f14438d/transformed/jetified-ui-tooling-data-1.1.0-rc01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.material:material-ripple:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/d4bc3c88c5cad0e8bd3f24ea1ef6ea30/transformed/jetified-material-ripple-1.1.0-rc01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.foundation:foundation:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/50aaaa25f96a4cb903ef3ce3fff11939/transformed/jetified-foundation-1.1.0-rc01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.navigation:navigation-compose:2.4.0-rc01] /home/mengchen/.gradle/caches/transforms-3/c1d6ac8a12261731a7924196ded72c4c/transformed/jetified-navigation-compose-2.4.0-rc01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.animation:animation:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/b00324c750af21c587c60714837d76a9/transformed/jetified-animation-1.1.0-rc01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.material:material-icons-extended:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/dfe7a981298f7ebdf8e0d0909d4f9367/transformed/jetified-material-icons-extended-1.1.0-rc01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.material:material-icons-core:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/2a49772ba9cf50332622aeef3a3a94ed/transformed/jetified-material-icons-core-1.1.0-rc01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.foundation:foundation-layout:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/0c1275fd7d4a06646ebc613eed03eece/transformed/jetified-foundation-layout-1.1.0-rc01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.animation:animation-core:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/100dd1fac7c0b2c73ca424b23b8ac9f9/transformed/jetified-animation-core-1.1.0-rc01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity-compose:1.3.1] /home/mengchen/.gradle/caches/transforms-3/96b493886d6821a205f94493c41a44ff/transformed/jetified-activity-compose-1.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0] /home/mengchen/.gradle/caches/transforms-3/1307350112f017a02e993c2615ea249c/transformed/jetified-lifecycle-viewmodel-compose-2.4.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/a34da4d25f4e476f567ad7ebd2d8c83c/transformed/jetified-ui-1.1.0-rc01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.4.0-rc01] /home/mengchen/.gradle/caches/transforms-3/63bcbb3364882d0681e4b0f719ea1b89/transformed/navigation-runtime-ktx-2.4.0-rc01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.navigation:navigation-runtime:2.4.0-rc01] /home/mengchen/.gradle/caches/transforms-3/06b2f0877b4da385df8d485523af3073/transformed/navigation-runtime-2.4.0-rc01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity-ktx:1.3.1] /home/mengchen/.gradle/caches/transforms-3/5eef052b3890d8336edb3fbe752dcc6f/transformed/jetified-activity-ktx-1.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.navigation:navigation-common-ktx:2.4.0-rc01] /home/mengchen/.gradle/caches/transforms-3/cdbd2b7746e53c17ce3eeadd6d37ebca/transformed/navigation-common-ktx-2.4.0-rc01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.navigation:navigation-common:2.4.0-rc01] /home/mengchen/.gradle/caches/transforms-3/50bcfa9f79e27e5c29e7e6ced7308be2/transformed/navigation-common-2.4.0-rc01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.4.0] /home/mengchen/.gradle/caches/transforms-3/f68c84ae8ece0bae227033523f9db271/transformed/jetified-lifecycle-runtime-ktx-2.4.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-tooling-preview:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/2569165d15ac0c873cb52716405a838f/transformed/jetified-ui-tooling-preview-1.1.0-rc01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-text:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/6eb7ff538c6ce6b4faec4d8501b4c335/transformed/jetified-ui-text-1.1.0-rc01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.runtime:runtime-saveable:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/e9fee47e4dd3c29a274a6c30042d62c2/transformed/jetified-runtime-saveable-1.1.0-rc01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-graphics:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/37c0bff83a0ccf25088233cd100a1aea/transformed/jetified-ui-graphics-1.1.0-rc01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-unit:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/7557aa48a1be8f656b2d7f60a337b7b9/transformed/jetified-ui-unit-1.1.0-rc01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-geometry:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/35f78ad162ae426987406fc329f4f770/transformed/jetified-ui-geometry-1.1.0-rc01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.runtime:runtime:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/aa5792c293b81a612963f341385c60e9/transformed/jetified-runtime-1.1.0-rc01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1] /home/mengchen/.gradle/caches/transforms-3/89c44294ccd1fe160a744a3d5327bed1/transformed/jetified-lifecycle-viewmodel-ktx-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [:todo:todo-common-ui-resources] /home/mengchen/code/android/EasyMcApp/todo/todo-common-ui-resources/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.core:core-ktx:1.7.0] /home/mengchen/.gradle/caches/transforms-3/074aa2f2b6e3516de9e08d9149aedeb8/transformed/jetified-core-ktx-1.7.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.material:material:1.3.0] /home/mengchen/.gradle/caches/transforms-3/71b9414ec2d179ffcf70b457ecb5035d/transformed/material-1.3.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] /home/mengchen/.gradle/caches/transforms-3/80e2c6e62d776759edcad90f0b13db76/transformed/constraintlayout-2.0.4/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.appcompat:appcompat:1.3.1] /home/mengchen/.gradle/caches/transforms-3/a93683c9626a77641d4656b33f120821/transformed/appcompat-1.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-util:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/4e662f85dd466be87a4fe3ccea97e45c/transformed/jetified-ui-util-1.1.0-rc01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.dynamicanimation:dynamicanimation-ktx:1.0.0-alpha03] /home/mengchen/.gradle/caches/transforms-3/3293f889c50a46d8b9fbbb2855a89da1/transformed/jetified-dynamicanimation-ktx-1.0.0-alpha03/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.savedstate:savedstate-ktx:1.1.0] /home/mengchen/.gradle/caches/transforms-3/c8a9ddcc5f0046955f1d9430bbe1998d/transformed/jetified-savedstate-ktx-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.databinding:viewbinding:7.0.0] /home/mengchen/.gradle/caches/transforms-3/50ffce783480ad34ab07848304b8195b/transformed/jetified-viewbinding-7.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/mengchen/.gradle/caches/transforms-3/54d0f1acb1aff76db651ac40284c8c33/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /home/mengchen/.gradle/caches/transforms-3/0f186932daedd844954ef930f7a9c9cc/transformed/jetified-viewpager2-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /home/mengchen/.gradle/caches/transforms-3/31675d64db8e77c391deccb380ca1ba6/transformed/lifecycle-extensions-2.2.0/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.fragment:fragment:1.3.6] /home/mengchen/.gradle/caches/transforms-3/141ec06af27a748a3bd8a26b315af42f/transformed/fragment-1.3.6/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat-resources:1.3.1] /home/mengchen/.gradle/caches/transforms-3/5db77c6248e7b95d7e2737ba62e01f25/transformed/jetified-appcompat-resources-1.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /home/mengchen/.gradle/caches/transforms-3/c58e6e32d830d79ba4c4cca3f467b662/transformed/drawerlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.3.1] /home/mengchen/.gradle/caches/transforms-3/f764d18667253a92c1855525340f4ae8/transformed/jetified-activity-1.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] /home/mengchen/.gradle/caches/transforms-3/10345546520b671de1b27d1ecf419393/transformed/jetified-lifecycle-viewmodel-savedstate-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.savedstate:savedstate:1.1.0] /home/mengchen/.gradle/caches/transforms-3/655c54134117e50c466cf078bfe5dfef/transformed/jetified-savedstate-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.loader:loader:1.0.0] /home/mengchen/.gradle/caches/transforms-3/555b9557005885481781f3c8d246e561/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] /home/mengchen/.gradle/caches/transforms-3/936eb90c3f4fd12625a9e2a68c4c5d0b/transformed/lifecycle-viewmodel-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.cardview:cardview:1.0.0] /home/mengchen/.gradle/caches/transforms-3/5059cb9c8da2117c5f17ae03f7534607/transformed/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/mengchen/.gradle/caches/transforms-3/ba938e6d154a81cd366b1dbf13cdd63e/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.transition:transition:1.2.0] /home/mengchen/.gradle/caches/transforms-3/89a21524564437b358d63a85596924ab/transformed/transition-1.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/mengchen/.gradle/caches/transforms-3/5b3d801b338f944a74b71963d22f99d1/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/mengchen/.gradle/caches/transforms-3/d97a49b144356d50908fd80bd8f5957c/transformed/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/99ea0da720dfe4af951d295c8c6c731e/transformed/jetified-profileinstaller-1.1.0-rc01/AndroidManifest.xml:17:1-48:12
+MERGED from [androidx.autofill:autofill:1.0.0] /home/mengchen/.gradle/caches/transforms-3/774f46bcae3e5526b022b70982767143/transformed/jetified-autofill-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/mengchen/.gradle/caches/transforms-3/ce591c9f3b800382b2b4f8afeda1798b/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /home/mengchen/.gradle/caches/transforms-3/547b0c96e9225620e777bc07e8ed6dd0/transformed/recyclerview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.customview:customview:1.0.0] /home/mengchen/.gradle/caches/transforms-3/8aaac3532f4c6d4faa764188292e6478/transformed/customview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.1.0-alpha03] /home/mengchen/.gradle/caches/transforms-3/a3305d8143461db7eb897d2e8a5e248b/transformed/dynamicanimation-1.1.0-alpha03/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core:1.7.0] /home/mengchen/.gradle/caches/transforms-3/7ff55b423d588c6c4cb3421d2dc42161/transformed/core-1.7.0/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.4.0] /home/mengchen/.gradle/caches/transforms-3/b8bf445438e003a3814b4ae63e3619c0/transformed/lifecycle-runtime-2.4.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/mengchen/.gradle/caches/transforms-3/c17dd33a3ecbe4147c0aa868be86ed87/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.startup:startup-runtime:1.0.0] /home/mengchen/.gradle/caches/transforms-3/e0521fafb3c1822c0945f45fc8f81106/transformed/jetified-startup-runtime-1.0.0/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/mengchen/.gradle/caches/transforms-3/46605bf8d973e8c9475bf9c83f77473a/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] /home/mengchen/.gradle/caches/transforms-3/17334229a4eec7ef9f643de5fa4cd4eb/transformed/lifecycle-livedata-core-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /home/mengchen/.gradle/caches/transforms-3/c355d6448ea198c7adeaa8f269c2f8e5/transformed/core-runtime-2.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/mengchen/.gradle/caches/transforms-3/36b930f1f2a2fe0f24d254425ffeaaf6/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.tracing:tracing:1.0.0] /home/mengchen/.gradle/caches/transforms-3/b959b1f64af196dc86f22db15aaf7a2b/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] /home/mengchen/.gradle/caches/transforms-3/ee38e0eba6e0a20dbf4db5f5b106a863/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:17:1-24:12
+INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:2:1-26:12
+INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:2:1-26:12
+INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:2:1-26:12
+	package
+		ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:3:5-46
+		INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml
+		INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml
+		ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:2:1-26:12
+		INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml
+		ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:2:1-26:12
+		INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:2:11-69
+application
+ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:5:5-24:19
+MERGED from [io.insert-koin:koin-android:3.1.5] /home/mengchen/.gradle/caches/transforms-3/ae48b582ccd0ae9fa65c86e56729f921/transformed/jetified-koin-android-3.1.5/AndroidManifest.xml:7:5-20
+MERGED from [io.insert-koin:koin-android:3.1.5] /home/mengchen/.gradle/caches/transforms-3/ae48b582ccd0ae9fa65c86e56729f921/transformed/jetified-koin-android-3.1.5/AndroidManifest.xml:7:5-20
+MERGED from [androidx.compose.ui:ui-tooling:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/0297a2f66f2ba113e5de57dea0e9528a/transformed/jetified-ui-tooling-1.1.0-rc01/AndroidManifest.xml:24:5-28:19
+MERGED from [androidx.compose.ui:ui-tooling:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/0297a2f66f2ba113e5de57dea0e9528a/transformed/jetified-ui-tooling-1.1.0-rc01/AndroidManifest.xml:24:5-28:19
+MERGED from [com.google.android.material:material:1.3.0] /home/mengchen/.gradle/caches/transforms-3/71b9414ec2d179ffcf70b457ecb5035d/transformed/material-1.3.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.3.0] /home/mengchen/.gradle/caches/transforms-3/71b9414ec2d179ffcf70b457ecb5035d/transformed/material-1.3.0/AndroidManifest.xml:22:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] /home/mengchen/.gradle/caches/transforms-3/80e2c6e62d776759edcad90f0b13db76/transformed/constraintlayout-2.0.4/AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] /home/mengchen/.gradle/caches/transforms-3/80e2c6e62d776759edcad90f0b13db76/transformed/constraintlayout-2.0.4/AndroidManifest.xml:9:5-20
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /home/mengchen/.gradle/caches/transforms-3/31675d64db8e77c391deccb380ca1ba6/transformed/lifecycle-extensions-2.2.0/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /home/mengchen/.gradle/caches/transforms-3/31675d64db8e77c391deccb380ca1ba6/transformed/lifecycle-extensions-2.2.0/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/99ea0da720dfe4af951d295c8c6c731e/transformed/jetified-profileinstaller-1.1.0-rc01/AndroidManifest.xml:25:5-46:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/99ea0da720dfe4af951d295c8c6c731e/transformed/jetified-profileinstaller-1.1.0-rc01/AndroidManifest.xml:25:5-46:19
+MERGED from [androidx.core:core:1.7.0] /home/mengchen/.gradle/caches/transforms-3/7ff55b423d588c6c4cb3421d2dc42161/transformed/core-1.7.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.7.0] /home/mengchen/.gradle/caches/transforms-3/7ff55b423d588c6c4cb3421d2dc42161/transformed/core-1.7.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/mengchen/.gradle/caches/transforms-3/c17dd33a3ecbe4147c0aa868be86ed87/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/mengchen/.gradle/caches/transforms-3/c17dd33a3ecbe4147c0aa868be86ed87/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.startup:startup-runtime:1.0.0] /home/mengchen/.gradle/caches/transforms-3/e0521fafb3c1822c0945f45fc8f81106/transformed/jetified-startup-runtime-1.0.0/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.0.0] /home/mengchen/.gradle/caches/transforms-3/e0521fafb3c1822c0945f45fc8f81106/transformed/jetified-startup-runtime-1.0.0/AndroidManifest.xml:25:5-31:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.7.0] /home/mengchen/.gradle/caches/transforms-3/7ff55b423d588c6c4cb3421d2dc42161/transformed/core-1.7.0/AndroidManifest.xml:24:18-86
+	android:supportsRtl
+		ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:11:9-35
+	android:label
+		ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:9:9-41
+	android:roundIcon
+		ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:10:9-54
+	android:icon
+		ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:8:9-43
+	android:allowBackup
+		ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:7:9-35
+	android:theme
+		ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:12:9-47
+	android:name
+		ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:6:9-71
+activity#top.mcwebsite.easymcapp.todoApp.home.MainActivity
+ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:13:9-23:20
+	android:label
+		ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:16:13-45
+	android:exported
+		ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:15:13-36
+	android:theme
+		ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:17:13-63
+	android:name
+		ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:14:13-46
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:18:13-22:29
+action#android.intent.action.MAIN
+ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:19:17-69
+	android:name
+		ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:19:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:21:17-77
+	android:name
+		ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml:21:27-74
+uses-sdk
+INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml
+INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml
+MERGED from [io.insert-koin:koin-android:3.1.5] /home/mengchen/.gradle/caches/transforms-3/ae48b582ccd0ae9fa65c86e56729f921/transformed/jetified-koin-android-3.1.5/AndroidManifest.xml:5:5-44
+MERGED from [io.insert-koin:koin-android:3.1.5] /home/mengchen/.gradle/caches/transforms-3/ae48b582ccd0ae9fa65c86e56729f921/transformed/jetified-koin-android-3.1.5/AndroidManifest.xml:5:5-44
+MERGED from [com.google.accompanist:accompanist-insets:0.21.5-rc] /home/mengchen/.gradle/caches/transforms-3/5fb24948fbb9946d289bd0b40073b458/transformed/jetified-accompanist-insets-0.21.5-rc/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.accompanist:accompanist-insets:0.21.5-rc] /home/mengchen/.gradle/caches/transforms-3/5fb24948fbb9946d289bd0b40073b458/transformed/jetified-accompanist-insets-0.21.5-rc/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.accompanist:accompanist-navigation-animation:0.21.5-rc] /home/mengchen/.gradle/caches/transforms-3/a4b089e10a2a0f8ec1a6cf89905b6c41/transformed/jetified-accompanist-navigation-animation-0.21.5-rc/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.accompanist:accompanist-navigation-animation:0.21.5-rc] /home/mengchen/.gradle/caches/transforms-3/a4b089e10a2a0f8ec1a6cf89905b6c41/transformed/jetified-accompanist-navigation-animation-0.21.5-rc/AndroidManifest.xml:20:5-22:41
+MERGED from [:common] /home/mengchen/code/android/EasyMcApp/common/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:common] /home/mengchen/code/android/EasyMcApp/common/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.compose.ui:ui-tooling:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/0297a2f66f2ba113e5de57dea0e9528a/transformed/jetified-ui-tooling-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-tooling:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/0297a2f66f2ba113e5de57dea0e9528a/transformed/jetified-ui-tooling-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/9341f9696840ca37cbfdbeb55a969c57/transformed/jetified-material-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/9341f9696840ca37cbfdbeb55a969c57/transformed/jetified-material-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-tooling-data:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/5b25932c0b70513257247fa75f14438d/transformed/jetified-ui-tooling-data-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-tooling-data:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/5b25932c0b70513257247fa75f14438d/transformed/jetified-ui-tooling-data-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material-ripple:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/d4bc3c88c5cad0e8bd3f24ea1ef6ea30/transformed/jetified-material-ripple-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material-ripple:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/d4bc3c88c5cad0e8bd3f24ea1ef6ea30/transformed/jetified-material-ripple-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.foundation:foundation:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/50aaaa25f96a4cb903ef3ce3fff11939/transformed/jetified-foundation-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.foundation:foundation:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/50aaaa25f96a4cb903ef3ce3fff11939/transformed/jetified-foundation-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-compose:2.4.0-rc01] /home/mengchen/.gradle/caches/transforms-3/c1d6ac8a12261731a7924196ded72c4c/transformed/jetified-navigation-compose-2.4.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-compose:2.4.0-rc01] /home/mengchen/.gradle/caches/transforms-3/c1d6ac8a12261731a7924196ded72c4c/transformed/jetified-navigation-compose-2.4.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.animation:animation:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/b00324c750af21c587c60714837d76a9/transformed/jetified-animation-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.animation:animation:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/b00324c750af21c587c60714837d76a9/transformed/jetified-animation-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material-icons-extended:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/dfe7a981298f7ebdf8e0d0909d4f9367/transformed/jetified-material-icons-extended-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material-icons-extended:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/dfe7a981298f7ebdf8e0d0909d4f9367/transformed/jetified-material-icons-extended-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material-icons-core:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/2a49772ba9cf50332622aeef3a3a94ed/transformed/jetified-material-icons-core-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material-icons-core:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/2a49772ba9cf50332622aeef3a3a94ed/transformed/jetified-material-icons-core-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.foundation:foundation-layout:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/0c1275fd7d4a06646ebc613eed03eece/transformed/jetified-foundation-layout-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.foundation:foundation-layout:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/0c1275fd7d4a06646ebc613eed03eece/transformed/jetified-foundation-layout-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.animation:animation-core:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/100dd1fac7c0b2c73ca424b23b8ac9f9/transformed/jetified-animation-core-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.animation:animation-core:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/100dd1fac7c0b2c73ca424b23b8ac9f9/transformed/jetified-animation-core-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity-compose:1.3.1] /home/mengchen/.gradle/caches/transforms-3/96b493886d6821a205f94493c41a44ff/transformed/jetified-activity-compose-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity-compose:1.3.1] /home/mengchen/.gradle/caches/transforms-3/96b493886d6821a205f94493c41a44ff/transformed/jetified-activity-compose-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0] /home/mengchen/.gradle/caches/transforms-3/1307350112f017a02e993c2615ea249c/transformed/jetified-lifecycle-viewmodel-compose-2.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0] /home/mengchen/.gradle/caches/transforms-3/1307350112f017a02e993c2615ea249c/transformed/jetified-lifecycle-viewmodel-compose-2.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/a34da4d25f4e476f567ad7ebd2d8c83c/transformed/jetified-ui-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/a34da4d25f4e476f567ad7ebd2d8c83c/transformed/jetified-ui-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.4.0-rc01] /home/mengchen/.gradle/caches/transforms-3/63bcbb3364882d0681e4b0f719ea1b89/transformed/navigation-runtime-ktx-2.4.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.4.0-rc01] /home/mengchen/.gradle/caches/transforms-3/63bcbb3364882d0681e4b0f719ea1b89/transformed/navigation-runtime-ktx-2.4.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-runtime:2.4.0-rc01] /home/mengchen/.gradle/caches/transforms-3/06b2f0877b4da385df8d485523af3073/transformed/navigation-runtime-2.4.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-runtime:2.4.0-rc01] /home/mengchen/.gradle/caches/transforms-3/06b2f0877b4da385df8d485523af3073/transformed/navigation-runtime-2.4.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity-ktx:1.3.1] /home/mengchen/.gradle/caches/transforms-3/5eef052b3890d8336edb3fbe752dcc6f/transformed/jetified-activity-ktx-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity-ktx:1.3.1] /home/mengchen/.gradle/caches/transforms-3/5eef052b3890d8336edb3fbe752dcc6f/transformed/jetified-activity-ktx-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-common-ktx:2.4.0-rc01] /home/mengchen/.gradle/caches/transforms-3/cdbd2b7746e53c17ce3eeadd6d37ebca/transformed/navigation-common-ktx-2.4.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-common-ktx:2.4.0-rc01] /home/mengchen/.gradle/caches/transforms-3/cdbd2b7746e53c17ce3eeadd6d37ebca/transformed/navigation-common-ktx-2.4.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-common:2.4.0-rc01] /home/mengchen/.gradle/caches/transforms-3/50bcfa9f79e27e5c29e7e6ced7308be2/transformed/navigation-common-2.4.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-common:2.4.0-rc01] /home/mengchen/.gradle/caches/transforms-3/50bcfa9f79e27e5c29e7e6ced7308be2/transformed/navigation-common-2.4.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.4.0] /home/mengchen/.gradle/caches/transforms-3/f68c84ae8ece0bae227033523f9db271/transformed/jetified-lifecycle-runtime-ktx-2.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.4.0] /home/mengchen/.gradle/caches/transforms-3/f68c84ae8ece0bae227033523f9db271/transformed/jetified-lifecycle-runtime-ktx-2.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-tooling-preview:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/2569165d15ac0c873cb52716405a838f/transformed/jetified-ui-tooling-preview-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-tooling-preview:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/2569165d15ac0c873cb52716405a838f/transformed/jetified-ui-tooling-preview-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-text:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/6eb7ff538c6ce6b4faec4d8501b4c335/transformed/jetified-ui-text-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-text:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/6eb7ff538c6ce6b4faec4d8501b4c335/transformed/jetified-ui-text-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.runtime:runtime-saveable:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/e9fee47e4dd3c29a274a6c30042d62c2/transformed/jetified-runtime-saveable-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.runtime:runtime-saveable:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/e9fee47e4dd3c29a274a6c30042d62c2/transformed/jetified-runtime-saveable-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-graphics:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/37c0bff83a0ccf25088233cd100a1aea/transformed/jetified-ui-graphics-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-graphics:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/37c0bff83a0ccf25088233cd100a1aea/transformed/jetified-ui-graphics-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-unit:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/7557aa48a1be8f656b2d7f60a337b7b9/transformed/jetified-ui-unit-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-unit:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/7557aa48a1be8f656b2d7f60a337b7b9/transformed/jetified-ui-unit-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-geometry:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/35f78ad162ae426987406fc329f4f770/transformed/jetified-ui-geometry-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-geometry:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/35f78ad162ae426987406fc329f4f770/transformed/jetified-ui-geometry-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.runtime:runtime:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/aa5792c293b81a612963f341385c60e9/transformed/jetified-runtime-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.runtime:runtime:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/aa5792c293b81a612963f341385c60e9/transformed/jetified-runtime-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1] /home/mengchen/.gradle/caches/transforms-3/89c44294ccd1fe160a744a3d5327bed1/transformed/jetified-lifecycle-viewmodel-ktx-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1] /home/mengchen/.gradle/caches/transforms-3/89c44294ccd1fe160a744a3d5327bed1/transformed/jetified-lifecycle-viewmodel-ktx-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [:todo:todo-common-ui-resources] /home/mengchen/code/android/EasyMcApp/todo/todo-common-ui-resources/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:todo:todo-common-ui-resources] /home/mengchen/code/android/EasyMcApp/todo/todo-common-ui-resources/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.7.0] /home/mengchen/.gradle/caches/transforms-3/074aa2f2b6e3516de9e08d9149aedeb8/transformed/jetified-core-ktx-1.7.0/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.core:core-ktx:1.7.0] /home/mengchen/.gradle/caches/transforms-3/074aa2f2b6e3516de9e08d9149aedeb8/transformed/jetified-core-ktx-1.7.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.android.material:material:1.3.0] /home/mengchen/.gradle/caches/transforms-3/71b9414ec2d179ffcf70b457ecb5035d/transformed/material-1.3.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.3.0] /home/mengchen/.gradle/caches/transforms-3/71b9414ec2d179ffcf70b457ecb5035d/transformed/material-1.3.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] /home/mengchen/.gradle/caches/transforms-3/80e2c6e62d776759edcad90f0b13db76/transformed/constraintlayout-2.0.4/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] /home/mengchen/.gradle/caches/transforms-3/80e2c6e62d776759edcad90f0b13db76/transformed/constraintlayout-2.0.4/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.appcompat:appcompat:1.3.1] /home/mengchen/.gradle/caches/transforms-3/a93683c9626a77641d4656b33f120821/transformed/appcompat-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.3.1] /home/mengchen/.gradle/caches/transforms-3/a93683c9626a77641d4656b33f120821/transformed/appcompat-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-util:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/4e662f85dd466be87a4fe3ccea97e45c/transformed/jetified-ui-util-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-util:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/4e662f85dd466be87a4fe3ccea97e45c/transformed/jetified-ui-util-1.1.0-rc01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.dynamicanimation:dynamicanimation-ktx:1.0.0-alpha03] /home/mengchen/.gradle/caches/transforms-3/3293f889c50a46d8b9fbbb2855a89da1/transformed/jetified-dynamicanimation-ktx-1.0.0-alpha03/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.dynamicanimation:dynamicanimation-ktx:1.0.0-alpha03] /home/mengchen/.gradle/caches/transforms-3/3293f889c50a46d8b9fbbb2855a89da1/transformed/jetified-dynamicanimation-ktx-1.0.0-alpha03/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate-ktx:1.1.0] /home/mengchen/.gradle/caches/transforms-3/c8a9ddcc5f0046955f1d9430bbe1998d/transformed/jetified-savedstate-ktx-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate-ktx:1.1.0] /home/mengchen/.gradle/caches/transforms-3/c8a9ddcc5f0046955f1d9430bbe1998d/transformed/jetified-savedstate-ktx-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.databinding:viewbinding:7.0.0] /home/mengchen/.gradle/caches/transforms-3/50ffce783480ad34ab07848304b8195b/transformed/jetified-viewbinding-7.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.databinding:viewbinding:7.0.0] /home/mengchen/.gradle/caches/transforms-3/50ffce783480ad34ab07848304b8195b/transformed/jetified-viewbinding-7.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/mengchen/.gradle/caches/transforms-3/54d0f1acb1aff76db651ac40284c8c33/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/mengchen/.gradle/caches/transforms-3/54d0f1acb1aff76db651ac40284c8c33/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /home/mengchen/.gradle/caches/transforms-3/0f186932daedd844954ef930f7a9c9cc/transformed/jetified-viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /home/mengchen/.gradle/caches/transforms-3/0f186932daedd844954ef930f7a9c9cc/transformed/jetified-viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /home/mengchen/.gradle/caches/transforms-3/31675d64db8e77c391deccb380ca1ba6/transformed/lifecycle-extensions-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /home/mengchen/.gradle/caches/transforms-3/31675d64db8e77c391deccb380ca1ba6/transformed/lifecycle-extensions-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.3.6] /home/mengchen/.gradle/caches/transforms-3/141ec06af27a748a3bd8a26b315af42f/transformed/fragment-1.3.6/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.3.6] /home/mengchen/.gradle/caches/transforms-3/141ec06af27a748a3bd8a26b315af42f/transformed/fragment-1.3.6/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.3.1] /home/mengchen/.gradle/caches/transforms-3/5db77c6248e7b95d7e2737ba62e01f25/transformed/jetified-appcompat-resources-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.3.1] /home/mengchen/.gradle/caches/transforms-3/5db77c6248e7b95d7e2737ba62e01f25/transformed/jetified-appcompat-resources-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /home/mengchen/.gradle/caches/transforms-3/c58e6e32d830d79ba4c4cca3f467b662/transformed/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /home/mengchen/.gradle/caches/transforms-3/c58e6e32d830d79ba4c4cca3f467b662/transformed/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.3.1] /home/mengchen/.gradle/caches/transforms-3/f764d18667253a92c1855525340f4ae8/transformed/jetified-activity-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.3.1] /home/mengchen/.gradle/caches/transforms-3/f764d18667253a92c1855525340f4ae8/transformed/jetified-activity-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] /home/mengchen/.gradle/caches/transforms-3/10345546520b671de1b27d1ecf419393/transformed/jetified-lifecycle-viewmodel-savedstate-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] /home/mengchen/.gradle/caches/transforms-3/10345546520b671de1b27d1ecf419393/transformed/jetified-lifecycle-viewmodel-savedstate-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.1.0] /home/mengchen/.gradle/caches/transforms-3/655c54134117e50c466cf078bfe5dfef/transformed/jetified-savedstate-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.1.0] /home/mengchen/.gradle/caches/transforms-3/655c54134117e50c466cf078bfe5dfef/transformed/jetified-savedstate-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.loader:loader:1.0.0] /home/mengchen/.gradle/caches/transforms-3/555b9557005885481781f3c8d246e561/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /home/mengchen/.gradle/caches/transforms-3/555b9557005885481781f3c8d246e561/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] /home/mengchen/.gradle/caches/transforms-3/936eb90c3f4fd12625a9e2a68c4c5d0b/transformed/lifecycle-viewmodel-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] /home/mengchen/.gradle/caches/transforms-3/936eb90c3f4fd12625a9e2a68c4c5d0b/transformed/lifecycle-viewmodel-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cardview:cardview:1.0.0] /home/mengchen/.gradle/caches/transforms-3/5059cb9c8da2117c5f17ae03f7534607/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /home/mengchen/.gradle/caches/transforms-3/5059cb9c8da2117c5f17ae03f7534607/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/mengchen/.gradle/caches/transforms-3/ba938e6d154a81cd366b1dbf13cdd63e/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/mengchen/.gradle/caches/transforms-3/ba938e6d154a81cd366b1dbf13cdd63e/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.2.0] /home/mengchen/.gradle/caches/transforms-3/89a21524564437b358d63a85596924ab/transformed/transition-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.2.0] /home/mengchen/.gradle/caches/transforms-3/89a21524564437b358d63a85596924ab/transformed/transition-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/mengchen/.gradle/caches/transforms-3/5b3d801b338f944a74b71963d22f99d1/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/mengchen/.gradle/caches/transforms-3/5b3d801b338f944a74b71963d22f99d1/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/mengchen/.gradle/caches/transforms-3/d97a49b144356d50908fd80bd8f5957c/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/mengchen/.gradle/caches/transforms-3/d97a49b144356d50908fd80bd8f5957c/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.profileinstaller:profileinstaller:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/99ea0da720dfe4af951d295c8c6c731e/transformed/jetified-profileinstaller-1.1.0-rc01/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.profileinstaller:profileinstaller:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/99ea0da720dfe4af951d295c8c6c731e/transformed/jetified-profileinstaller-1.1.0-rc01/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.autofill:autofill:1.0.0] /home/mengchen/.gradle/caches/transforms-3/774f46bcae3e5526b022b70982767143/transformed/jetified-autofill-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.autofill:autofill:1.0.0] /home/mengchen/.gradle/caches/transforms-3/774f46bcae3e5526b022b70982767143/transformed/jetified-autofill-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/mengchen/.gradle/caches/transforms-3/ce591c9f3b800382b2b4f8afeda1798b/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/mengchen/.gradle/caches/transforms-3/ce591c9f3b800382b2b4f8afeda1798b/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /home/mengchen/.gradle/caches/transforms-3/547b0c96e9225620e777bc07e8ed6dd0/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /home/mengchen/.gradle/caches/transforms-3/547b0c96e9225620e777bc07e8ed6dd0/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.0.0] /home/mengchen/.gradle/caches/transforms-3/8aaac3532f4c6d4faa764188292e6478/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /home/mengchen/.gradle/caches/transforms-3/8aaac3532f4c6d4faa764188292e6478/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.1.0-alpha03] /home/mengchen/.gradle/caches/transforms-3/a3305d8143461db7eb897d2e8a5e248b/transformed/dynamicanimation-1.1.0-alpha03/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.1.0-alpha03] /home/mengchen/.gradle/caches/transforms-3/a3305d8143461db7eb897d2e8a5e248b/transformed/dynamicanimation-1.1.0-alpha03/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.7.0] /home/mengchen/.gradle/caches/transforms-3/7ff55b423d588c6c4cb3421d2dc42161/transformed/core-1.7.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.7.0] /home/mengchen/.gradle/caches/transforms-3/7ff55b423d588c6c4cb3421d2dc42161/transformed/core-1.7.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.4.0] /home/mengchen/.gradle/caches/transforms-3/b8bf445438e003a3814b4ae63e3619c0/transformed/lifecycle-runtime-2.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.4.0] /home/mengchen/.gradle/caches/transforms-3/b8bf445438e003a3814b4ae63e3619c0/transformed/lifecycle-runtime-2.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/mengchen/.gradle/caches/transforms-3/c17dd33a3ecbe4147c0aa868be86ed87/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/mengchen/.gradle/caches/transforms-3/c17dd33a3ecbe4147c0aa868be86ed87/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.startup:startup-runtime:1.0.0] /home/mengchen/.gradle/caches/transforms-3/e0521fafb3c1822c0945f45fc8f81106/transformed/jetified-startup-runtime-1.0.0/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.0.0] /home/mengchen/.gradle/caches/transforms-3/e0521fafb3c1822c0945f45fc8f81106/transformed/jetified-startup-runtime-1.0.0/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/mengchen/.gradle/caches/transforms-3/46605bf8d973e8c9475bf9c83f77473a/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/mengchen/.gradle/caches/transforms-3/46605bf8d973e8c9475bf9c83f77473a/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] /home/mengchen/.gradle/caches/transforms-3/17334229a4eec7ef9f643de5fa4cd4eb/transformed/lifecycle-livedata-core-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] /home/mengchen/.gradle/caches/transforms-3/17334229a4eec7ef9f643de5fa4cd4eb/transformed/lifecycle-livedata-core-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /home/mengchen/.gradle/caches/transforms-3/c355d6448ea198c7adeaa8f269c2f8e5/transformed/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /home/mengchen/.gradle/caches/transforms-3/c355d6448ea198c7adeaa8f269c2f8e5/transformed/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/mengchen/.gradle/caches/transforms-3/36b930f1f2a2fe0f24d254425ffeaaf6/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/mengchen/.gradle/caches/transforms-3/36b930f1f2a2fe0f24d254425ffeaaf6/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.tracing:tracing:1.0.0] /home/mengchen/.gradle/caches/transforms-3/b959b1f64af196dc86f22db15aaf7a2b/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /home/mengchen/.gradle/caches/transforms-3/b959b1f64af196dc86f22db15aaf7a2b/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] /home/mengchen/.gradle/caches/transforms-3/ee38e0eba6e0a20dbf4db5f5b106a863/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] /home/mengchen/.gradle/caches/transforms-3/ee38e0eba6e0a20dbf4db5f5b106a863/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:20:5-22:41
+INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml
+INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml
+		ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml
+		INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml
+		ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml
+		INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-app/src/main/AndroidManifest.xml
+activity#androidx.compose.ui.tooling.PreviewActivity
+ADDED from [androidx.compose.ui:ui-tooling:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/0297a2f66f2ba113e5de57dea0e9528a/transformed/jetified-ui-tooling-1.1.0-rc01/AndroidManifest.xml:25:9-27:39
+	android:exported
+		ADDED from [androidx.compose.ui:ui-tooling:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/0297a2f66f2ba113e5de57dea0e9528a/transformed/jetified-ui-tooling-1.1.0-rc01/AndroidManifest.xml:27:13-36
+	android:name
+		ADDED from [androidx.compose.ui:ui-tooling:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/0297a2f66f2ba113e5de57dea0e9528a/transformed/jetified-ui-tooling-1.1.0-rc01/AndroidManifest.xml:26:13-71
+provider#androidx.startup.InitializationProvider
+ADDED from [androidx.profileinstaller:profileinstaller:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/99ea0da720dfe4af951d295c8c6c731e/transformed/jetified-profileinstaller-1.1.0-rc01/AndroidManifest.xml:26:9-34:20
+MERGED from [androidx.startup:startup-runtime:1.0.0] /home/mengchen/.gradle/caches/transforms-3/e0521fafb3c1822c0945f45fc8f81106/transformed/jetified-startup-runtime-1.0.0/AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.0.0] /home/mengchen/.gradle/caches/transforms-3/e0521fafb3c1822c0945f45fc8f81106/transformed/jetified-startup-runtime-1.0.0/AndroidManifest.xml:26:9-30:34
+	tools:node
+		ADDED from [androidx.profileinstaller:profileinstaller:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/99ea0da720dfe4af951d295c8c6c731e/transformed/jetified-profileinstaller-1.1.0-rc01/AndroidManifest.xml:30:13-31
+	android:authorities
+		ADDED from [androidx.profileinstaller:profileinstaller:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/99ea0da720dfe4af951d295c8c6c731e/transformed/jetified-profileinstaller-1.1.0-rc01/AndroidManifest.xml:28:13-68
+	android:exported
+		ADDED from [androidx.profileinstaller:profileinstaller:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/99ea0da720dfe4af951d295c8c6c731e/transformed/jetified-profileinstaller-1.1.0-rc01/AndroidManifest.xml:29:13-37
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/99ea0da720dfe4af951d295c8c6c731e/transformed/jetified-profileinstaller-1.1.0-rc01/AndroidManifest.xml:27:13-67
+meta-data#androidx.profileinstaller.ProfileInstallerInitializer
+ADDED from [androidx.profileinstaller:profileinstaller:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/99ea0da720dfe4af951d295c8c6c731e/transformed/jetified-profileinstaller-1.1.0-rc01/AndroidManifest.xml:31:13-33:52
+	android:value
+		ADDED from [androidx.profileinstaller:profileinstaller:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/99ea0da720dfe4af951d295c8c6c731e/transformed/jetified-profileinstaller-1.1.0-rc01/AndroidManifest.xml:33:17-49
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/99ea0da720dfe4af951d295c8c6c731e/transformed/jetified-profileinstaller-1.1.0-rc01/AndroidManifest.xml:32:17-85
+receiver#androidx.profileinstaller.ProfileInstallReceiver
+ADDED from [androidx.profileinstaller:profileinstaller:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/99ea0da720dfe4af951d295c8c6c731e/transformed/jetified-profileinstaller-1.1.0-rc01/AndroidManifest.xml:36:9-45:20
+	android:enabled
+		ADDED from [androidx.profileinstaller:profileinstaller:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/99ea0da720dfe4af951d295c8c6c731e/transformed/jetified-profileinstaller-1.1.0-rc01/AndroidManifest.xml:39:13-35
+	android:exported
+		ADDED from [androidx.profileinstaller:profileinstaller:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/99ea0da720dfe4af951d295c8c6c731e/transformed/jetified-profileinstaller-1.1.0-rc01/AndroidManifest.xml:40:13-36
+	android:permission
+		ADDED from [androidx.profileinstaller:profileinstaller:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/99ea0da720dfe4af951d295c8c6c731e/transformed/jetified-profileinstaller-1.1.0-rc01/AndroidManifest.xml:41:13-57
+	android:directBootAware
+		ADDED from [androidx.profileinstaller:profileinstaller:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/99ea0da720dfe4af951d295c8c6c731e/transformed/jetified-profileinstaller-1.1.0-rc01/AndroidManifest.xml:38:13-44
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/99ea0da720dfe4af951d295c8c6c731e/transformed/jetified-profileinstaller-1.1.0-rc01/AndroidManifest.xml:37:13-76
+intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/99ea0da720dfe4af951d295c8c6c731e/transformed/jetified-profileinstaller-1.1.0-rc01/AndroidManifest.xml:42:13-44:29
+action#androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/99ea0da720dfe4af951d295c8c6c731e/transformed/jetified-profileinstaller-1.1.0-rc01/AndroidManifest.xml:43:17-91
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.1.0-rc01] /home/mengchen/.gradle/caches/transforms-3/99ea0da720dfe4af951d295c8c6c731e/transformed/jetified-profileinstaller-1.1.0-rc01/AndroidManifest.xml:43:25-88

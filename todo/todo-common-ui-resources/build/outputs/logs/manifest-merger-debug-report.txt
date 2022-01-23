@@ -1,0 +1,19 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-common-ui-resources/src/main/AndroidManifest.xml:2:1-5:12
+INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-common-ui-resources/src/main/AndroidManifest.xml:2:1-5:12
+INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-common-ui-resources/src/main/AndroidManifest.xml:2:1-5:12
+	package
+		ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-common-ui-resources/src/main/AndroidManifest.xml:3:5-63
+		INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-common-ui-resources/src/main/AndroidManifest.xml
+		INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-common-ui-resources/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-common-ui-resources/src/main/AndroidManifest.xml:2:11-69
+uses-sdk
+INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-common-ui-resources/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-common-ui-resources/src/main/AndroidManifest.xml
+INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-common-ui-resources/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-common-ui-resources/src/main/AndroidManifest.xml
+		ADDED from /home/mengchen/code/android/EasyMcApp/todo/todo-common-ui-resources/src/main/AndroidManifest.xml
+		INJECTED from /home/mengchen/code/android/EasyMcApp/todo/todo-common-ui-resources/src/main/AndroidManifest.xml

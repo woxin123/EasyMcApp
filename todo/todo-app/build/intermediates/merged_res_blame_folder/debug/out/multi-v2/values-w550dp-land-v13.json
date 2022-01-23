@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "/home/mengchen/code/android/EasyMcApp/todo/todo-app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-w550dp-land-v13/values-w550dp-land-v13.xml",
+            "map": [
+                {
+                    "source": "/home/mengchen/.gradle/caches/transforms-3/71b9414ec2d179ffcf70b457ecb5035d/transformed/material-1.3.0/res/values-w550dp-land-v13/values-w550dp-land-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "51",
+                        "endOffsets": "102"
+                    }
+                }
+            ]
+        }
+    ]
+}

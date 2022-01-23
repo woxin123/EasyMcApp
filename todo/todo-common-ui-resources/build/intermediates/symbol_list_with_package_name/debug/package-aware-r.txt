@@ -1,0 +1,4 @@
+top.mcwebsite.easymcapp.todo_common_ui_resources
+string calender_title
+string settings_title
+string tasks_title
