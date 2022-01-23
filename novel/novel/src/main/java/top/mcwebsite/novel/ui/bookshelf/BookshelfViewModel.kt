@@ -20,7 +20,7 @@ class BookshelfViewModel(
     private val bookDataSource: IBookDatasource,
     private val chapterSource: IChapterDatasource,
     private val bookRepositoryManager: BookRepositoryManager,
-): ViewModel() {
+) : ViewModel() {
 
     private val _bookshelfEvent = MutableSharedFlow<List<BookEntity>>(1)
     val bookshelfEvent = _bookshelfEvent.asSharedFlow()
@@ -114,9 +114,10 @@ class BookshelfViewModel(
                 bookRepositoryManager.getBookChapters(book.transform()).collect {
                     val oldChapters = chapterSource.getChaptersByBid(book.bid)
                     if (isUpdate(oldChapters, it)) {
-                        updatedBook.add(index to book)
                         book.isUpdate = true
                         bookDataSource.update(book)
+                        updateBookChapter(book.bid, oldChapters, it)
+                        updatedBook.add(index to book)
                     }
                 }
             }
@@ -128,4 +129,22 @@ class BookshelfViewModel(
         return newChapterEntity.size > oldChapterList.size
     }
 
+    private fun updateBookChapter(bid: Int, oldChapterEntities: List<ChapterEntity>, newChapters: List<Chapter>) {
+        val updateChapterEntities = mutableListOf<ChapterEntity>()
+        val addChapterEntities = mutableListOf<ChapterEntity>()
+        val newChapterEntities = newChapters.map { it.transformToEntity(bid) }
+        val oldChapterSize = oldChapterEntities.size
+        for (i in 0 until oldChapterSize) {
+            if (oldChapterEntities[i].title != newChapterEntities[i].title) {
+                updateChapterEntities.add(newChapterEntities[i])
+            }
+        }
+        for (i in oldChapterSize until newChapterEntities.size) {
+            addChapterEntities.add(newChapterEntities[i])
+        }
+        viewModelScope.launch {
+            chapterSource.updateChapterEntities(*updateChapterEntities.toTypedArray())
+            chapterSource.insert(*addChapterEntities.toTypedArray())
+        }
+    }
 }

@@ -21,7 +21,7 @@ interface ChapterDao {
 
 
     @Update
-    suspend fun update(chapter: ChapterEntity)
+    suspend fun update(vararg chapter: ChapterEntity)
 
     @Delete
     suspend fun deleteByBid(chapters: List<ChapterEntity>)

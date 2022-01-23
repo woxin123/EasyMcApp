@@ -10,7 +10,7 @@ interface IChapterDatasource {
 
     suspend fun getChaptersByBidFlow(bid: Int): Flow<List<ChapterEntity>>
 
-    suspend fun update(chapter: ChapterEntity)
+    suspend fun updateChapterEntities(vararg chapterEntity: ChapterEntity)
 
     suspend fun insert(vararg chapterEntity: ChapterEntity)
 }

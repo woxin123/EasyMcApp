@@ -16,8 +16,8 @@ class ChapterDatasourceImpl(
         return chapterDao.getChaptersByBidFlow(bid)
     }
 
-    override suspend fun update(chapter: ChapterEntity) {
-        chapterDao.update(chapter)
+    override suspend fun updateChapterEntities(vararg chapterEntity: ChapterEntity) {
+        chapterDao.update(*chapterEntity)
     }
 
     override suspend fun insert(vararg chapterEntity: ChapterEntity) {

@@ -33,15 +33,15 @@ class BookShelfFragment : Fragment() {
     private lateinit var editStatusBackPressedCallback: OnBackPressedCallback
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentBookShelfBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         return binding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -133,11 +133,9 @@ class BookShelfFragment : Fragment() {
                         it.forEach {
                             adapter.setBookUpdate(it.first)
                         }
-
                     }
                 }
             }
         }
     }
-
 }
