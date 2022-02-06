@@ -20,9 +20,9 @@ import top.mcwebsite.easymcapp.todo.icons.priotity.HighPriority
 import top.mcwebsite.easymcapp.todo.icons.priotity.LowPriority
 import top.mcwebsite.easymcapp.todo.icons.priotity.MediumPriority
 import top.mcwebsite.easymcapp.todo.icons.priotity.NonePriority
-import top.mcwebsite.easymcapp.todo.todo_compose_components.ToDoTextField
-import top.mcwebsite.easymcapp.todo.todo_compose_components.TodoTopBar
-import top.mcwebsite.easymcapp.todo.todo_compose_components.rememberFlowWithLifecycle
+import top.mcwebsite.easymcapp.todo.todoComposeComponents.ToDoTextField
+import top.mcwebsite.easymcapp.todo.todoComposeComponents.TodoTopBar
+import top.mcwebsite.easymcapp.todo.todoComposeComponents.rememberFlowWithLifecycle
 import java.time.LocalDate
 
 @Composable

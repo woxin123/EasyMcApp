@@ -1,24 +1,34 @@
-package top.mcwebsite.easymcapp.todo.todo_compose_components
+package top.mcwebsite.easymcapp.todo.todoComposeComponents
 
-import android.icu.util.LocaleData
 import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ChainStyle
@@ -26,11 +36,12 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
-import top.mcwebsite.easymcapp.todo.todo_compose_components.utils.commonDays
+import top.mcwebsite.easymcapp.todo.todoComposeComponents.utils.commonDays
 import java.time.LocalDate
 import java.time.Month
 import java.time.format.TextStyle
-import java.util.*
+import java.util.Calendar
+import java.util.Locale
 
 private val weekDaysName = arrayOf("日", "一", "二", "三", "四", "五", "六")
 
@@ -40,13 +51,13 @@ internal val DEFAULT_MAX_DATE = LocalDate.of(2050, 1, 1)
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun Calendar(
+    modifier: Modifier = Modifier,
     currentDate: LocalDate = LocalDate.now(),
     holiday: Map<LocalDate, String> = commonDays(currentDate.year),
     minDate: LocalDate = DEFAULT_MIN_DATE,
     maxDate: LocalDate = DEFAULT_MAX_DATE,
     currentDayColor: Color = Color.Blue,
     chooseDayColor: Color = Color.Red,
-    modifier: Modifier = Modifier,
     onChoose: (LocalDate) -> Unit = {},
 ) {
     val pageState = rememberPagerState()
@@ -215,7 +226,6 @@ fun Day(
                         centerHorizontallyTo(parent)
                         top.linkTo(parent.top)
                         bottom.linkTo(holidayText.top)
-
                     } else {
                         centerTo(parent)
                     }

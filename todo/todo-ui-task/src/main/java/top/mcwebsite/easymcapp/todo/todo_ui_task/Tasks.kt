@@ -2,21 +2,17 @@ package top.mcwebsite.easymcapp.todo.todo_ui_task
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Menu
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.koin.androidx.compose.getViewModel
-import top.mcwebsite.easymcapp.todo.todo_compose_components.TodoTopBar
+import top.mcwebsite.easymcapp.todo.todoComposeComponents.TodoTopBar
 
 @Composable
 fun Tasks(

@@ -1,4 +1,4 @@
-package top.mcwebsite.easymcapp.todo.todo_compose_components
+package top.mcwebsite.easymcapp.todo.todoComposeComponents
 
 import java.time.LocalDate
 

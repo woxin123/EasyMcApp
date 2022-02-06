@@ -1,4 +1,4 @@
-package top.mcwebsite.easymcapp.todo.todo_compose_components
+package top.mcwebsite.easymcapp.todo.todoComposeComponents
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
