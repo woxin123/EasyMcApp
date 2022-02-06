@@ -1,12 +1,10 @@
 package top.mcwebsite.easymcapp.todoApp.home
 
-import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.ExperimentalMaterialApi
@@ -21,12 +19,8 @@ import androidx.compose.material.icons.outlined.EditCalendar
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.Task
 import androidx.compose.material.icons.outlined.Warning
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.State
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -35,6 +29,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import top.mcwebsite.easymcapp.todoApp.AppNavigation
 import top.mcwebsite.easymcapp.todoApp.R
@@ -44,22 +39,45 @@ import top.mcwebsite.easymcapp.todoApp.Screen
 @Composable
 internal fun Home() {
     val navController = rememberAnimatedNavController()
+    val useBottomNavigationState = rememberSaveable {
+        mutableStateOf(true)
+    }
+
     Scaffold(
         bottomBar = {
             val currentSelectedItem by navController.currentScreenAsState()
-            HomeBottomNavigation(
-                selectedNavigation = currentSelectedItem,
-                onNavigationSelected = { selected ->
-                    Log.d("mengchen", "selected = $selected")
-                },
-                modifier = Modifier.fillMaxWidth()
-            )
+            if (useBottomNavigationState.value) {
+                HomeBottomNavigation(
+                    selectedNavigation = currentSelectedItem,
+                    onNavigationSelected = { selected ->
+                        navController.navigate(selected.route) {
+                            launchSingleTop = true
+                            restoreState = true
+
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                        }
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
     ) {
-        AppNavigation(
-            navController = navController,
-            modifier = Modifier.fillMaxHeight(),
-        )
+        Row(
+
+            Modifier
+                .fillMaxSize()
+                .padding(it)
+        ) {
+            AppNavigation(
+                navController = navController,
+                useBottomNavigationState,
+                modifier = Modifier
+                    .weight(1F)
+                    .fillMaxHeight(),
+            )
+        }
     }
 }
 

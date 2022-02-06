@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "top.mcwebsite.easymcapp.todoApp"
-        minSdk = 23
+        minSdk = 26
         targetSdk = 31
         versionCode = 1
         versionName = "1.0"
@@ -36,6 +36,7 @@ android {
         compose = true
     }
     composeOptions {
+        kotlinCompilerVersion = libs.versions.kotlin.get()
         kotlinCompilerExtensionVersion = libs.versions.compose.get()
     }
     packagingOptions {
@@ -48,6 +49,10 @@ android {
 dependencies {
     implementation(project(":common"))
     implementation(project(":todo:todo-common-ui-resources"))
+    implementation(project(":todo:todo-compose-components"))
+    implementation(project(":todo:todo-ui-task"))
+    implementation(project(":todo:todo-ui-addtask"))
+    implementation(project(":todo:todo-ui-choose_date_time"))
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
     implementation(libs.android.material)
