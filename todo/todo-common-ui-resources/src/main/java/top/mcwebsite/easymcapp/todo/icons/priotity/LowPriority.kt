@@ -55,8 +55,7 @@ public val ToDoIcons.LowPriority: ImageVector
                 arcToRelative(25.75f, 25.75f, 0.0f, false, false, -25.09f, -26.78f)
                 close()
             }
-        }
-        .build()
+        }.build()
         return _lowPriority!!
     }
 

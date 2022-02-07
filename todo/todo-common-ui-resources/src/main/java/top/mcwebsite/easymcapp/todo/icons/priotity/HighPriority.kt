@@ -16,11 +16,22 @@ public val ToDoIcons.HighPriority: ImageVector
         if (_highPriority != null) {
             return _highPriority!!
         }
-        _highPriority = Builder(name = "HighPriority", defaultWidth = 200.0.dp, defaultHeight =
-                200.0.dp, viewportWidth = 1024.0f, viewportHeight = 1024.0f).apply {
-            path(fill = SolidColor(Color(0xFFF25555)), stroke = null, strokeLineWidth = 0.0f,
-                    strokeLineCap = Butt, strokeLineJoin = Miter, strokeLineMiter = 4.0f,
-                    pathFillType = NonZero) {
+        _highPriority = Builder(
+            name = "HighPriority",
+            defaultWidth = 200.0.dp,
+            defaultHeight = 200.0.dp,
+            viewportWidth = 1024.0f,
+            viewportHeight = 1024.0f
+        ).apply {
+            path(
+                fill = SolidColor(Color(0xFFF25555)),
+                stroke = null,
+                strokeLineWidth = 0.0f,
+                strokeLineCap = Butt,
+                strokeLineJoin = Miter,
+                strokeLineMiter = 4.0f,
+                pathFillType = NonZero
+            ) {
                 moveTo(825.6f, 181.25f)
                 curveToRelative(26.88f, 11.98f, 44.8f, 36.04f, 44.8f, 64.1f)
                 verticalLineToRelative(320.51f)
@@ -95,8 +106,7 @@ public val ToDoIcons.HighPriority: ImageVector
                 arcTo(25.75f, 25.75f, 0.0f, false, false, 640.51f, 307.2f)
                 close()
             }
-        }
-        .build()
+        }.build()
         return _highPriority!!
     }
 

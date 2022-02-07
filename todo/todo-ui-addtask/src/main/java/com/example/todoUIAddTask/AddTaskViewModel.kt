@@ -69,5 +69,4 @@ class AddTaskViewModel : ViewModel() {
             dateState.emit(date)
         }
     }
-
 }

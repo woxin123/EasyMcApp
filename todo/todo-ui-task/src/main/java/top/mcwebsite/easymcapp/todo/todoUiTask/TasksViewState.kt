@@ -1,4 +1,4 @@
-package top.mcwebsite.easymcapp.todo.todo_ui_task
+package top.mcwebsite.easymcapp.todo.todoUiTask
 
 data class TasksViewState(
     val test: String? = null,

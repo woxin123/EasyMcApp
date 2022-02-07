@@ -1,4 +1,4 @@
-package top.mcwebsite.easymcapp.todo.todo_ui_task
+package top.mcwebsite.easymcapp.todo.todoUiTask
 
 import org.junit.Test
 

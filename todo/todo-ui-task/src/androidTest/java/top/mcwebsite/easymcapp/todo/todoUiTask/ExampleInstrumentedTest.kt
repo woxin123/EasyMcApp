@@ -1,4 +1,4 @@
-package top.mcwebsite.easymcapp.todo.todo_ui_task
+package top.mcwebsite.easymcapp.todo.todoUiTask
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

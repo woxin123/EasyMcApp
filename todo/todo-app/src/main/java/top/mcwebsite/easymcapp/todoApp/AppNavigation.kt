@@ -16,7 +16,7 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import top.mcwebsite.easymcapp.todo.chooseDateTime.ChooseDateTime
 import top.mcwebsite.easymcapp.todo.todoComposeComponents.Calendar
-import top.mcwebsite.easymcapp.todo.todo_ui_task.Tasks
+import top.mcwebsite.easymcapp.todo.todoUiTask.Tasks
 import java.time.LocalDate
 
 internal sealed class Screen(val route: String) {

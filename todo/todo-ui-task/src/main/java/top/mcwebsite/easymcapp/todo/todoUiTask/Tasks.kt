@@ -1,8 +1,14 @@
-package top.mcwebsite.easymcapp.todo.todo_ui_task
+package top.mcwebsite.easymcapp.todo.todoUiTask
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.*
+import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Menu
@@ -52,9 +58,7 @@ internal fun Tasks(
         isFloatingActionButtonDocked = false,
         modifier = Modifier.fillMaxWidth()
     ) {
-        LazyColumn() {
-
-        }
+        LazyColumn() {}
     }
 }
 
