@@ -1,5 +1,6 @@
 package top.mcwebsite.easymcapp.todo.todoUiTask
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
@@ -13,12 +14,15 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Menu
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.unit.dp
 import org.koin.androidx.compose.getViewModel
 import top.mcwebsite.easymcapp.todo.todoComposeComponents.TodoTopBar
+import top.mcwebsite.easymcapp.todo.todoComposeComponents.rememberFlowWithLifecycle
 
 @Composable
 fun Tasks(
@@ -33,6 +37,18 @@ fun Tasks(
 @Composable
 internal fun Tasks(
     tasksViewModel: TasksViewModel,
+    openAddTask: () -> Unit
+) {
+    val state by rememberFlowWithLifecycle(tasksViewModel.state).collectAsState(TasksViewState.Empty)
+    Tasks(
+        state = state,
+        openAddTask = openAddTask,
+    )
+}
+
+@Composable
+internal fun Tasks(
+    state: TasksViewState,
     openAddTask: () -> Unit
 ) {
     Scaffold(
@@ -58,7 +74,11 @@ internal fun Tasks(
         isFloatingActionButtonDocked = false,
         modifier = Modifier.fillMaxWidth()
     ) {
-        LazyColumn() {}
+        Column {
+            state.tasks.forEach {
+                Text(text = it.toString())
+            }
+        }
     }
 }
 
@@ -72,7 +92,7 @@ internal fun TaskTopBar(
             Text(text = "InBox")
         },
         navigationIcon = {
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = { /*TODO*/ }) {0
                 Icon(
                     painter = rememberVectorPainter(Icons.Outlined.Menu),
                     contentDescription = null,

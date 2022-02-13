@@ -1,15 +1,16 @@
+import top.mcwebsite.easymcapp.build.BuildConfig
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
 
 android {
-    compileSdk = 31
+    compileSdk = BuildConfig.COMPILE_SDK
 
     defaultConfig {
-        minSdk = 26
-        targetSdk = 31
-
+        minSdk = BuildConfig.MIN_SDK
+        targetSdk = BuildConfig.TARGET_SDK
     }
 
     buildFeatures {
@@ -30,6 +31,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":todo:todo-data"))
     implementation(project(":todo:todo-compose-components"))
     implementation(project(":todo:todo-common-ui-resources"))
     implementation(libs.androidx.core)

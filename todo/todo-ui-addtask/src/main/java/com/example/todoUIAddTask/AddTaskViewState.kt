@@ -3,7 +3,7 @@ package com.example.todoUIAddTask
 data class AddTaskViewState(
     val isChooseDateAndRepeat: Boolean = false,
     val dateAndRepeat: String = "",
-    val priority: Priority = noPriority,
+    val priority: Priority = Priority.NoPriority,
     val title: String = "",
     val content: String = "",
 ) {

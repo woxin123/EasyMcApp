@@ -4,15 +4,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import top.mcwebsite.easymcapp.todo.todoData.entity.PriorityType
+import top.mcwebsite.easymcapp.todo.todoData.entity.TaskEntity
+import top.mcwebsite.easymcapp.todo.todoData.repository.task.TasksRepository
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class AddTaskViewModel : ViewModel() {
+class AddTaskViewModel(
+    private val tasksRepository: TasksRepository
+) : ViewModel() {
 
     private val title = MutableStateFlow("")
     private val content = MutableStateFlow("")
     private val isChooseDateAndRepeat = MutableStateFlow(false)
-    private val priorityState = MutableStateFlow(noPriority)
+    private val priorityState = MutableStateFlow<Priority>(Priority.NoPriority)
     private val dateAndRepeat = MutableStateFlow("日期&重复")
     private val dateState = MutableStateFlow<LocalDate?>(null)
 
@@ -67,6 +72,50 @@ class AddTaskViewModel : ViewModel() {
     fun updateDate(date: LocalDate?) {
         viewModelScope.launch {
             dateState.emit(date)
+        }
+    }
+
+    fun isEdited(): Boolean {
+        if (title.value.isNotEmpty()) {
+            return true
+        }
+        if (content.value.isNotEmpty()) {
+            return true
+        }
+        if (priorityState.value != Priority.NoPriority) {
+            return true
+        }
+        if (dateState.value != null) {
+            return true
+        }
+        return false
+    }
+
+    fun back() {
+        if (isEdited()) {
+            saveTask()
+        }
+    }
+
+    fun saveTask() {
+        viewModelScope.launch {
+            tasksRepository.saveTask(
+                TaskEntity(
+                    title = title.value,
+                    content = content.value,
+                    startDate = dateState.value,
+                    priority = priorityState.value.covertToPriorityType()
+                )
+            )
+        }
+    }
+
+    private fun Priority.covertToPriorityType(): PriorityType {
+        return when(this) {
+            is Priority.HighPriority -> PriorityType.HIGH_PRIORITY
+            is Priority.MediumPriority -> PriorityType.MEDIUM_PRIORITY
+            is Priority.LowPriority -> PriorityType.LOW_PRIORITY
+            is Priority.NoPriority -> PriorityType.NO_PRIORITY
         }
     }
 }

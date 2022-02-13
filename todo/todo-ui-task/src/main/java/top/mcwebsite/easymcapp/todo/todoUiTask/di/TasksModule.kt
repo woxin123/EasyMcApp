@@ -6,6 +6,6 @@ import top.mcwebsite.easymcapp.todo.todoUiTask.TasksViewModel
 
 val tasksModule = module {
     viewModel {
-        TasksViewModel()
+        TasksViewModel(get())
     }
 }

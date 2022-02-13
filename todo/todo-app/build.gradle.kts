@@ -48,6 +48,7 @@ android {
 
 dependencies {
     implementation(project(":common"))
+    implementation(project(":todo:todo-data"))
     implementation(project(":todo:todo-common-ui-resources"))
     implementation(project(":todo:todo-compose-components"))
     implementation(project(":todo:todo-ui-task"))

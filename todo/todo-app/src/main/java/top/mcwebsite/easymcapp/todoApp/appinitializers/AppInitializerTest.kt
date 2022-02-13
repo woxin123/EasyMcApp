@@ -6,6 +6,6 @@ import top.mcwebsite.common.android.appinitializer.AppInitializer
 
 class AppInitializerTest : AppInitializer {
     override fun init(application: Application) {
-        Log.d("mengchen", "app init")
+        // no op
     }
 }

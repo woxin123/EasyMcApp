@@ -1,11 +1,30 @@
 package com.example.todoUIAddTask
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.Checkbox
+import androidx.compose.material.DropdownMenu
+import androidx.compose.material.DropdownMenuItem
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -51,7 +70,10 @@ fun AddTask(
         .collectAsState(initial = AddTaskViewState.Empty)
     AddTask(
         state = state,
-        navigateUp = navigateUp,
+        navigateUp = {
+            addTaskViewModel.back()
+            navigateUp()
+        },
         openChooseDateTime = openChooseDateTime,
         onTitleChanged = { addTaskViewModel.onTitleChanged(it) },
         onContentChanged = { addTaskViewModel.onContentChanged(it) },
@@ -194,7 +216,6 @@ fun AddTask(
     }
 }
 
-
 @Composable
 fun AddTaskTopBar(
     onBackClick: () -> Unit,
@@ -214,21 +235,31 @@ fun AddTaskTopBar(
     )
 }
 
-data class Priority(
+sealed class Priority(
     val name: String,
     val icon: ImageVector,
     val iconColor: Color,
-)
+) {
+    object HighPriority : Priority(
+        "High Priority", ToDoIcons.HighPriority, Color.Red
+    )
 
-internal val highPriority = Priority("High Priority", ToDoIcons.HighPriority, Color.Red)
-internal val mediumPriority =
-    Priority("Medium Priority", ToDoIcons.MediumPriority, Color(0xFFFFBB44))
-internal val lowPriority = Priority("Low Priority", ToDoIcons.LowPriority, Color(0xFF0888FF))
-internal val noPriority = Priority("No Priority", ToDoIcons.NonePriority, Color(0xFF333333))
+    object MediumPriority : Priority(
+        "Medium Priority", ToDoIcons.MediumPriority, Color(0xFFFFBB44)
+    )
 
-internal val priority = buildList {
-    add(highPriority)
-    add(mediumPriority)
-    add(lowPriority)
-    add(noPriority)
+    object LowPriority: Priority(
+        "Low Priority", ToDoIcons.LowPriority, Color(0xFF0888FF)
+    )
+
+    object NoPriority : Priority(
+        "No Priority", ToDoIcons.NonePriority, Color(0xFF333333)
+    )
 }
+
+val priority = mutableListOf(
+    Priority.HighPriority,
+    Priority.MediumPriority,
+    Priority.LowPriority,
+    Priority.NoPriority,
+)

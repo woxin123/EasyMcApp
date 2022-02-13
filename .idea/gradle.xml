@@ -21,6 +21,7 @@
             <option value="$PROJECT_DIR$/todo/todo-app" />
             <option value="$PROJECT_DIR$/todo/todo-common-ui-resources" />
             <option value="$PROJECT_DIR$/todo/todo-compose-components" />
+            <option value="$PROJECT_DIR$/todo/todo-data" />
             <option value="$PROJECT_DIR$/todo/todo-ui-addtask" />
             <option value="$PROJECT_DIR$/todo/todo-ui-choose_date_time" />
             <option value="$PROJECT_DIR$/todo/todo-ui-task" />

@@ -30,6 +30,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":todo:todo-data"))
     implementation(project(":todo:todo-compose-components"))
 
     implementation(libs.androidx.core)
