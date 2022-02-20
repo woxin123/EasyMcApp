@@ -2,6 +2,7 @@ package top.mcwebsite.easymcapp.todo.todoData.dao
 
 import androidx.room.Dao
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 import top.mcwebsite.easymcapp.todo.todoData.entity.TaskEntity
 
 @Dao
@@ -14,4 +15,7 @@ abstract class TasksDao : EntityDao<TaskEntity>() {
 
     @Query("DELETE FROM task")
     abstract suspend fun deleteAll(): Int
+
+    @Query("SELECT * FROM task")
+    abstract fun queryAllUseFlow(): Flow<List<TaskEntity>>
 }

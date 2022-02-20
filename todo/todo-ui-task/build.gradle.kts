@@ -1,14 +1,16 @@
+import top.mcwebsite.easymcapp.build.BuildConfig
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
 
 android {
-    compileSdk = 31
+    compileSdk = BuildConfig.COMPILE_SDK
 
     defaultConfig {
-        minSdk = 21
-        targetSdk = 31
+        minSdk = BuildConfig.MIN_SDK
+        targetSdk = BuildConfig.TARGET_SDK
     }
 
     compileOptions {

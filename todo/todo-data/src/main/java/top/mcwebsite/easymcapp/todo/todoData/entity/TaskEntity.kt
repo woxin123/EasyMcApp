@@ -15,6 +15,8 @@ data class TaskEntity(
     val title: String? = null,
     @ColumnInfo(name = "content")
     val content: String? = null,
+    @ColumnInfo(name = "is_complete")
+    val isComplete: Boolean = false,
     @ColumnInfo(name = "priority")
     val priority: PriorityType = PriorityType.NO_PRIORITY,
     @ColumnInfo(name = "start_date")

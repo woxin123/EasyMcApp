@@ -32,11 +32,11 @@ private sealed class LeafScreen(
 
     object Tasks : LeafScreen("tasks")
     object Calendar : LeafScreen("calender")
-    object AddTask : LeafScreen("addTask") {
-        fun createRoute(root: Screen, date: LocalDate?): String {
-            return "${root.route}/addTask".let {
-                if (date != null) {
-                    "$it?date=$date"
+    object AddOrEditTask : LeafScreen("addOrEditTask?task_id={task_id}") {
+        fun createRoute(root: Screen, taskId: Long? = null): String {
+            return "${root.route}/addOrEditTask".let {
+                if (taskId != null) {
+                    "$it?task_id=$taskId"
                 } else {
                     it
                 }
@@ -78,7 +78,7 @@ private fun NavGraphBuilder.addTasksTopLevel(
         startDestination = LeafScreen.Tasks.createRoute(Screen.Tasks)
     ) {
         addTasks(navController, bottomNavigationState, Screen.Tasks)
-        addAddTask(navController, bottomNavigationState, Screen.Tasks)
+        addAddOrEditTask(navController, bottomNavigationState, Screen.Tasks)
         addChooseDateTime(navController, bottomNavigationState, Screen.Tasks)
     }
 }
@@ -91,7 +91,7 @@ private fun NavGraphBuilder.addCalendarTopLevel(
         route = Screen.Calender.route,
         startDestination = LeafScreen.Calendar.createRoute(Screen.Calender)
     ) {
-       addCalendar(navController, bottomNavigationState, Screen.Calender)
+        addCalendar(navController, bottomNavigationState, Screen.Calender)
     }
 }
 
@@ -107,7 +107,10 @@ private fun NavGraphBuilder.addTasks(
         bottomNavigationState.value = true
         Tasks(
             openAddTask = {
-                navController.navigate(LeafScreen.AddTask.createRoute(root))
+                navController.navigate(LeafScreen.AddOrEditTask.createRoute(root))
+            },
+            openEditTask = {
+                navController.navigate(LeafScreen.AddOrEditTask.createRoute(root, it))
             }
         )
     }
@@ -128,29 +131,31 @@ private fun NavGraphBuilder.addCalendar(
 }
 
 @ExperimentalAnimationApi
-private fun NavGraphBuilder.addAddTask(
+private fun NavGraphBuilder.addAddOrEditTask(
     navController: NavHostController,
     bottomNavigationState: MutableState<Boolean>,
     root: Screen,
 ) {
     composable(
-        route = LeafScreen.AddTask.createRoute(root),
+        route = LeafScreen.AddOrEditTask.createRoute(root),
         arguments = listOf(
-            navArgument("date") {
-                type = NavType.SerializableType(LocalDate::class.java)
-                nullable = true
+            navArgument("task_id") {
+                type = NavType.LongType
+                defaultValue = -1
             }
         )
-    ) {
-        bottomNavigationState.value = false
-        val date = it.savedStateHandle.get<LocalDate>("date")
+    ) { backStackTrace ->
+        val date = backStackTrace.savedStateHandle.get<LocalDate>("date")
+        val taskId = backStackTrace.arguments?.getLong("task_id") ?: -1
         AddTask(
+            taskId = taskId,
             date = date,
             navigateUp = navController::navigateUp,
             openChooseDateTime = {
                 navController.navigate(LeafScreen.ChooseDateTime.createRoute(root))
             }
         )
+        bottomNavigationState.value = false
     }
 }
 

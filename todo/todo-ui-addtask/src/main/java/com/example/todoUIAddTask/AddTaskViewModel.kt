@@ -2,6 +2,7 @@ package com.example.todoUIAddTask
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import top.mcwebsite.easymcapp.todo.todoData.entity.PriorityType
@@ -20,6 +21,9 @@ class AddTaskViewModel(
     private val priorityState = MutableStateFlow<Priority>(Priority.NoPriority)
     private val dateAndRepeat = MutableStateFlow("日期&重复")
     private val dateState = MutableStateFlow<LocalDate?>(null)
+    private var isInitByTaskId: Boolean = false
+
+    private var taskEntity: TaskEntity = TaskEntity()
 
     val state = combine(
         title,
@@ -42,6 +46,27 @@ class AddTaskViewModel(
                     dateAndRepeat.emit(it.format(DateTimeFormatter.ofPattern("MM-dd")))
                 }
             }
+        }
+    }
+
+    fun initTaskEntity(taskId: Long) {
+        viewModelScope.launch {
+            if (taskId != -1L && !isInitByTaskId) {
+                isInitByTaskId = true
+                taskEntity = tasksRepository.getTask(taskId)
+                update(taskEntity)
+            }
+        }
+    }
+
+    private fun update(taskEntity: TaskEntity) {
+        viewModelScope.launch {
+            title.emit(taskEntity.title ?: "")
+            content.emit(taskEntity.content ?: "")
+            priorityState.emit(taskEntity.priority.convertToPriority())
+            dateAndRepeat.emit(
+                taskEntity.startDate?.format(DateTimeFormatter.ofPattern("MM-dd")) ?: "日期&重复"
+            )
         }
     }
 
@@ -75,7 +100,7 @@ class AddTaskViewModel(
         }
     }
 
-    fun isEdited(): Boolean {
+    private fun isEdited(): Boolean {
         if (title.value.isNotEmpty()) {
             return true
         }
@@ -97,12 +122,13 @@ class AddTaskViewModel(
         }
     }
 
-    fun saveTask() {
+    private fun saveTask() {
         viewModelScope.launch {
-            tasksRepository.saveTask(
-                TaskEntity(
+            tasksRepository.saveOrUpdateTask(
+                taskEntity = taskEntity.copy(
                     title = title.value,
                     content = content.value,
+                    isComplete = false,
                     startDate = dateState.value,
                     priority = priorityState.value.covertToPriorityType()
                 )
@@ -111,11 +137,20 @@ class AddTaskViewModel(
     }
 
     private fun Priority.covertToPriorityType(): PriorityType {
-        return when(this) {
+        return when (this) {
             is Priority.HighPriority -> PriorityType.HIGH_PRIORITY
             is Priority.MediumPriority -> PriorityType.MEDIUM_PRIORITY
             is Priority.LowPriority -> PriorityType.LOW_PRIORITY
             is Priority.NoPriority -> PriorityType.NO_PRIORITY
+        }
+    }
+
+    private fun PriorityType.convertToPriority(): Priority {
+        return when (this) {
+            PriorityType.HIGH_PRIORITY -> Priority.HighPriority
+            PriorityType.MEDIUM_PRIORITY -> Priority.MediumPriority
+            PriorityType.LOW_PRIORITY -> Priority.LowPriority
+            PriorityType.NO_PRIORITY -> Priority.NoPriority
         }
     }
 }

@@ -26,7 +26,7 @@ abstract class EntityDao<in E : ToDoEntity> {
     @Transaction
     open suspend fun withTransaction(tx: suspend () -> Unit) = tx()
 
-    private suspend fun insertOrUpdate(entity: E): Long {
+    open suspend fun insertOrUpdate(entity: E): Long {
         return if (entity.id == 0L) {
             insert(entity)
         } else {

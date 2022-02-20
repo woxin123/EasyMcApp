@@ -46,11 +46,13 @@ import java.time.LocalDate
 
 @Composable
 fun AddTask(
+    taskId: Long = -1,
     date: LocalDate?,
     navigateUp: () -> Unit,
     openChooseDateTime: () -> Unit,
 ) {
     AddTask(
+        taskId = taskId,
         date = date,
         addTaskViewModel = getViewModel(),
         navigateUp = navigateUp,
@@ -60,11 +62,13 @@ fun AddTask(
 
 @Composable
 fun AddTask(
+    taskId: Long,
     date: LocalDate?,
     addTaskViewModel: AddTaskViewModel,
     navigateUp: () -> Unit,
     openChooseDateTime: () -> Unit,
 ) {
+    addTaskViewModel.initTaskEntity(taskId)
     addTaskViewModel.updateDate(date)
     val state by rememberFlowWithLifecycle(addTaskViewModel.state)
         .collectAsState(initial = AddTaskViewState.Empty)

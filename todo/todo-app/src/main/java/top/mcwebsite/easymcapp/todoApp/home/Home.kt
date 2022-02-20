@@ -65,8 +65,7 @@ internal fun Home() {
         }
     ) {
         Row(
-
-            Modifier
+            modifier = Modifier
                 .fillMaxSize()
                 .padding(it)
         ) {
@@ -116,8 +115,6 @@ internal fun HomeBottomNavigation(
     modifier: Modifier = Modifier,
 ) {
     BottomNavigation(
-        backgroundColor = Color.White,
-        contentColor = Color.Blue,
         modifier = modifier
     ) {
         HomeBottomNavigationItems.forEach { item ->

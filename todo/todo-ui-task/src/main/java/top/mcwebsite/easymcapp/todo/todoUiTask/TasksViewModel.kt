@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -17,7 +18,7 @@ class TasksViewModel(
     private val uiMessage = MutableStateFlow<String>("")
 
     val state = combine(tasksState, uiMessage) { tasks, message ->
-        TasksViewState(tasks, message)
+        TasksViewState(listOf(TaskGroup(groupName = "all", tasks = tasks)), message)
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
@@ -26,7 +27,21 @@ class TasksViewModel(
 
     init {
         viewModelScope.launch {
-            tasksState.emit(tasksRepository.getTasks())
+            tasksRepository.getTasksUseFlow().collect {
+                tasksState.emit(it)
+            }
+        }
+    }
+
+    fun completeTask(taskEntity: TaskEntity) {
+        viewModelScope.launch {
+            tasksRepository.updateTask(taskEntity.copy(isComplete = true))
+        }
+    }
+
+    fun activeTask(taskEntity: TaskEntity) {
+        viewModelScope.launch {
+            tasksRepository.updateTask(taskEntity.copy(isComplete = false))
         }
     }
 }
