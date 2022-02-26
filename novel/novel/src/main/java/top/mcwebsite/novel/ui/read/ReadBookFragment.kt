@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.GravityCompat
@@ -24,23 +23,20 @@ import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.components.ImmersionFragment
 import com.gyf.immersionbar.ktx.immersionBar
 import com.gyf.immersionbar.ktx.showStatusBar
+import com.gyf.immersionbar.ktx.statusBarHeight
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import top.mcwebsite.common.ui.utils.dp
-import top.mcwebsite.common.ui.view.CircleView
 import top.mcwebsite.novel.R
 import top.mcwebsite.novel.common.Constant
 import top.mcwebsite.novel.config.ReadColor
 import top.mcwebsite.novel.config.ReadConfig
-import top.mcwebsite.novel.config.readColors
 import top.mcwebsite.novel.databinding.FragmentReadBookBinding
 import top.mcwebsite.novel.ui.read.page.PageMode
 import top.mcwebsite.novel.ui.read.page.PageViewDrawer
 import top.mcwebsite.novel.ui.read.view.PageWidget
-
 
 class ReadBookFragment : ImmersionFragment(), KoinComponent {
 
@@ -48,9 +44,9 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
 
     private lateinit var binding: FragmentReadBookBinding
 
-    private lateinit var  pageViewDrawer: PageViewDrawer
+    private lateinit var pageViewDrawer: PageViewDrawer
 
-    private val bookMenuAdapter: BookMenuAdapter by lazy {  BookMenuAdapter(viewModel) }
+    private val bookMenuAdapter: BookMenuAdapter by lazy { BookMenuAdapter(viewModel) }
 
     private val readConfig: ReadConfig by inject()
 
@@ -58,43 +54,44 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
 
     private val readConfigSettingsFragment: ReadConfigSettingsFragment by lazy {
         ReadConfigSettingsFragment().apply {
-            onReadSettingChangeListener = object : ReadConfigSettingsFragment.OnReadSettingChangeListener {
-                override fun onColorChange(readColor: ReadColor) {
-                    binding.page.updateColor()
-                }
+            onReadSettingChangeListener =
+                object : ReadConfigSettingsFragment.OnReadSettingChangeListener {
+                    override fun onColorChange(readColor: ReadColor) {
+                        binding.page.updateColor()
+                    }
 
-                override fun onTextChange() {
-                    binding.page.updateTextSize()
-                }
+                    override fun onTextChange() {
+                        binding.page.updateTextSize()
+                    }
 
-                override fun onBrightnessChange(brightness: Float) {
-                    readConfig.brightness = brightness
-                    setCurrentPageBrightness(brightness)
-                }
+                    override fun onBrightnessChange(brightness: Float) {
+                        readConfig.brightness = brightness
+                        setCurrentPageBrightness(brightness)
+                    }
 
-                override fun setPageMode(pageMode: PageMode) {
-                    readConfig.pageMode = pageMode.ordinal
-                    binding.page.setPageMode(pageMode)
+                    override fun setPageMode(pageMode: PageMode) {
+                        readConfig.pageMode = pageMode.ordinal
+                        binding.page.setPageMode(pageMode)
+                    }
                 }
-
-            }
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                quit()
-                findNavController().navigateUp()
-            }
-
-        })
-
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    quit()
+                    findNavController().navigateUp()
+                }
+            })
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
@@ -127,7 +124,6 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
             page.touchListener = object : PageWidget.TouchListener {
                 override fun center() {
                     viewModel.changeMenuStatus(true)
-
                 }
 
                 override fun prePage(): Boolean {
@@ -139,8 +135,8 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
                 }
 
                 override fun cancel() {
+                    // ignore
                 }
-
             }
             pageViewDrawer = PageViewDrawer()
             pageViewDrawer.pageWidget = binding.page
@@ -170,10 +166,15 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
                     viewModel.changeBookMenuStatus(false)
                 }
             })
+            binding.statusBarPlaceholder.layoutParams.let {
+                it.height = statusBarHeight
+                binding.statusBarPlaceholder.layoutParams = it
+            }
         }
         if (Build.VERSION.SDK_INT >= 28) {
             activity?.window?.attributes?.let {
-                it.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
+                it.layoutInDisplayCutoutMode =
+                    WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
                 activity?.window?.attributes = it
                 binding.page.setOnApplyWindowInsetsListener { _, insets ->
                     val displayCutout = insets.displayCutout
@@ -185,14 +186,14 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
                     insets.consumeSystemWindowInsets()
                 }
             }
-
         }
         binding.backBtn.setOnClickListener {
             quit()
             findNavController().navigateUp()
         }
         binding.downloadBtn.setOnClickListener {
-            Toast.makeText(requireContext(), getText(R.string.start_download), Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getText(R.string.start_download), Toast.LENGTH_SHORT)
+                .show()
             viewModel.download()
         }
     }
@@ -204,7 +205,8 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
                     viewModel.chapterList.collect {
                         binding.totalChapter.text = "共 ${it.size + 1} 章"
                         bookMenuAdapter.setBookMenu(it)
-                        val progress = (viewModel.bookEntity.lastReadChapterPos * 1F / it.size) * 100
+                        val progress =
+                            (viewModel.bookEntity.lastReadChapterPos * 1F / it.size) * 100
                         binding.seekBar.progress = progress.toInt()
                     }
                 }
@@ -247,7 +249,10 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
                     viewModel.bookMenuStatus.collect {
                         if (it) {
                             (binding.bookMenu.layoutManager as LinearLayoutManager)
-                                .scrollToPositionWithOffset(viewModel.pageProvider.chapterPos, binding.bookMenu.height / 3)
+                                .scrollToPositionWithOffset(
+                                    viewModel.pageProvider.chapterPos,
+                                    binding.bookMenu.height / 3
+                                )
                             binding.root.openDrawer(GravityCompat.START)
                             bookMenuAdapter.updateChapterMenuSelect(viewModel.pageProvider.chapterPos)
                         }
@@ -279,27 +284,34 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
             // 注册时间变化得广播
             addAction(Intent.ACTION_TIME_TICK)
         }
-        activity?.registerReceiver(object : BroadcastReceiver() {
+        activity?.registerReceiver(
+            object : BroadcastReceiver() {
 
-            override fun onReceive(context: Context?, intent: Intent) {
-                when (intent.action) {
-                    Intent.ACTION_BATTERY_CHANGED -> {
-                        val batteryCapacity = intent.getIntExtra("level", 0)
-                        if (lastBatteryLevel != batteryCapacity) {
-                            pageViewDrawer.updateBattery(batteryCapacity)
-                            lastBatteryLevel = batteryCapacity
+                override fun onReceive(context: Context?, intent: Intent) {
+                    when (intent.action) {
+                        Intent.ACTION_BATTERY_CHANGED -> {
+                            val batteryCapacity = intent.getIntExtra("level", 0)
+                            if (lastBatteryLevel != batteryCapacity) {
+                                pageViewDrawer.updateBattery(batteryCapacity)
+                                lastBatteryLevel = batteryCapacity
+                            }
                         }
+                        Intent.ACTION_TIME_TICK -> pageViewDrawer.updateTime()
                     }
-                    Intent.ACTION_TIME_TICK -> pageViewDrawer.updateTime()
                 }
-            }
-
-        }, intentFilter)
+            },
+            intentFilter
+        )
     }
 
     override fun onPause() {
         super.onPause()
         viewModel.updateBookEntity()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.root.invalidate()
     }
 
     override fun onStop() {
@@ -349,7 +361,8 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
         immersionBar {
             hideBar(BarHide.FLAG_HIDE_NAVIGATION_BAR)
             showStatusBar()
-            titleBarMarginTop(binding.readMenuLayout)
+            fitsSystemWindows(false)
+//            titleBarMarginTop(binding.readMenuLayout)
             statusBarColor(R.color.colorPrimary)
         }
     }
@@ -361,5 +374,4 @@ class ReadBookFragment : ImmersionFragment(), KoinComponent {
     private fun resetScreenBrightness() {
         setCurrentPageBrightness(-1F)
     }
-
 }
