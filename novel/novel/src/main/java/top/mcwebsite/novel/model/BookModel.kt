@@ -3,7 +3,6 @@ package top.mcwebsite.novel.model
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import top.mcwebsite.novel.data.local.db.entity.BookEntity
-import java.sql.Date
 
 @Parcelize
 data class BookModel(
@@ -35,5 +34,4 @@ data class BookModel(
         lastReadTime = System.currentTimeMillis(),
         readDuration = 0L,
     )
-
 }

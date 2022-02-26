@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import top.mcwebsite.novel.databinding.ItemRecentSearchBinding
-import top.mcwebsite.novel.ui.search.RecentSearchRecyclerAdapter.*
+import top.mcwebsite.novel.ui.search.RecentSearchRecyclerAdapter.RecentSearchRecyclerViewHolder
 
 class RecentSearchRecyclerAdapter(private val viewModel: SearchViewModel) : RecyclerView.Adapter<RecentSearchRecyclerViewHolder>() {
 
@@ -30,7 +30,9 @@ class RecentSearchRecyclerAdapter(private val viewModel: SearchViewModel) : Recy
         return _data.size
     }
 
-    class RecentSearchRecyclerViewHolder(private val binding: ItemRecentSearchBinding) : RecyclerView.ViewHolder(binding.root) {
+    class RecentSearchRecyclerViewHolder(
+        private val binding: ItemRecentSearchBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
         companion object {
             fun from(parent: ViewGroup) : RecentSearchRecyclerViewHolder {
                 return RecentSearchRecyclerViewHolder(
@@ -44,6 +46,4 @@ class RecentSearchRecyclerAdapter(private val viewModel: SearchViewModel) : Recy
             binding.searchText = text
         }
     }
-
-
 }

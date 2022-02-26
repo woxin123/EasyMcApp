@@ -3,12 +3,9 @@ package top.mcwebsite.novel.ui.bookdetail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import top.mcwebsite.novel.data.remote.repository.BookRepositoryManager
-import top.mcwebsite.novel.data.remote.repository.IBookRepository
 import top.mcwebsite.novel.model.BookModel
 
 class BookDetailViewModel(private val bookRepository: BookRepositoryManager) : ViewModel() {
@@ -29,5 +26,4 @@ class BookDetailViewModel(private val bookRepository: BookRepositoryManager) : V
             }
         }
     }
-
 }

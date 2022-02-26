@@ -24,7 +24,6 @@ class Yb3BookRepository  : IBookRepository {
         RetrofitFactory.factory(baseUrl).create(IYb3Api::class.java)
     }
 
-
     override suspend fun getBookInfo(book: BookModel): Flow<BookModel> {
         val result = retrofit.getBookInfo(book.url)
         return parseBookInfo(result, book)
@@ -96,7 +95,6 @@ class Yb3BookRepository  : IBookRepository {
                     if (index < introElements.size - 1) {
                         intro.append("\r\n")
                     }
-
                 }
             }
             bookModel.bookType = doc.getElementsByClass("box_con")[0].getElementsByTag("a")[1].text()

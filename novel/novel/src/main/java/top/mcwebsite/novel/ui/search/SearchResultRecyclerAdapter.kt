@@ -96,6 +96,4 @@ class SearchResultRecyclerAdapter(private val viewModel: SearchViewModel) :
             }
         }
     }
-
-
 }

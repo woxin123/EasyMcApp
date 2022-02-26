@@ -2,29 +2,25 @@ package top.mcwebsite.novel.ui.discovery
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import top.mcwebsite.novel.R
 import top.mcwebsite.novel.databinding.FragmentDiscoveryBinding
-import top.mcwebsite.novel.ui.search.SearchViewModel
-
 
 class DiscoveryFragment : Fragment() {
 
     private val viewModel: DiscoveryViewModel by viewModel()
 
-
     private lateinit var binding: FragmentDiscoveryBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_discovery, container, false).also {

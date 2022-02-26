@@ -1,6 +1,10 @@
 package top.mcwebsite.novel.data.local.db.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 import top.mcwebsite.novel.data.local.db.entity.BookEntity
 

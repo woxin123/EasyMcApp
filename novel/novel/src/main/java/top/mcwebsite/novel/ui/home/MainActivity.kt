@@ -1,20 +1,17 @@
 package top.mcwebsite.novel.ui.home
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import top.mcwebsite.novel.R
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import top.mcwebsite.common.android.ext.setVisible
+import top.mcwebsite.novel.R
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,9 +38,12 @@ class MainActivity : AppCompatActivity() {
             add(R.id.meFragment)
         }
         navController.addOnDestinationChangedListener { _, destation, _ ->
-            viewModel.changeBottomNavigationStatus(showBottomNavigationViewDestIds.contains(destation.id))
+            viewModel.changeBottomNavigationStatus(
+                showBottomNavigationViewDestIds.contains(
+                    destation.id
+                )
+            )
         }
-
     }
 
     private fun initObservable() {

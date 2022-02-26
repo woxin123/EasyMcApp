@@ -79,7 +79,6 @@ class BookShelfRecyclerAdapter(private val viewModel: BookshelfViewModel) : Recy
         }
     }
 
-
      class BookShelfRecyclerViewHolder(private val binding: ItemBookShelfBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -126,8 +125,6 @@ class BookShelfRecyclerAdapter(private val viewModel: BookshelfViewModel) : Recy
                 onCheckedBoxClick.invoke(binding.checkbox.isChecked)
                 viewModel.onBookSelected(binding.checkbox.isChecked, book)
             }
-
-
         }
 
         companion object {
@@ -139,7 +136,5 @@ class BookShelfRecyclerAdapter(private val viewModel: BookshelfViewModel) : Recy
                 )
             }
         }
-
     }
-
 }

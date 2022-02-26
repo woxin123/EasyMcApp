@@ -1,6 +1,10 @@
 package top.mcwebsite.novel.data.local.db.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 import top.mcwebsite.novel.data.local.db.entity.ChapterEntity
 
@@ -19,11 +23,9 @@ interface ChapterDao {
     @Insert
     suspend fun insertAll(vararg chapter: ChapterEntity)
 
-
     @Update
     suspend fun update(vararg chapter: ChapterEntity)
 
     @Delete
     suspend fun deleteByBid(chapters: List<ChapterEntity>)
-
 }

@@ -14,5 +14,4 @@ class EasyMCNovelApplication : Application() {
             modules(appModule)
         }
     }
-
 }

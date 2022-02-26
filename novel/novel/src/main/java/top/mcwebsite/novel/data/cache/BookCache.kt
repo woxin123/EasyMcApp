@@ -3,11 +3,11 @@ package top.mcwebsite.novel.data.cache
 import android.content.Context
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import top.mcwebsite.novel.data.local.db.entity.BookEntity
 import top.mcwebsite.novel.data.local.db.entity.ChapterEntity
-import top.mcwebsite.novel.model.BookModel
-import top.mcwebsite.novel.model.Chapter
-import java.io.*
+import java.io.BufferedWriter
+import java.io.File
+import java.io.FileReader
+import java.io.FileWriter
 
 object BookCache: KoinComponent {
 
@@ -19,14 +19,6 @@ object BookCache: KoinComponent {
             file.mkdirs()
         }
         return getCachePath(context) + File.separator + bid + File.separator + title
-    }
-
-    private fun getBookChaptersCachePath(bid: String): String {
-        val file = File(getCachePath(context) + File.separator + bid)
-        if (!file.exists()) {
-            file.mkdirs()
-        }
-        return file.absolutePath + File.separator + "chapters"
     }
 
     fun cacheChapter(bid: String, chapter: ChapterEntity, content: String) {
@@ -61,11 +53,9 @@ object BookCache: KoinComponent {
         }
         return cachePath
     }
-
-
 }
 
 fun ChapterEntity.isCached(bid: String): Boolean {
-    val file  = File(BookCache.getCachePath(bid, this.title))
+    val file = File(BookCache.getCachePath(bid, this.title))
     return file.exists() && file.length() > 0
 }

@@ -37,6 +37,5 @@ class CenterLinearLayoutManager(
         override fun calculateSpeedPerPixel(displayMetrics: DisplayMetrics): Float {
             return 25F / displayMetrics.densityDpi
         }
-
     }
 }

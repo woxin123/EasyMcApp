@@ -17,14 +17,12 @@ class BookMenuAdapter(private val viewModel: ReadViewModel) :
 
     private var currentSelected: Int = -1
 
-
     @SuppressLint("NotifyDataSetChanged")
     fun setBookMenu(chapters: List<ChapterEntity>) {
         data.clear()
         data.addAll(chapters)
         notifyDataSetChanged()
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookMenuViewHolder {
         return BookMenuViewHolder.from(parent)
@@ -73,7 +71,5 @@ class BookMenuAdapter(private val viewModel: ReadViewModel) :
                 }
             }
         }
-
     }
-
 }

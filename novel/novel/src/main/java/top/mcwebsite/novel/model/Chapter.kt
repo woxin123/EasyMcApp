@@ -6,7 +6,6 @@ data class Chapter(
     val index: Int,
     val title: String,
     val url: String,
-
 ) {
     fun transformToEntity(bid: Int): ChapterEntity {
         return ChapterEntity(

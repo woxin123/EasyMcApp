@@ -6,7 +6,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 import top.mcwebsite.novel.model.BookModel
-import java.sql.Date
 
 @Parcelize
 @Entity(tableName = "book")

@@ -1,7 +1,10 @@
 package top.mcwebsite.novel.view
 
 import android.content.Context
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
 
@@ -14,7 +17,6 @@ class BatteryView @JvmOverloads constructor(
     private val paint by lazy { Paint() }
 
     private val rect by lazy { RectF() }
-
 
     var powerProgress = 50
         set(value) {
@@ -73,5 +75,4 @@ class BatteryView @JvmOverloads constructor(
             rect, paint
         )
     }
-
 }

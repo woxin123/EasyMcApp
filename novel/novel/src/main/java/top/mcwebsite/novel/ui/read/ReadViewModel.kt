@@ -4,7 +4,13 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -36,7 +42,6 @@ class ReadViewModel(
     private lateinit var bookModel: BookModel
 
     lateinit var pageProvider: PageProvider
-
 
     private var _chapterList = MutableSharedFlow<List<ChapterEntity>>()
     val chapterList = _chapterList.asSharedFlow()
@@ -138,7 +143,6 @@ class ReadViewModel(
             bookEntity.lastReadTime = System.currentTimeMillis()
             bookDataSource.update(bookEntity)
         }
-
     }
 
     fun openChapter(chapterIndex: Int) {
@@ -184,5 +188,4 @@ class ReadViewModel(
             }
         }
     }
-
 }

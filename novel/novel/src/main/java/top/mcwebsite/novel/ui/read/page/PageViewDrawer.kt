@@ -21,7 +21,6 @@ import kotlin.collections.ArrayList
 
 class PageViewDrawer : KoinComponent {
 
-
     companion object {
         // 当前页面的状态
         const val STATUS_LOADING = 1 // 正在加载
@@ -39,7 +38,6 @@ class PageViewDrawer : KoinComponent {
         const val STATUS_CATEGORY_EMPTY = 7 // 获取到的目录为空
 
         const val STATUS_INIT = 8
-
     }
 
     var status = STATUS_INIT
@@ -50,12 +48,10 @@ class PageViewDrawer : KoinComponent {
 
     // 绘制的配置
 
-
     private var batterFontSize: Float = dip2px(context, 12F).toFloat()
 
     // 电池边界宽度
     private var borderWidth: Int = dip2px(context, 1F)
-
 
     // 页面的宽度
     private var width: Float = 0F
@@ -75,7 +71,6 @@ class PageViewDrawer : KoinComponent {
     // 左右与边缘的距离
     private var measureMarginWidth: Float = 0F
 
-
     // 绘制的宽度
     private var visibleWidth: Float = 0F
 
@@ -87,8 +82,8 @@ class PageViewDrawer : KoinComponent {
 
     // 段间距
     private val paragraphSpace: Float = dip2px(context, 30F).toFloat()
-    private var titlePara: Float = readConfig.textSize + dip2px(context, 4F).toFloat()
 
+    private var titlePara: Float = readConfig.textSize + dip2px(context, 4F).toFloat()
 
     // 绘制的配置
     // PageWidget
@@ -106,12 +101,10 @@ class PageViewDrawer : KoinComponent {
     // 绘制电池的画笔
     private val batteryPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
 
-
     private var textInterval: Float = fontSize / 2
     private var titleInterval: Float = fontSize / 2
 
     private var textPara: Float = fontSize
-
 
     private var pageMode: PageMode = PageMode.COVER
 
@@ -122,7 +115,6 @@ class PageViewDrawer : KoinComponent {
     private var batteryCapacity = 50
 
     private var backgroundColor = readConfig.backgroundColor
-
 
     init {
         // 提示画笔初始化
@@ -159,7 +151,6 @@ class PageViewDrawer : KoinComponent {
         this.height = height
         visibleWidth = width - marginWidth * 2
         visibleHeight = height - marginHeight * 2 - safeInsetTop
-
     }
 
     fun drawPage(bitmap: Bitmap, isUpdate: Boolean) {
@@ -319,7 +310,6 @@ class PageViewDrawer : KoinComponent {
                 top += interval
             }
         }
-
     }
 
     fun prePage(): Boolean {
@@ -344,11 +334,9 @@ class PageViewDrawer : KoinComponent {
         pageProvider.cancelPage()
     }
 
-
     private fun getCurrentChapter(): ChapterEntity {
         return pageProvider.getCurChapter()
     }
-
 
     fun updateBattery(capacity: Int) {
         batteryCapacity = capacity
@@ -362,7 +350,6 @@ class PageViewDrawer : KoinComponent {
     private fun getCurrentPage(): Page {
         return pageProvider.getCurPage()
     }
-
 
     fun loadPage(chapter: ChapterEntity, content: String): List<Page> {
         // 生成的页面
@@ -438,7 +425,6 @@ class PageViewDrawer : KoinComponent {
                 rHeight = rHeight - titlePara + titleInterval
                 showTitle = false
             }
-
         }
         if (lines.isNotEmpty()) {
             val page = Page()

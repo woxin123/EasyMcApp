@@ -4,13 +4,16 @@ import android.util.Log
 import android.util.LruCache
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import top.mcwebsite.novel.data.local.db.entity.BookEntity
 import top.mcwebsite.novel.data.local.db.entity.ChapterEntity
 import top.mcwebsite.novel.model.Page
 import top.mcwebsite.novel.ui.read.page.PageViewDrawer
-import java.lang.IllegalStateException
 import java.util.concurrent.atomic.AtomicInteger
 
 /**
@@ -99,7 +102,6 @@ class PageProvider(
     fun initCurChapter() {
         curPageList = getChapterPage(chapterPos) ?: emptyList()
     }
-
 
     private fun getChapterPage(chapterPosition: Int): List<Page>? {
         if (chapterPosition < 0 || chapterPosition >= chapterSize()) {
@@ -217,7 +219,5 @@ class PageProvider(
             return
         }
         curPageList = chapterPages
-
     }
-
 }

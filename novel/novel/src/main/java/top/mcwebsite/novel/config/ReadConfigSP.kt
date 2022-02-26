@@ -49,5 +49,4 @@ class ReadConfigSP<T>(
             else -> throw IllegalArgumentException("This type can not be saved into preferences")
         }.apply()
     }
-
 }

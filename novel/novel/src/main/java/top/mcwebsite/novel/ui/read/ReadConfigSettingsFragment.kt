@@ -1,9 +1,5 @@
 package top.mcwebsite.novel.ui.read
 
-import android.app.Dialog
-import android.content.Context
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.provider.Settings
@@ -13,11 +9,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.SeekBar
-import androidx.appcompat.app.AppCompatDialog
-import androidx.core.view.forEach
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -29,7 +22,6 @@ import top.mcwebsite.novel.config.ReadConfig
 import top.mcwebsite.novel.config.readColors
 import top.mcwebsite.novel.databinding.LayoutReadSettingsBinding
 import top.mcwebsite.novel.ui.read.page.PageMode
-import java.util.zip.Inflater
 
 class ReadConfigSettingsFragment(
 ) : BottomSheetDialogFragment(), KoinComponent {
@@ -151,11 +143,12 @@ class ReadConfigSettingsFragment(
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                // no op
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                // no op
             }
-
         })
         binding.followSystemCb.setOnClickListener {
             onReadSettingChangeListener?.onBrightnessChange(-1F)
@@ -163,7 +156,10 @@ class ReadConfigSettingsFragment(
     }
 
     private fun getScreenBrightness(): Float {
-        return Settings.System.getInt(requireActivity().contentResolver, Settings.System.SCREEN_BRIGHTNESS, 125).toFloat() / 255F
+        return Settings.System.getInt(
+            requireActivity().contentResolver,
+            Settings.System.SCREEN_BRIGHTNESS,
+            125
+        ).toFloat() / 255F
     }
-
 }

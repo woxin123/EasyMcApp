@@ -6,7 +6,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -17,8 +21,6 @@ import top.mcwebsite.novel.data.local.serizlizer.SearchHistory
 import top.mcwebsite.novel.data.remote.repository.BookRepositoryManager
 import top.mcwebsite.novel.data.remote.repository.exception.BookSourceException
 import top.mcwebsite.novel.model.BookModel
-import java.lang.Exception
-import kotlin.collections.ArrayList
 
 class SearchViewModel(private val bookDataSource: IBookDatasource) : ViewModel(), KoinComponent {
 
@@ -32,7 +34,6 @@ class SearchViewModel(private val bookDataSource: IBookDatasource) : ViewModel()
 
     private val _searchHistoryEvent = MutableLiveData<List<String>>()
     val searchHistoryData: LiveData<List<String>> = _searchHistoryEvent
-
 
     private val _backEvent = MutableLiveData<Unit>()
     val backEvent: LiveData<Unit> = _backEvent
@@ -109,9 +110,9 @@ class SearchViewModel(private val bookDataSource: IBookDatasource) : ViewModel()
                     it.printStackTrace()
                 }
                 .collect {
-                updateSearchResult(it)
-                _searchResult.value = it
-            }
+                    updateSearchResult(it)
+                    _searchResult.value = it
+                }
         }
     }
 
@@ -134,13 +135,12 @@ class SearchViewModel(private val bookDataSource: IBookDatasource) : ViewModel()
     }
 
     fun cancelSearch() {
-
+        // no op
     }
 
     fun setSearchText(text: String) {
         searchContent.value = text
     }
-
 
     private fun addHistory(text: String) {
         searchHistories.add(
@@ -171,5 +171,4 @@ class SearchViewModel(private val bookDataSource: IBookDatasource) : ViewModel()
     fun removeSearchBookRepository(source: String) {
         bookRepositoryManager.removeSearchBookRepositoryBySource(source)
     }
-
 }

@@ -1,7 +1,6 @@
 package top.mcwebsite.novel.data.remote.repository
 
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -11,9 +10,8 @@ import top.mcwebsite.novel.data.remote.repository.impl.Yb3BookRepository
 import top.mcwebsite.novel.model.BookModel
 import top.mcwebsite.novel.model.Chapter
 import top.mcwebsite.novel.model.RankCategory
-import java.lang.IllegalStateException
 
-class BookRepositoryManager :  KoinComponent {
+class BookRepositoryManager : KoinComponent {
 
     private val yb3BookRepository by inject<Yb3BookRepository>()
 
@@ -30,7 +28,6 @@ class BookRepositoryManager :  KoinComponent {
         repositories.add(idejianBookRepository)
         searchRepositories.addAll(repositories)
     }
-
 
     suspend fun getBookInfo(book: BookModel): Flow<BookModel> {
         return getRepositoryBySource(book.source).getBookInfo(book)
