@@ -21,12 +21,10 @@ import top.mcwebsite.novel.data.remote.repository.impl.TaduBookRepository
 import top.mcwebsite.novel.data.remote.repository.impl.Yb3BookRepository
 import top.mcwebsite.novel.ui.bookdetail.BookDetailViewModel
 import top.mcwebsite.novel.ui.bookshelf.BookshelfViewModel
-import top.mcwebsite.novel.ui.search.SearchViewModel
 import top.mcwebsite.novel.ui.discovery.DiscoveryViewModel
 import top.mcwebsite.novel.ui.home.MainViewModel
-import top.mcwebsite.novel.ui.rank.RankViewModel
 import top.mcwebsite.novel.ui.read.ReadViewModel
-import top.mcwebsite.novel.ui.read.page.PageViewDrawer
+import top.mcwebsite.novel.ui.search.SearchViewModel
 
 private val Context.searchHistoryDataStore : DataStore<SearchHistories> by dataStore(
     fileName = "search_history.pb",
@@ -89,9 +87,5 @@ val appModule = module {
 
     viewModel {
         ReadViewModel(get(), get(), get())
-    }
-
-    viewModel {
-        RankViewModel(get())
     }
 }

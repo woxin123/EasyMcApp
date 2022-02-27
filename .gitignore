@@ -6,4 +6,4 @@ build/
 .externalNativeBuild
 .cxx
 local.properties
-.idea/*
+.idea/

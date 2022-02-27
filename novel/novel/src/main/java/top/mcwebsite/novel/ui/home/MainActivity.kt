@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity() {
         showBottomNavigationViewDestIds.apply {
             add(R.id.bookShelfFragment)
             add(R.id.discoveryFragment)
-            add(R.id.rankFragment)
             add(R.id.meFragment)
         }
         navController.addOnDestinationChangedListener { _, destation, _ ->
